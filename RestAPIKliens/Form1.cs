@@ -13,13 +13,15 @@ using System.Runtime.InteropServices;
 
 namespace RestAPIKliens
 {
+    
+
     public partial class Form1 : Form
     {
         //788; 458
 
-        String URL = "http://127.0.0.1:3000/Animals/";
-        String URLuser = "http://127.0.0.1:3000/Users/";
-        bool Loggedin = false;
+        //String URL = "http://127.0.0.1:3000/Animals/";
+        //String URLuser = "http://127.0.0.1:3000/Users/";
+        //bool Loggedin = false;
         //Fields
         private Button currentButton;
         Random random;
@@ -30,7 +32,7 @@ namespace RestAPIKliens
             InitializeComponent();
             random = new Random();
             btnCloseChildForm.Visible = false;
-            this.Text =String.Empty;
+            this.Text = String.Empty;
             this.ControlBox = false;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
@@ -42,7 +44,7 @@ namespace RestAPIKliens
 
         private void btnGetAll_Click(object sender, EventArgs e)
         {
-             
+
 
             /*
             Állatok.Items.Clear();
@@ -65,9 +67,9 @@ namespace RestAPIKliens
                
             }
             */
-            
+
         }
-            
+
 
         private void gtnGetById_Click(object sender, EventArgs e)
         {/*
@@ -210,7 +212,7 @@ namespace RestAPIKliens
             OpenChildForm(new Forms.FormRS(), sender);
 
 
-            this.Width = 1112;
+            this.Width = 1127;
         }
 
         private void btnDry_Click(object sender, EventArgs e)
@@ -224,7 +226,7 @@ namespace RestAPIKliens
         //Methods
         private Color SelectThemeColor()
         {
-            
+
 
             int index = random.Next(ThemeColor.ColorList.Count);
             while (tempIndex == index)
@@ -284,24 +286,24 @@ namespace RestAPIKliens
             {
                 case "FormRS":
                     lblTitle.Text = "Nyersanyag raktár";
-                  break;
+                    break;
                 case "FormDry":
                     lblTitle.Text = "Száraz raktár";
                     break;
                 case "FormFP":
-                    lblTitle.Text = "Kész termék"; 
+                    lblTitle.Text = "Kész termék";
                     break;
                 case "FormBasin":
                     lblTitle.Text = "Basin";
                     break;
                 case "FormScrap":
-                    lblTitle.Text = "Selejt"; 
+                    lblTitle.Text = "Selejt";
                     break;
                 case "FormStat":
                     lblTitle.Text = "Statisztika";
                     break;
                 default:
-                    
+
                     break;
             }
             //lblTitle.Text = childForm.Text;
@@ -328,19 +330,19 @@ namespace RestAPIKliens
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
-        
-    
 
-          public class Animal
-          {
 
-              public int id { get; set; }
-              public string Name { get; set; }
-              public string Class { get; set; }
-              public int Legs { get; set; }
-              public int Pet { get; set; }
 
-          }
+        public class Animal
+        {
+
+            public int id { get; set; }
+            public string Name { get; set; }
+            public string Class { get; set; }
+            public int Legs { get; set; }
+            public int Pet { get; set; }
+
+        }
         public class RS
         {
 
@@ -417,18 +419,19 @@ namespace RestAPIKliens
 
         }
         public class User
-          {
+        {
 
-              public int id { get; set; }
-              public string Name { get; set; }
-              public string Password { get; set; }
+            public int id { get; set; }
+            public string Name { get; set; }
+            public string Password { get; set; }
 
 
-          }
+        }
 
         private void btnBasin_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormBasin(), sender);
+            this.Width = 1350;
         }
 
         private void btnFP_Click(object sender, EventArgs e)
@@ -488,4 +491,94 @@ namespace RestAPIKliens
         }
     }
 
+    public class RS
+    {
+
+        public int id { get; set; }
+        public string name { get; set; }
+        public int weight { get; set; }
+        public DateTime arrived { get; set; }
+        public DateTime butchered { get; set; }
+        public string place { get; set; }
+
+    }
+    public class Dry
+    {
+
+        public int id { get; set; }
+        public string name { get; set; }
+        public int weight { get; set; }
+        public DateTime arrived { get; set; }
+        public string place { get; set; }
+
+    }
+    public class Basin
+    {
+
+        public int id { get; set; }
+        public string name { get; set; }
+        public int weight { get; set; }
+        public DateTime arrived { get; set; }
+        public string place { get; set; }
+        public DateTime marinadestart { get; set; }
+        public DateTime marinadeend { get; set; }
+        public DateTime smoking { get; set; }
+        public int rsid { get; set; }
+
+    }
+    public class BasinMini
+    {
+        public int weight { get; set; }
+        public DateTime marinadestart { get; set; }
+        public DateTime marinadeend { get; set; }
+    }
+        public class FP
+    {
+
+        public int id { get; set; }
+        public int rsid { get; set; }
+        public int bid { get; set; }
+
+        public int did { get; set; }
+        public string name { get; set; }
+        public int weight { get; set; }
+        public string place { get; set; }
+        public DateTime arrived { get; set; }
+
+    }
+    public class Scrap
+    {
+
+        public int id { get; set; }
+        public string name { get; set; }
+        public int weight { get; set; }
+        public DateTime time { get; set; }
+        public int rsid { get; set; }
+        public int did { get; set; }
+
+    }
+    public class Stat
+    {
+        public int id { get; set; }
+        public int fpid { get; set; }
+        public int rsid { get; set; }
+        public int bid { get; set; }
+        public int did { get; set; }
+        public string name { get; set; }
+        public int weight { get; set; }
+        public string place { get; set; }
+        public DateTime arrived { get; set; }
+        public DateTime marinated { get; set; }
+        public DateTime smoked { get; set; }
+
+    }
+    public class User
+    {
+
+        public int id { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
+
+
+    }
 }

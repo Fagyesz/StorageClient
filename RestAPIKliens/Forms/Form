@@ -17,13 +17,12 @@ namespace RestAPIKliens.Forms
     {
         String URL = "http://127.0.0.1:3000/basin/";
         private List<Basin> RSList = new List<Basin>();
-        public static FormBasin Self;
+
 
         public FormBasin()
         {
             InitializeComponent();
             GetData();
-            Self = this;
         }
 
         private void GetData()
@@ -49,24 +48,19 @@ namespace RestAPIKliens.Forms
 
 
         }
-        
+
         private void btnGetAll_Click(object sender, EventArgs e)
         {
-            //GetData();
+            GetData();
         }
 
         private void gtnGetById_Click(object sender, EventArgs e)
-        {
-           // GetDataID();
-        }
-        
-        private void GetDataID(string b)
         {
             ClearDataGridViewRows(dataGridBasin, RSList);
 
             RSList.Clear();
             var client = new RestClient(URL);
-            String ROUTE = b;
+            String ROUTE = txtGetById.Text;
             var request = new RestRequest(ROUTE, Method.GET);
             IRestResponse<Basin> response = client.Execute<Basin>(request);
             var content = response.Content;
@@ -183,9 +177,9 @@ namespace RestAPIKliens.Forms
             catch (Exception ex)
             {
 
-                MsExeption("Basin hiba \n " + ex, "BasinHiba");
+                MsExeption("Basin hiba \n "+ex,"BasinHiba");
             }
-
+            
         }
         private void Put()
         {
@@ -244,7 +238,7 @@ namespace RestAPIKliens.Forms
 
 
 
-
+        
             IRestResponse response = client.Execute(request);
             MessageBox.Show(response.Content);
 
@@ -252,18 +246,15 @@ namespace RestAPIKliens.Forms
 
 
 
-        }
 
-        public void GetDataPublic()
-        {
+           
 
-            GetData();
-            this.Refresh();
-        }
-        public void GetDataPublicId(string b)
-        {
-            GetDataID(b);
-            this.Refresh();
+
+
+
+
+
+
         }
     }
 }

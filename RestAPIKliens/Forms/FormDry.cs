@@ -18,57 +18,65 @@ namespace RestAPIKliens.Forms
         String URL = "http://127.0.0.1:3000/drystorage/";
         String URLuser = "http://127.0.0.1:3000/Users/";
         private List<Dry> DryList = new List<Dry>();
+        public static FormDry Self;
         public FormDry()
         {
             InitializeComponent();
             GetData();
+            Self = this;
         }
         //drystorage
 
         private void GetData()
         {
-            
-            
-                ClearDataGridViewRows(dataGridDry, DryList);
-
-                var client = new RestClient(URL);
-                String ROUTE = "";
-                var request = new RestRequest(ROUTE, Method.GET);
-                request.RequestFormat = DataFormat.Json;
-
-                IRestResponse<List<Dry>> response = client.Execute<List<Dry>>(request);
-                foreach (Dry a in response.Data)
-                {
-
-                    DryList.Add(a);
-                    //listcomp.Items.Add("Id: " + a.id + " Név: " + a.name + " Súly: " + a.weight + " Érkezési idő: " + a.arrived + "Honnan érkezett:" + a.place  );
 
 
-                }
-                dataGridDry.DataSource = DryList;
-            
-            
+            ClearDataGridViewRows(dataGridDry, DryList);
+
+            var client = new RestClient(URL);
+            String ROUTE = "";
+            var request = new RestRequest(ROUTE, Method.GET);
+            request.RequestFormat = DataFormat.Json;
+
+            IRestResponse<List<Dry>> response = client.Execute<List<Dry>>(request);
+            foreach (Dry a in response.Data)
+            {
+
+                DryList.Add(a);
+                //listcomp.Items.Add("Id: " + a.id + " Név: " + a.name + " Súly: " + a.weight + " Érkezési idő: " + a.arrived + "Honnan érkezett:" + a.place  );
+
+
+            }
+            dataGridDry.DataSource = DryList;
+
+
 
         }
         private void btnGetAll_Click(object sender, EventArgs e)
         {
-            
-            GetData();
+
+           // GetData();
 
 
         }
 
         private void gtnGetById_Click(object sender, EventArgs e)
         {
+            //GetDataID();
+
+        }
+        
+        private void GetDataID(string b)
+        {
             ClearDataGridViewRows(dataGridDry, DryList);
-            
+
             //dataGridDry.Rows.Clear();
-            
-            
+
+
             // dataGridDry.Refresh();
             DryList.Clear();
             var client = new RestClient(URL);
-            String ROUTE = txtGetById.Text;
+            String ROUTE = b;
             var request = new RestRequest(ROUTE, Method.GET);
             IRestResponse<Dry> response = client.Execute<Dry>(request);
             var content = response.Content;
@@ -79,12 +87,12 @@ namespace RestAPIKliens.Forms
             //listcomp.Items.Add(content);
 
             string srt;
-            srt= content;
+            srt = content;
             srt = srt.Substring(1, srt.Length - 2);
             Dry a = new Dry();
             a = JsonConvert.DeserializeObject<Dry>(srt);
-            
-            DryList.Add(a); 
+
+            DryList.Add(a);
             dataGridDry.DataSource = DryList;
 
             /*
@@ -99,7 +107,6 @@ namespace RestAPIKliens.Forms
             dataGridDry.Refresh();
             //DryList.Add(content);
             */
-
         }
 
         private void btnDeleteById_Click(object sender, EventArgs e)
@@ -129,30 +136,30 @@ namespace RestAPIKliens.Forms
             public DateTime arrived { get; set; }
             public string place { get; set; }
 
-           
+
         }
 
         private void btnPost_Click(object sender, EventArgs e)
         {
-            bool check=false;
-            if (txtPostName.Text==""  )
+            bool check = false;
+            if (txtPostName.Text == "")
             {
-
+                check = true;
             }
             if (txtPostWeight == null)
             {
-
+                check = true;
             }
-            
+
             if (txtPostWeight == null)
             {
-
+                check = true;
             }
             if (txtPostPlace.Text == "")
             {
-
+                check = true;
             }
-            if (!check)
+            if (check)
             {
                 Console.WriteLine("hiba");
             }
@@ -192,6 +199,7 @@ namespace RestAPIKliens.Forms
                 IRestResponse response = client.Execute(request);
                 MessageBox.Show("Succesfully added.");
             }
+            GetData();
         }
 
         private void btnPut_Click(object sender, EventArgs e)
@@ -230,16 +238,16 @@ namespace RestAPIKliens.Forms
 
         private void FormDry_Load(object sender, EventArgs e)
         {
-           
+
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ClearDataGridViewRows(dataGridDry,DryList);
+            ClearDataGridViewRows(dataGridDry, DryList);
         }
         public static void ClearDataGridViewRows(DataGridView dataGridView, List<Dry> DryList)
-         {/*
+        {/*
             foreach (DataGridViewRow row in dataGridView.Rows)
             {
               if (dataGridView.Rows.Count == 1) continue;
@@ -252,13 +260,13 @@ namespace RestAPIKliens.Forms
 
         private void button2_Click(object sender, EventArgs e)
         {
-           
+
         }
         private void Delete()
         {
             int rowIndex = dataGridDry.CurrentCell.RowIndex;
             string tmp = dataGridDry.SelectedRows[0].Cells[0].Value.ToString();
-            
+
 
             var client = new RestClient(URL);
             String ROUTE = "delete/" + tmp;
@@ -296,8 +304,8 @@ namespace RestAPIKliens.Forms
 
         private void dataGridDry_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            Put(); 
-            
+            Put();
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -322,7 +330,7 @@ namespace RestAPIKliens.Forms
         private void Confirmation()
         {
             DialogResult result = MessageBox.Show("Biztos Törölni akarod?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (result.Equals(DialogResult.OK))
+            if (result.Equals(DialogResult.Yes))
             {
                 Delete();
             }
@@ -339,6 +347,62 @@ namespace RestAPIKliens.Forms
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void txtPostPlace_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void txtGetById_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridDry_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+        public void GetDataPublic()
+        {
+
+            GetData();
+            this.Refresh();
+        }
+        public void GetDataPublicId(string b)
+        {
+            GetDataID(b);
+            this.Refresh();
         }
     }
 }
