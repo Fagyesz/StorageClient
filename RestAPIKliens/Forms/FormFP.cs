@@ -23,22 +23,150 @@ namespace RestAPIKliens.Forms
         private Form activeForm;
         private static bool searchbool = false;
         public static FormFP Self;
-       
-        
+
+        private bool ColumnChange =true;
 
         public FormFP()
         {
             
             InitializeComponent();
+            LoadTheme();
             Self = this;
             random = new Random();
             
             this.Text = String.Empty;
             this.ControlBox = false;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
-            //GetData();
+            GetData();
             
         }
+
+        internal Stat DataToStatFP()
+        {
+            Stat ST = new Stat();
+
+            ST.name=(string)dataGridFP.SelectedRows[0].Cells[4].Value;
+            ST.weight = (int)dataGridFP.SelectedRows[0].Cells[5].Value;
+            ST.fpid = (int)dataGridFP.SelectedRows[0].Cells[0].Value;
+            ST.rsid = (int)dataGridFP.SelectedRows[0].Cells[1].Value;
+            ST.bid = (int)dataGridFP.SelectedRows[0].Cells[2].Value;
+            ST.did = (int)dataGridFP.SelectedRows[0].Cells[3].Value;
+            ST.place = (string)dataGridFP.SelectedRows[0].Cells[6].Value;
+            ST.arrived=(DateTime)dataGridFP.SelectedRows[0].Cells[7].Value;
+            ST.marinated = (DateTime)dataGridFP.SelectedRows[0].Cells[8].Value; 
+            ST.smoked = (DateTime)dataGridFP.SelectedRows[0].Cells[9].Value; 
+
+            
+
+           
+
+            return ST;
+        }
+
+        private DateTime[] GetBasinData(string b)
+        {
+            DateTime[] d=new DateTime[2];
+
+            try
+            {
+                
+                var client = new RestClient(URL);
+                String ROUTE =b ;
+                var request = new RestRequest(ROUTE, Method.GET);
+                IRestResponse<Basin> response = client.Execute<Basin>(request);
+                var content = response.Content;
+
+
+                string srt;
+                srt = content;
+                srt = srt.Substring(1, srt.Length - 2);
+                Basin a = new Basin();
+                a = JsonConvert.DeserializeObject<Basin>(srt);
+
+                d[0] = a.marinadeend;
+                d[1] = a.smoking;
+                
+                this.Refresh();
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+
+            return d;
+        }
+
+        internal Scrap DataToScrapFP()
+        {
+            Scrap SC = new Scrap();
+
+           // SC.fid = (int)dataGridFP.SelectedRows[0].Cells[0].Value;
+            SC.name = (string)dataGridFP.SelectedRows[0].Cells[1].Value;
+            SC.weight = (int)dataGridFP.SelectedRows[0].Cells[2].Value;
+
+            return SC;
+
+            //Scrap nem tartalmaz Kész terméket Az adatbázisban 
+            // szükség szerint bővíthető
+            
+        }
+
+        internal void DeleteByST()
+        {
+            Delete();
+        }
+        private void CallColumns()
+        {
+            try
+            {
+                SetColumsName();
+            }
+            catch (Exception)
+            {
+
+                
+            }
+                
+                
+            
+           
+        }
+        private void SetColumsName()
+        {
+            ColumnChange = true;
+            dataGridFP.Columns[0].HeaderText = "Azonosító";
+            dataGridFP.Columns[1].HeaderText = "Nyersanyag ID";
+            dataGridFP.Columns[2].HeaderText = "Basin ID";
+            dataGridFP.Columns[3].HeaderText = "SzárazRaktár ID";
+            dataGridFP.Columns[4].HeaderText = "Megnevezés";
+            dataGridFP.Columns[5].HeaderText = "Súly";
+            dataGridFP.Columns[6].HeaderText = "Származási hely";
+            dataGridFP.Columns[7].HeaderText = "Érkezési idő";
+            dataGridFP.Columns[8].HeaderText = "Érlelés ideje";
+            dataGridFP.Columns[9].HeaderText = "Füstölés ideje";
+            ColumnChange = false;
+        }
+
+        internal void DecreaseByST(int w)
+        {
+            try
+            {
+
+                int rowIndex = dataGridFP.CurrentCell.RowIndex;
+                string tmp = dataGridFP.SelectedRows[0].Cells[0].Value.ToString();
+
+
+                dataGridFP.SelectedRows[0].Cells[5].Value = w;
+
+            }
+            catch
+            {
+
+                throw new Exception();
+            }
+        }
+
         private void LoadTheme()
 
         {
@@ -63,11 +191,38 @@ namespace RestAPIKliens.Forms
             //label2.ForeColor = ThemeColor.SecondaryColor;
             //.ForeColor = ThemeColor.SecondaryColor;
         }
+
+        internal void ScrapDel(int weight)
+        {
+            int rowIndex = dataGridFP.CurrentCell.RowIndex;
+            string tmp = dataGridFP.SelectedRows[0].Cells[0].Value.ToString();
+            int currentweight = (int)dataGridFP.SelectedRows[0].Cells[5].Value;
+            if (currentweight < weight)
+            {
+                MessageBox.Show("Súly hiba", "Súly hiba");
+            }
+            else
+                if (currentweight == weight)
+            {
+                Delete();
+            }
+            else
+            {
+                dataGridFP.SelectedRows[0].Cells[5].Value = currentweight - weight;
+            }
+
+        }
+
+        internal void DeleteBySC()
+        {
+            Delete();
+        }
+
         private void GetData()
         {
 
-
-            ClearDataGridViewRows(dataGridDry, FPList);
+            try { 
+            ClearDataGridViewRows(dataGridFP, FPList);
 
             var client = new RestClient(URL);
             String ROUTE = "";
@@ -83,38 +238,43 @@ namespace RestAPIKliens.Forms
 
 
             }
-            dataGridDry.DataSource = FPList;
+            dataGridFP.DataSource = FPList;
 
-
-
+                CallColumns();
         }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges "+e.Message);
+            }
+
+}
+
+        internal void DecreaseBySC(int w)
+        {
+            try
+            {
+
+                int rowIndex = dataGridFP.CurrentCell.RowIndex;
+                string tmp = dataGridFP.SelectedRows[0].Cells[0].Value.ToString();
+
+
+                dataGridFP.SelectedRows[0].Cells[5].Value = w;
+
+            }
+            catch
+            {
+
+                throw new Exception();
+            }
+        }
+
         private void btnGetAll_Click(object sender, EventArgs e)
         {
             GetData();
         }
 
-        private void gtnGetById_Click(object sender, EventArgs e)
-        {
-            ClearDataGridViewRows(dataGridDry, FPList);
-
-            FPList.Clear();
-            var client = new RestClient(URL);
-            String ROUTE = txtGetById.Text;
-            var request = new RestRequest(ROUTE, Method.GET);
-            IRestResponse<Dry> response = client.Execute<Dry>(request);
-            var content = response.Content;
-
-
-            string srt;
-            srt = content;
-            srt = srt.Substring(1, srt.Length - 2);
-            FP a = new FP();
-            a = JsonConvert.DeserializeObject<FP>(srt);
-
-            FPList.Add(a);
-            dataGridDry.DataSource = FPList;
-        }
-        public static void ClearDataGridViewRows(DataGridView dataGridView, List<FP> DryList)
+         public static void ClearDataGridViewRows(DataGridView dataGridView, List<FP> DryList)
         {/*
             foreach (DataGridViewRow row in dataGridView.Rows)
             {
@@ -126,77 +286,12 @@ namespace RestAPIKliens.Forms
             DryList.Clear();
         }
 
-        private void btnPost_Click(object sender, EventArgs e)
-        {
-            DataPost();
-        }
-
-        private void DataPost()
-        {
-            bool check = false;
-            if (txtPostName.Text == "")
-            {
-
-            }
-            if (txtPostWeight == null)
-            {
-
-            }
-
-            if (txtPostWeight == null)
-            {
-
-            }
-            if (txtPostPlace.Text == "")
-            {
-
-            }
-            if (!check)
-            {
-                Console.WriteLine("hiba");
-            }
-            else
-            {
-
-
-                var client = new RestClient(URL);
-                String ROUTE = "post";
-                var request = new RestRequest(ROUTE, Method.POST);
-                request.RequestFormat = DataFormat.Json;
-                DateTime theDate = dateTimePicker1.Value.Date;
-                dateTimePicker1.Format = DateTimePickerFormat.Custom;
-                dateTimePicker1.CustomFormat = "yyyy/MM/dd";
-                MessageBox.Show("Selected Date: " + dateTimePicker1.Text, "DateTimePicker", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                try
-                {
-                    request.AddBody(new Dry
-                    {
-                        name = txtPostName.Text,
-                        weight = int.Parse(txtPostWeight.Text),
-                        arrived = theDate,
-                        place = txtPostPlace.Text
-                    });
-                }
-                catch (Exception)
-                {
-
-                    MessageBox.Show(
-                      " Töltsd ki az adatokat!! ",
-                      "Hiányzó adatok",
-                      MessageBoxButtons.OK,
-                      MessageBoxIcon.Error
-                     );
-                }
-
-                IRestResponse response = client.Execute(request);
-                MessageBox.Show("Succesfully added.");
-            }
-        }
-
+      
+  
         private void Delete()
         {
-            int rowIndex = dataGridDry.CurrentCell.RowIndex;
-            string tmp = dataGridDry.SelectedRows[0].Cells[0].Value.ToString();
+            int rowIndex = dataGridFP.CurrentCell.RowIndex;
+            string tmp = dataGridFP.SelectedRows[0].Cells[0].Value.ToString();
 
 
             var client = new RestClient(URL);
@@ -208,29 +303,30 @@ namespace RestAPIKliens.Forms
 
         private void Put()
         {
-            int rowIndex = dataGridDry.CurrentCell.RowIndex;
-            string tmp = dataGridDry.SelectedRows[0].Cells[0].Value.ToString();
+            int rowIndex = dataGridFP.CurrentCell.RowIndex;
+            string tmp = dataGridFP.SelectedRows[0].Cells[0].Value.ToString();
 
-            DateTime theDate = dateTimePicker1.Value.Date;
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "yyyy/MM/dd";
             var client = new RestClient(URL);
-            String ROUTE = "put/" + (int)dataGridDry.SelectedRows[0].Cells[0].Value;
+            String ROUTE = "put/" + (int)dataGridFP.SelectedRows[0].Cells[0].Value;
             var request = new RestRequest(ROUTE, Method.PUT);
             request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(new Dry
+            request.AddJsonBody(new FP
             {
-
-                name = (string)dataGridDry.SelectedRows[0].Cells[1].Value,
-                weight = (int)dataGridDry.SelectedRows[0].Cells[2].Value,
-                arrived = (DateTime)dataGridDry.SelectedRows[0].Cells[3].Value,
-                place = (string)dataGridDry.SelectedRows[0].Cells[4].Value
-
+                rsid = (int)dataGridFP.SelectedRows[0].Cells[1].Value,
+                bid = (int)dataGridFP.SelectedRows[0].Cells[2].Value,
+                did = (int)dataGridFP.SelectedRows[0].Cells[3].Value,
+                name = (string)dataGridFP.SelectedRows[0].Cells[4].Value,
+                weight = (int)dataGridFP.SelectedRows[0].Cells[5].Value,
+                place = (string)dataGridFP.SelectedRows[0].Cells[6].Value,
+                arrived = (DateTime)dataGridFP.SelectedRows[0].Cells[7].Value
+                
+                
 
 
             });
             IRestResponse response = client.Execute(request);
             MessageBox.Show(response.Content);
+            GetData();
         }
         private void OpenChildForm(Form childForm, object btnSender)
         {
@@ -313,34 +409,27 @@ namespace RestAPIKliens.Forms
             
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new Forms.Selectors.FPAdd("FP"), sender);
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            OpenChildForm(new Forms.Selectors.Search("FP"), sender);
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            OpenChildForm(new Forms.Selectors.FPAdd("FP"), sender);
-        }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            OpenChildForm(new Forms.Selectors.ScrapAdd("FP"), sender);
-        }
+        
 
         private void FormFP_Load(object sender, EventArgs e)
         {
+
             LoadTheme();
+
+            this.dataGridFP.AllowUserToOrderColumns = true;
+            
+            
+           
+            
+            DataGridDateFormating();
         }
-        private void fillTxt()
+        private void DataGridDateFormating()
         {
-            txtGetById.Text = "yes";
+            dataGridFP.Columns[7].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            dataGridFP.Columns[8].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            dataGridFP.Columns[9].DefaultCellStyle.Format = "yyyy.MM.dd.";
         }
+
         public void GetDataPublic()
         {
 
@@ -349,13 +438,28 @@ namespace RestAPIKliens.Forms
         }
         public void GetDataPublicId(string b)
         {
-            GetDataID(b);
-            this.Refresh();
+            if (!b.All(char.IsDigit))
+            {
+                MessageBox.Show("Nem szám", "Hibás bemenet");
+            }
+            else
+            {
+                if (b == "")
+                {
+                    MessageBox.Show("Üres mező", "Hibás bemenet");
+                }
+                else
+                {
+                    GetDataID(b);
+                    this.Refresh();
+                }
+            }
         }
 
         private void GetDataID(string b)
         {
-            ClearDataGridViewRows(dataGridDry, FPList);
+            try { 
+            ClearDataGridViewRows(dataGridFP, FPList);
 
             FPList.Clear();
             var client = new RestClient(URL);
@@ -372,11 +476,152 @@ namespace RestAPIKliens.Forms
             a = JsonConvert.DeserializeObject<FP>(srt);
 
             FPList.Add(a);
-            dataGridDry.DataSource = FPList;
+            dataGridFP.DataSource = FPList;
             b = "";
+
             this.Refresh();
+        }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+            CallColumns();
         }
 
 
+        private void dataGridDry_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!ColumnChange) 
+            Put();
+        }
+
+        private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.Search("FP"), sender);
+        }
+
+        private void radioButton2_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.FPAdd("FP"), sender);
+        }
+
+        private void radioButton3_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.ScrapAdd("FP"), sender);
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.Print("FP"), sender);
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.StatAdd("FP"), sender);
+        }
+
+        private void dataGridFP_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //dataGridFP.Sort(dataGridFP.Columns[1], ListSortDirection.Ascending);
+            /*
+                switch (e.ColumnIndex)
+                {
+                    case 0:
+                        
+
+                        break;
+                    case 1:
+                        dataGridFP.Sort(dataGridFP.Columns[1], ListSortDirection.Ascending);
+                    Sorting();
+                        break;
+
+                    case 2:
+                        // ST = FormDry.Self.DataToStatDry();
+                        break;
+                    case 3:
+                        // ST = FormBasin.Self.DataToStatBasin();
+                        break;
+                    default:
+                        break;
+                }
+            */
+
+        }
+
+        private void Sorting()
+        {
+           
+        }
+
+        private void dataGridFP_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panelFill_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panelSelector_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

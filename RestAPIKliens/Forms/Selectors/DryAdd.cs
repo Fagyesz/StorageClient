@@ -10,28 +10,27 @@ using System.Windows.Forms;
 
 namespace RestAPIKliens.Forms.Selectors
 {
-    public partial class RSAdd : Form
+    public partial class DryAdd : Form
     {
         public static string creator;
         private int a;
         private string text;
-        private RS RS =new RS();
-
-        public RSAdd(string a)
+        private Dry Dry = new Dry();
+        public DryAdd(string a)
         {
             InitializeComponent();
             creator = a;
         }
 
-        private void RSAdd_Load(object sender, EventArgs e)
+        private void btnPost_Click(object sender, EventArgs e)
         {
-
+            DryPost();
         }
-        private void RSPost()
+        private void DryPost()
         {
             DateTime theDate = dateTimePicker1.Value.Date;
-            DateTime theDate2 = dateTimePicker2.Value.Date;
-            RS.name = txtPostName.Text;
+            
+            
 
             if (!txtPostWeight.Text.All(char.IsDigit))
             {
@@ -39,11 +38,10 @@ namespace RestAPIKliens.Forms.Selectors
             }
             else
             {
-
-                RS.weight = int.Parse(txtPostWeight.Text);
-                RS.arrived = theDate;
-                RS.butchered = theDate2;
-                RS.place = txtPostPlace.Text;
+                Dry.name= txtPostName.Text;
+                Dry.weight = int.Parse(txtPostWeight.Text);
+                Dry.arrived = theDate;
+                Dry.place = txtPostPlace.Text;
                 /*
                             RS.Add(new RS() { 
                                         name = txtPostName.Text,
@@ -53,15 +51,12 @@ namespace RestAPIKliens.Forms.Selectors
                                         place = txtPostPlace.Text
                             });
                 */
-                FormRS.Self.DataList(RS);
+                FormDry.Self.DataList(Dry);
             }
-            
 
-    }
 
-        private void btnPost_Click(object sender, EventArgs e)
-        {
-            RSPost();
         }
+
+        
     }
 }

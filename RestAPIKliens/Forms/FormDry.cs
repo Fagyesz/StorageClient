@@ -18,19 +18,54 @@ namespace RestAPIKliens.Forms
         String URL = "http://127.0.0.1:3000/drystorage/";
         String URLuser = "http://127.0.0.1:3000/Users/";
         private List<Dry> DryList = new List<Dry>();
+        private static DateTime DataTimePut1 = new DateTime();
         public static FormDry Self;
+        public static bool id = false;
         public FormDry()
         {
             InitializeComponent();
+            LoadTheme();
             GetData();
             Self = this;
         }
         //drystorage
 
+        private void LoadTheme()
+        {
+            panelSelector.BackColor = ThemeColor.SecondaryColor;
+            panelSelector.ForeColor = Color.White;
+            foreach (Control btns in this.Controls)
+            {
+                if (btns.GetType() == typeof(Button))
+                {
+                    Button btn = (Button)btns;
+                    btn.BackColor = ThemeColor.PrimaryColor;
+                    btn.ForeColor = Color.White;
+                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+                    btn.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                }
+            }
+            //label1.ForeColor = ThemeColor.SecondaryColor;
+            //label2.ForeColor = ThemeColor.SecondaryColor;
+            //.ForeColor = ThemeColor.SecondaryColor;
+        }
+
+        internal Scrap DataToScrapDry()
+        {
+            Scrap SC = new Scrap();
+
+            SC.did = (int)dataGridDry.SelectedRows[0].Cells[0].Value;
+            SC.name = (string)dataGridDry.SelectedRows[0].Cells[1].Value;
+            SC.weight = (int)dataGridDry.SelectedRows[0].Cells[2].Value;
+
+            return SC;
+        }
+
+        
         private void GetData()
         {
 
-
+            try { 
             ClearDataGridViewRows(dataGridDry, DryList);
 
             var client = new RestClient(URL);
@@ -48,10 +83,134 @@ namespace RestAPIKliens.Forms
 
             }
             dataGridDry.DataSource = DryList;
+            GridForming();
+            DataGridDateFormating();
+            }
+            catch (Exception e)
+            {
 
-
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
 
         }
+
+        internal void DeleteBySC()
+        {
+            Delete();
+        }
+
+        internal void ScrapDel(int weight)
+        {
+            int rowIndex = dataGridDry.CurrentCell.RowIndex;
+            string tmp = dataGridDry.SelectedRows[0].Cells[0].Value.ToString();
+            int currentweight = (int)dataGridDry.SelectedRows[0].Cells[2].Value;
+            if (currentweight < weight)
+            {
+                MsExeption("Súly hiba", "Súly hiba");
+            }
+            else
+                if (currentweight == weight)
+            {
+                Delete();
+            }
+            else
+            {
+                dataGridDry.SelectedRows[0].Cells[2].Value = currentweight - weight;
+            }
+
+        }
+
+        internal void DecreaseBySC(int w)
+        {
+            try
+            {
+
+                int rowIndex = dataGridDry.CurrentCell.RowIndex;
+                string tmp = dataGridDry.SelectedRows[0].Cells[0].Value.ToString();
+
+
+                dataGridDry.SelectedRows[0].Cells[2].Value = w;
+
+            }
+            catch
+            {
+
+                throw new Exception();
+            }
+        }
+
+        private void GridForming()
+        {
+            dataGridDry.Columns[3].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            dataGridDry.Columns[4].DefaultCellStyle.Format = "yyyy.MM.dd.";
+        }
+
+        public void DataList(Dry d)
+        {
+            DataPost(d);
+        }
+        private void DataPost(Dry d)
+        {
+            bool check = false;
+            if (d.name == "")
+            {
+                check = true;
+            }/*
+            if (a.weight == null)
+            {
+                check = true;
+            }*/
+            if (d.weight == 0)
+            {
+
+                check = true;
+
+            }
+
+
+            if (d.place == "")
+            {
+                check = true;
+            }
+            if (check)
+            {
+                MsExeption("Hiányzó adatok ", "Hibás adatok");
+            }
+            else
+            {
+
+
+                var client = new RestClient(URL);
+                String ROUTE = "post";
+                var request = new RestRequest(ROUTE, Method.POST);
+                request.RequestFormat = DataFormat.Json;
+
+                try
+                {
+                    request.AddBody(new Dry
+                    {
+                        name = d.name,
+                        weight = d.weight,
+                        arrived = d.arrived.AddDays(1),
+                        place = d.place,
+                        expiration = d.expiration,
+                        ExternaliD = d.ExternaliD
+
+                    }) ;
+                }
+                catch (Exception)
+                {
+
+                    MsExeption("Hibás feltöltés", "");
+                }
+
+                IRestResponse response = client.Execute(request);
+                MessageBox.Show("Succesfully added.");
+
+            }
+            GetData();
+        }
+
         private void btnGetAll_Click(object sender, EventArgs e)
         {
 
@@ -68,6 +227,7 @@ namespace RestAPIKliens.Forms
         
         private void GetDataID(string b)
         {
+            try { 
             ClearDataGridViewRows(dataGridDry, DryList);
 
             //dataGridDry.Rows.Clear();
@@ -94,6 +254,14 @@ namespace RestAPIKliens.Forms
 
             DryList.Add(a);
             dataGridDry.DataSource = DryList;
+            GridForming();
+            DataGridDateFormating();
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
 
             /*
             List<string> ContentList = new List<string>();
@@ -117,30 +285,10 @@ namespace RestAPIKliens.Forms
             IRestResponse response = client.Execute(request);
             MessageBox.Show(response.Content);*/
         }
-        public class Animal
-        {
-
-            public int id { get; set; }
-            public string Name { get; set; }
-            public string Class { get; set; }
-            public int Legs { get; set; }
-            public int Pet { get; set; }
-
-        }
-        public class Dry
-        {
-
-            public int id { get; set; }
-            public string name { get; set; }
-            public int weight { get; set; }
-            public DateTime arrived { get; set; }
-            public string place { get; set; }
-
-
-        }
+        
 
         private void btnPost_Click(object sender, EventArgs e)
-        {
+        {/*
             bool check = false;
             if (txtPostName.Text == "")
             {
@@ -199,37 +347,10 @@ namespace RestAPIKliens.Forms
                 IRestResponse response = client.Execute(request);
                 MessageBox.Show("Succesfully added.");
             }
-            GetData();
+            GetData();*/
         }
 
-        private void btnPut_Click(object sender, EventArgs e)
-        {/*
-            DateTime theDate = dateTimePicker1.Value.Date;
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "yyyy/MM/dd";
-            var client = new RestClient(URL);
-            String ROUTE = "put/" + txtPutIdText.Text;
-            var request = new RestRequest(ROUTE, Method.PUT);
-            request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(new Dry
-            {
-
-                name = txtPutName.Text,
-                weight = int.Parse(txtPutAge.Text),
-                arrived = theDate,
-                place = txtPutValue.Text
-
-                
-
-            });
-            IRestResponse response = client.Execute(request);
-            MessageBox.Show(response.Content);*/
-        }
-
-        private void dataGridRS_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
@@ -238,8 +359,14 @@ namespace RestAPIKliens.Forms
 
         private void FormDry_Load(object sender, EventArgs e)
         {
+            LoadTheme();
+            DataGridDateFormating();
+        }
+        private void DataGridDateFormating()
 
-
+        { 
+            dataGridDry.Columns[3].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            dataGridDry.Columns[5].DefaultCellStyle.Format = "yyyy.MM.dd.";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -277,12 +404,22 @@ namespace RestAPIKliens.Forms
 
         private void Put()
         {
+            DateTime time= DateTime.MinValue; 
+
+            DataTimePut1 = (DateTime)dataGridDry.SelectedRows[0].Cells[3].Value;
+            if (id)
+            {
+                time = PutGET();
+            }
+            else
+            {
+                time = PutGETid();
+            }
+            
+            
+
             int rowIndex = dataGridDry.CurrentCell.RowIndex;
             string tmp = dataGridDry.SelectedRows[0].Cells[0].Value.ToString();
-
-            DateTime theDate = dateTimePicker1.Value.Date;
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "yyyy/MM/dd";
             var client = new RestClient(URL);
             String ROUTE = "put/" + (int)dataGridDry.SelectedRows[0].Cells[0].Value;
             var request = new RestRequest(ROUTE, Method.PUT);
@@ -292,14 +429,35 @@ namespace RestAPIKliens.Forms
 
                 name = (string)dataGridDry.SelectedRows[0].Cells[1].Value,
                 weight = (int)dataGridDry.SelectedRows[0].Cells[2].Value,
-                arrived = (DateTime)dataGridDry.SelectedRows[0].Cells[3].Value,
-                place = (string)dataGridDry.SelectedRows[0].Cells[4].Value
+                arrived = time,
+                place = (string)dataGridDry.SelectedRows[0].Cells[4].Value,
+                expiration=(DateTime)dataGridDry.SelectedRows[0].Cells[5].Value,
+                ExternaliD=(string)dataGridDry.SelectedRows[0].Cells[6].Value,
+
 
 
 
             });
             IRestResponse response = client.Execute(request);
             MessageBox.Show(response.Content);
+
+        }
+
+        private static DateTime PutGET()
+        {
+            // PlusTime();
+            int year, month, day;
+            year = DataTimePut1.Year; day = DataTimePut1.Day ; month = DataTimePut1.Month;
+            DateTime a = new DateTime(year, month, day);
+            return a;
+        }
+        private static DateTime PutGETid()
+        {
+            // PlusTime();
+            int year, month, day;
+            year = DataTimePut1.Year; day = DataTimePut1.Day ; month = DataTimePut1.Month;
+            DateTime b = new DateTime(year, month, day);
+            return b;
         }
 
         private void dataGridDry_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -398,11 +556,107 @@ namespace RestAPIKliens.Forms
 
             GetData();
             this.Refresh();
+            id = false;
         }
         public void GetDataPublicId(string b)
         {
-            GetDataID(b);
-            this.Refresh();
+            if (!b.All(char.IsDigit))
+            {
+                MsExeption("Nem szám", "Hibás bemenet");
+            }
+            else
+            {
+                if (b == "")
+                {
+                    MsExeption("Üres mező", "Hibás bemenet");
+                }
+                else
+                {
+                    GetDataID(b);
+                    this.Refresh();
+                    id = true;
+                }
+            }
+        }
+       
+        public void MsExeption(string s, string s2)
+
+        {
+            if (s2 == "")
+            {
+                s2 = "Hiba";
+            }
+            MessageBox.Show(
+                      s,
+                      s2,
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error
+                     );
+
+        }
+        public void MsInfo(string s, string s2)
+
+        {
+            if (s2 == "")
+            {
+                s2 = "Info";
+            }
+            MessageBox.Show(
+                      s,
+                      s2,
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Information
+                     );
+
+        }
+
+        
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void OpenChildForm(Form childForm, object btnSender)
+        {
+
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            this.panelFill.Controls.Add(childForm);
+            this.panelFill.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+
+        }
+
+        private void dataGridDry_CellValueChanged_1(object sender, DataGridViewCellEventArgs e)
+        {
+            Put();
+        }
+
+        private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.Search("Dry"), sender);
+        }
+
+        private void radioButton2_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.DryAdd("Dry"), sender);
+        }
+
+        private void radioButton3_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.ScrapAdd("Dry"), sender);
+        }
+
+        private void radioButton4_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.Print("Dry"), sender);
+        }
+
+        private void radioButton5_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.FPAdd("Dry"), sender);
         }
     }
 }

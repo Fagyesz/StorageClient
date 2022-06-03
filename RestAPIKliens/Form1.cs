@@ -207,19 +207,7 @@ namespace RestAPIKliens
 
         }
 
-        private void btnRS_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new Forms.FormRS(), sender);
-
-
-            this.Width = 1127;
-        }
-
-        private void btnDry_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new Forms.FormDry(), sender);
-            this.Width = 1034;
-        }
+        
 
 
 
@@ -290,9 +278,7 @@ namespace RestAPIKliens
                 case "FormDry":
                     lblTitle.Text = "Száraz raktár";
                     break;
-                case "FormFP":
-                    lblTitle.Text = "Kész termék";
-                    break;
+               
                 case "FormBasin":
                     lblTitle.Text = "Basin";
                     break;
@@ -302,9 +288,14 @@ namespace RestAPIKliens
                 case "FormStat":
                     lblTitle.Text = "Statisztika";
                     break;
-                default:
-
+                case "FormF":
+                    lblTitle.Text = "Kész termék";
                     break;
+
+                default:
+                    lblTitle.Text = "Kész termék";
+                    break;
+                
             }
             //lblTitle.Text = childForm.Text;
         }
@@ -333,122 +324,44 @@ namespace RestAPIKliens
 
 
 
-        public class Animal
-        {
-
-            public int id { get; set; }
-            public string Name { get; set; }
-            public string Class { get; set; }
-            public int Legs { get; set; }
-            public int Pet { get; set; }
-
-        }
-        public class RS
-        {
-
-            public int id { get; set; }
-            public string name { get; set; }
-            public int weight { get; set; }
-            public DateTime arrived { get; set; }
-            public DateTime butchered { get; set; }
-            public string place { get; set; }
-
-        }
-        public class Dry
-        {
-
-            public int did { get; set; }
-            public string name { get; set; }
-            public int weight { get; set; }
-            public DateTime arrived { get; set; }
-            public string place { get; set; }
-
-        }
-        public class Basin
-        {
-
-            public int bid { get; set; }
-            public string name { get; set; }
-            public int weight { get; set; }
-            public DateTime arrived { get; set; }
-            public string place { get; set; }
-            public DateTime marinadestart { get; set; }
-            public DateTime marinadeend { get; set; }
-            public DateTime smoking { get; set; }
-            public int rsid { get; set; }
-
-        }
-        public class FP
-        {
-
-            public int fpid { get; set; }
-            public int rsid { get; set; }
-            public int bid { get; set; }
-
-            public int did { get; set; }
-            public string name { get; set; }
-            public int weight { get; set; }
-            public string place { get; set; }
-            public DateTime arrived { get; set; }
-
-        }
-        public class Scrap
-        {
-
-            public int scrapid { get; set; }
-            public string name { get; set; }
-            public int weight { get; set; }
-            public DateTime time { get; set; }
-            public int rsid { get; set; }
-            public int did { get; set; }
-
-        }
-        public class Stat
-        {
-            public int statid { get; set; }
-            public int fpid { get; set; }
-            public int rsid { get; set; }
-            public int bid { get; set; }
-            public int did { get; set; }
-            public string name { get; set; }
-            public int weight { get; set; }
-            public string place { get; set; }
-            public DateTime arrived { get; set; }
-            public DateTime marinated { get; set; }
-            public DateTime smoked { get; set; }
-
-        }
-        public class User
-        {
-
-            public int id { get; set; }
-            public string Name { get; set; }
-            public string Password { get; set; }
-
-
-        }
+        
 
         private void btnBasin_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormBasin(), sender);
-            this.Width = 1350;
+            this.Width = 1411;
         }
 
-        private void btnFP_Click(object sender, EventArgs e)
+        private void btnRS_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.FormFP(), sender);
+            OpenChildForm(new Forms.FormRS(), sender);
+
+
+            this.Width = 1127;
+        }
+
+        private void btnDry_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormDry(), sender);
+            this.Width = 1233;
         }
 
         private void btnStat_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormStat(), sender);
+            this.Width = 1727;
         }
 
         private void btnScrap_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormScrap(), sender);
+            this.Width = 1227;
         }
-
+        private void FPbtn_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormFP(), sender);
+            this.Width = 1533;
+        }
         private void Home_Click(object sender, EventArgs e)
         {
 
@@ -489,6 +402,49 @@ namespace RestAPIKliens
                 activeForm.Close();
             Reset();
         }
+
+        public void MsExeption(string s, string s2)
+
+        {
+            if (s2 == "")
+            {
+                s2 = "Hiba";
+            }
+            MessageBox.Show(
+                      s,
+                      s2,
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error
+                     );
+
+        }
+        public void MsInfo(string s, string s2)
+
+        {
+            if (s2 == "")
+            {
+                s2 = "Info";
+            }
+            MessageBox.Show(
+                      s,
+                      s2,
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Information
+                     );
+
+        }
+
+        private void panelTitleBar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class RS
@@ -510,6 +466,8 @@ namespace RestAPIKliens
         public int weight { get; set; }
         public DateTime arrived { get; set; }
         public string place { get; set; }
+        public DateTime expiration { get; set; }
+        public string ExternaliD { get; set; }
 
     }
     public class Basin
@@ -518,8 +476,8 @@ namespace RestAPIKliens
         public int id { get; set; }
         public string name { get; set; }
         public int weight { get; set; }
-        public DateTime arrived { get; set; }
         public string place { get; set; }
+        public DateTime arrived { get; set; }
         public DateTime marinadestart { get; set; }
         public DateTime marinadeend { get; set; }
         public DateTime smoking { get; set; }
@@ -538,12 +496,13 @@ namespace RestAPIKliens
         public int id { get; set; }
         public int rsid { get; set; }
         public int bid { get; set; }
-
         public int did { get; set; }
         public string name { get; set; }
         public int weight { get; set; }
         public string place { get; set; }
         public DateTime arrived { get; set; }
+        public DateTime marinated { get; set; }
+        public DateTime smoked { get; set; }
 
     }
     public class Scrap
@@ -555,8 +514,11 @@ namespace RestAPIKliens
         public DateTime time { get; set; }
         public int rsid { get; set; }
         public int did { get; set; }
+        public int bid { get; set; }
+
 
     }
+    
     public class Stat
     {
         public int id { get; set; }
@@ -570,8 +532,10 @@ namespace RestAPIKliens
         public DateTime arrived { get; set; }
         public DateTime marinated { get; set; }
         public DateTime smoked { get; set; }
+        public DateTime stated { get; set; }
 
     }
+    
     public class User
     {
 
@@ -581,4 +545,5 @@ namespace RestAPIKliens
 
 
     }
+
 }

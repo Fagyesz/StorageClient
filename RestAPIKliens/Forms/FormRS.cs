@@ -24,12 +24,17 @@ namespace RestAPIKliens.Forms
         public static FormRS Self;
         private List<RS> Rs = new List<RS>();
         private RS singlers = new RS();
-     public FormRS()
+        private static DateTime DataTimePut1=new DateTime();
+        private static DateTime DataTimePut2=new DateTime();
+        private bool ColumnChange = true;
+        public FormRS()
         {
             InitializeComponent();
             LoadTheme();
             GetData();
             Self = this;
+            GridFormating();
+            
         }
         private void LoadTheme()
         {
@@ -51,9 +56,36 @@ namespace RestAPIKliens.Forms
             //.ForeColor = ThemeColor.SecondaryColor;
         }
 
+
+        internal void ScrapDel(int weight)
+        {
+            int rowIndex = dataGridRS.CurrentCell.RowIndex;
+            string tmp = dataGridRS.SelectedRows[0].Cells[0].Value.ToString();
+            int currentweight = (int)dataGridRS.SelectedRows[0].Cells[2].Value;
+            if (currentweight<weight)
+            {
+                MsExeption("Súly hiba", "Súly hiba");
+            }
+            else
+                if (currentweight == weight)
+            {
+                Delete();
+            }
+            else
+            {
+                dataGridRS.SelectedRows[0].Cells[2].Value = currentweight - weight;
+            }
+           
+        }
+
+        internal void DeleteBySC()
+        {
+            Delete();
+        }
+
         private void GetData()
         {
-
+            try {
 
             ClearDataGridViewRows(dataGridRS, RSList);
 
@@ -71,7 +103,15 @@ namespace RestAPIKliens.Forms
             }
             dataGridRS.DataSource = RSList;
 
+            //dataGridRS.Columns[3].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            // dataGridRS.Columns[4].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            GridFormating();
+            }
+            catch (Exception e)
+            {
 
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
 
         }/*
         private void btnGetAll_Click(object sender, EventArgs e)
@@ -87,9 +127,34 @@ namespace RestAPIKliens.Forms
             GetDataID();
 
         }*/
+        internal void DecreaseBySC(int w)
+        {
+            try
+            {
+
+                int rowIndex = dataGridRS.CurrentCell.RowIndex;
+                string tmp = dataGridRS.SelectedRows[0].Cells[0].Value.ToString();
+
+
+                dataGridRS.SelectedRows[0].Cells[2].Value = w;
+
+            }
+            catch
+            {
+
+                throw new Exception();
+            }
+        }
+
+        private void GridFormating()
+        {
+            dataGridRS.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
+            dataGridRS.Columns[4].DefaultCellStyle.Format = "MM/dd/yyyy";
+        }
 
         private void GetDataID(string b)
         {
+            try { 
             ClearDataGridViewRows(dataGridRS, RSList);
 
             RSList.Clear();
@@ -108,6 +173,12 @@ namespace RestAPIKliens.Forms
             RSList.Add(a);
             dataGridRS.DataSource = RSList;
         }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+}
 
         /*
 public class RS
@@ -123,7 +194,7 @@ public class RS
 }*/
 
         private void btnPost_Click(object sender, EventArgs e)
-        {
+        {/*
             bool check = false;
             if (txtPostName.Text == "")
             {
@@ -180,7 +251,7 @@ public class RS
 
                 IRestResponse response = client.Execute(request);
                 MessageBox.Show("Succesfully added.");
-            }
+            }*/
         }
 
         public static void ClearDataGridViewRows(DataGridView dataGridView, List<RS> DryList)
@@ -220,58 +291,64 @@ public class RS
             IRestResponse response = client.Execute(request);
             //  MessageBox.Show(response.Content);
         }
+        private static void PlusTime()
+        {
+            //DataTimePut2.Year = DataTimePut1.Year;
+           // DataTimePut2.Day = DataTimePut2.Day + 1;
+           // DateTime a = new DateTime (DataTimePut1.Year+DataTimePut1.Day+DataTimePut1.Hour);
 
+        }
         private void Put()
         {
             int rowIndex = dataGridRS.CurrentCell.RowIndex;
             string tmp = dataGridRS.SelectedRows[0].Cells[0].Value.ToString();
 
-            DateTime theDate = dateTimePicker1.Value.Date;
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "yyyy/MM/dd";
+
+
+
             var client = new RestClient(URL);
             String ROUTE = "put/" + (int)dataGridRS.SelectedRows[0].Cells[0].Value;
             var request = new RestRequest(ROUTE, Method.PUT);
             request.RequestFormat = DataFormat.Json;
-            /*
-            int weight = 0;
-            if (btnBasinw.Text != "")
-            {
-                weight = int.Parse(btnBasinw.Text);
-            }
+
+
+
+            DataTimePut1 = (DateTime)dataGridRS.SelectedRows[0].Cells[3].Value;
+            DataTimePut2 = (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value;
+
             
-            if (weight<=0)
-            {
-                MsInfo("Nulla vagy kissebb súlyt nem lehet tovább küldeni basinba ","NULL");
-               
-            }
-            else
-            {
-                if (weight>(int)dataGridRS.SelectedRows[0].Cells[2].Value)
-                {
-                    MsExeption("Túl nagy Súlyt adott meg","Túlcsordulás");MsInfo("Nulla vagy kissebb súlyt nem lehet tovább küldeni basinba ","NULL");
-                }
-                else
-                {
-                    
-                }
-            }
-            */
+            DateTime a, b;
+            PutTime(out a, out b);
+            
             request.AddJsonBody(new RS
             {
 
                 name = (string)dataGridRS.SelectedRows[0].Cells[1].Value,
                 weight = (int)dataGridRS.SelectedRows[0].Cells[2].Value,
-                arrived = (DateTime)dataGridRS.SelectedRows[0].Cells[3].Value,
-                butchered = (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value,
+                arrived = a,
+                butchered = b,
                 place = (string)dataGridRS.SelectedRows[0].Cells[5].Value
 
 
 
             });
             IRestResponse response = client.Execute(request);
+
             MessageBox.Show(response.Content);
         }
+
+        private static void PutTime(out DateTime a, out DateTime b)
+        {
+            // PlusTime();
+            int year, month, day;
+            year = DataTimePut1.Year; day = DataTimePut1.Day ; month = DataTimePut1.Month;
+            a = new DateTime(year, month, day);
+            year = DataTimePut2.Year; day = DataTimePut2.Day ; month = DataTimePut2.Month;
+            b = new DateTime(year, month, day);
+        }
+        
+
+
 
         private void btnPost_Click_1(object sender, EventArgs e)
         {
@@ -308,8 +385,7 @@ public class RS
             else
             {
 
-                DateTime theDate = dateTimePicker1.Value.Date;
-                DateTime theDate2 = dateTimePicker1.Value.Date;
+                
                 var client = new RestClient(URL);
                 String ROUTE = "post";
                 var request = new RestRequest(ROUTE, Method.POST);
@@ -321,8 +397,8 @@ public class RS
                     {
                         name = a.name,
                         weight = a.weight,
-                        arrived = a.arrived,
-                        butchered = a.butchered,
+                        arrived = a.arrived.AddDays(1),
+                        butchered = a.butchered.AddDays(1),
                         place = a.place
                     });
                 }
@@ -470,19 +546,7 @@ public class RS
             }
         }
 
-        public class Basin
-        {
-            public int id { get; set; }
-            public string name { get; set; }
-            public int weight { get; set; }
-            public DateTime arrived { get; set; }
-            public string place { get; set; }
-            public DateTime marinadestart { get; set; }
-            public DateTime marinadeend { get; set; }
-            public DateTime smoking { get; set; }
-            public int rsid { get; set; }
-
-        }
+        
         private void Basinba(BasinMini b)
         {
 
@@ -587,11 +651,6 @@ public class RS
 
         }
 
-        private void dataGridRS_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void dataGridRS_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             Put();
@@ -605,36 +664,38 @@ public class RS
         }
         public void GetDataPublic()
         {
-
+            
             GetData();
+            dataGridRS.Columns[3].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            dataGridRS.Columns[4].DefaultCellStyle.Format = "yyyy.MM.dd.";
             this.Refresh();
         }
         public void GetDataPublicId(string b)
         {
-            GetDataID(b);
-            this.Refresh();
+            if (!b.All(char.IsDigit))
+            {
+                MsExeption("Nem szám", "Hibás bemenet");
+            }
+            else
+            {
+                if (b=="")
+                {
+                    MsExeption("Üres mező", "Hibás bemenet");
+                }
+                else
+                {
+                    GetDataID(b);
+                    dataGridRS.Columns[3].DefaultCellStyle.Format = "yyyy.MM.dd.";
+                    dataGridRS.Columns[4].DefaultCellStyle.Format = "yyyy.MM.dd.";
+                    this.Refresh();
+                }
+
+            }
+            
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            OpenChildForm(new Forms.Selectors.Search("RS"), sender);
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            OpenChildForm(new Forms.Selectors.RSAdd("RS"), sender);
-        }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            OpenChildForm(new Forms.Selectors.FPAdd("RS"), sender);
-        }
-
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-            OpenChildForm(new Forms.Selectors.FPAdd("RS"), sender);
-        }
-          private void OpenChildForm(Form childForm, object btnSender)
+       
+        private void OpenChildForm(Form childForm, object btnSender)
         {
             
             childForm.TopLevel = false;
@@ -655,7 +716,31 @@ public class RS
         private void FormRS_Load(object sender, EventArgs e)
         {
             LoadTheme();
+            dataGridRS.Columns[3].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            dataGridRS.Columns[4].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            DataGridDateFormating();
+            SetColumsName();
+            Scrollbar();
         }
+
+        private void DataGridDateFormating()
+        {
+            dataGridRS.Columns[3].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            dataGridRS.Columns[4].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            
+        }
+
+        private void SetColumsName()
+        {
+            dataGridRS.Columns[0].HeaderText = "Azonosító";
+            dataGridRS.Columns[1].HeaderText = "Megnevezés";
+            dataGridRS.Columns[2].HeaderText = "Súly";
+            dataGridRS.Columns[3].HeaderText = "Érkezési idő";
+            dataGridRS.Columns[4].HeaderText = "Vágási idő";
+            dataGridRS.Columns[5].HeaderText = "Származási hely";
+            ColumnChange = false;
+        }
+
         public void DataList(RS a)
         {
             DataPost(a);
@@ -665,5 +750,62 @@ public class RS
             BasinbaMethod(b);
         }
 
+        private void dataGridRS_CellValueChanged_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!ColumnChange)
+            {
+                Put();
+            }
+            
+        }
+        private void Scrollbar()
+        {
+            ScrollableControl ctl;
+            ctl = new ScrollableControl();
+            //ctl.HorizontalScroll.Visible   // the horizontal scrollbar visibility
+            ctl.VerticalScroll.Visible = false;  // the vertical scrollbar visibility
+        }
+
+        private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.Search("RS"), sender);
+        }
+
+        private void radioButton2_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.RSAdd("RS"), sender);
+        }
+
+        private void radioButton3_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.ScrapAdd("RS"), sender);
+        }
+
+        private void radioButton4_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.Print("RS"), sender);
+        }
+
+        private void radioButton5_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.BasinAdd("RS"), sender);
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.FPAdd("RS"), sender);
+        }
+        public Scrap DataToScrapRS()
+        {
+            Scrap SC = new Scrap();
+            int rowIndex = dataGridRS.CurrentCell.RowIndex;
+            string tmp = dataGridRS.SelectedRows[0].Cells[0].Value.ToString();
+
+            SC.name = (string)dataGridRS.SelectedRows[0].Cells[1].Value;
+            SC.rsid = (int)dataGridRS.SelectedRows[0].Cells[0].Value;
+            SC.weight= (int)dataGridRS.SelectedRows[0].Cells[2].Value;
+
+            return SC;
+        }
     }
 }

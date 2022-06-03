@@ -28,216 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.gtnGetById = new System.Windows.Forms.Button();
-            this.btnGetAll = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.txtGetById = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.txtPostName = new System.Windows.Forms.ComboBox();
-            this.btnPost = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtPostWeight = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtPostPlace = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dataGridBasin = new System.Windows.Forms.DataGridView();
-            this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelFill = new System.Windows.Forms.Panel();
+            this.panelSelector = new System.Windows.Forms.Panel();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBasin)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panelSelector.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnDelete.Location = new System.Drawing.Point(61, 110);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(104, 43);
-            this.btnDelete.TabIndex = 22;
-            this.btnDelete.Text = "Törlés";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // gtnGetById
-            // 
-            this.gtnGetById.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gtnGetById.Location = new System.Drawing.Point(6, 61);
-            this.gtnGetById.Name = "gtnGetById";
-            this.gtnGetById.Size = new System.Drawing.Size(104, 43);
-            this.gtnGetById.TabIndex = 2;
-            this.gtnGetById.Text = "Keresés";
-            this.gtnGetById.UseVisualStyleBackColor = true;
-            this.gtnGetById.Click += new System.EventHandler(this.gtnGetById_Click);
-            // 
-            // btnGetAll
-            // 
-            this.btnGetAll.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnGetAll.Location = new System.Drawing.Point(61, 12);
-            this.btnGetAll.Name = "btnGetAll";
-            this.btnGetAll.Size = new System.Drawing.Size(104, 43);
-            this.btnGetAll.TabIndex = 0;
-            this.btnGetAll.Text = "Frissités";
-            this.btnGetAll.UseVisualStyleBackColor = true;
-            this.btnGetAll.Click += new System.EventHandler(this.btnGetAll_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.btnDelete);
-            this.panel2.Controls.Add(this.gtnGetById);
-            this.panel2.Controls.Add(this.txtGetById);
-            this.panel2.Controls.Add(this.btnGetAll);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(224, 164);
-            this.panel2.TabIndex = 32;
-            // 
-            // txtGetById
-            // 
-            this.txtGetById.Location = new System.Drawing.Point(113, 73);
-            this.txtGetById.Name = "txtGetById";
-            this.txtGetById.Size = new System.Drawing.Size(100, 20);
-            this.txtGetById.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(75, 192);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 13);
-            this.label4.TabIndex = 33;
-            this.label4.Text = "Vágás ideje";
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(13, 208);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 32;
-            // 
-            // txtPostName
-            // 
-            this.txtPostName.FormattingEnabled = true;
-            this.txtPostName.Items.AddRange(new object[] {
-            "Comb",
-            "Csülök",
-            "kenyér"});
-            this.txtPostName.Location = new System.Drawing.Point(54, 28);
-            this.txtPostName.Name = "txtPostName";
-            this.txtPostName.Size = new System.Drawing.Size(100, 21);
-            this.txtPostName.TabIndex = 22;
-            // 
-            // btnPost
-            // 
-            this.btnPost.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnPost.Location = new System.Drawing.Point(61, 234);
-            this.btnPost.Name = "btnPost";
-            this.btnPost.Size = new System.Drawing.Size(93, 40);
-            this.btnPost.TabIndex = 6;
-            this.btnPost.Text = "Post";
-            this.btnPost.UseVisualStyleBackColor = true;
-            this.btnPost.Click += new System.EventHandler(this.btnPost_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(58, 107);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 13);
-            this.label3.TabIndex = 31;
-            this.label3.Text = "Honnan érkezett";
-            // 
-            // txtPostWeight
-            // 
-            this.txtPostWeight.FormattingEnabled = true;
-            this.txtPostWeight.Items.AddRange(new object[] {
-            "100",
-            "200",
-            "300",
-            "400",
-            "500",
-            "600"});
-            this.txtPostWeight.Location = new System.Drawing.Point(54, 73);
-            this.txtPostWeight.Name = "txtPostWeight";
-            this.txtPostWeight.Size = new System.Drawing.Size(100, 21);
-            this.txtPostWeight.TabIndex = 23;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(89, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(27, 13);
-            this.label2.TabIndex = 30;
-            this.label2.Text = "Súly";
-            // 
-            // txtPostPlace
-            // 
-            this.txtPostPlace.FormattingEnabled = true;
-            this.txtPostPlace.Items.AddRange(new object[] {
-            "Eger",
-            "Miskolc",
-            "Gyöngyös",
-            "Pásztó"});
-            this.txtPostPlace.Location = new System.Drawing.Point(54, 123);
-            this.txtPostPlace.Name = "txtPostPlace";
-            this.txtPostPlace.Size = new System.Drawing.Size(100, 21);
-            this.txtPostPlace.TabIndex = 24;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(69, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
-            this.label1.TabIndex = 29;
-            this.label1.Text = "Megnevezés";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(12, 150);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 28;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.label4);
-            this.panel4.Controls.Add(this.dateTimePicker2);
-            this.panel4.Controls.Add(this.txtPostName);
-            this.panel4.Controls.Add(this.btnPost);
-            this.panel4.Controls.Add(this.label3);
-            this.panel4.Controls.Add(this.txtPostWeight);
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.txtPostPlace);
-            this.panel4.Controls.Add(this.label1);
-            this.panel4.Controls.Add(this.dateTimePicker1);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 164);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(224, 286);
-            this.panel4.TabIndex = 33;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(576, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(224, 450);
-            this.panel1.TabIndex = 21;
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.panel1);
             this.panel3.Controls.Add(this.dataGridBasin);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
@@ -255,48 +61,101 @@
             this.dataGridBasin.Name = "dataGridBasin";
             this.dataGridBasin.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridBasin.Size = new System.Drawing.Size(800, 450);
-            this.dataGridBasin.TabIndex = 21;
-            this.dataGridBasin.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDry_CellValueChanged);
+            this.dataGridBasin.TabIndex = 22;
+            this.dataGridBasin.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridBasin_CellValueChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.panelFill);
+            this.panel1.Controls.Add(this.panelSelector);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(576, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(224, 450);
+            this.panel1.TabIndex = 33;
+            // 
+            // panelFill
+            // 
+            this.panelFill.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelFill.Location = new System.Drawing.Point(0, 65);
+            this.panelFill.Name = "panelFill";
+            this.panelFill.Size = new System.Drawing.Size(224, 385);
+            this.panelFill.TabIndex = 37;
+            // 
+            // panelSelector
+            // 
+            this.panelSelector.Controls.Add(this.radioButton4);
+            this.panelSelector.Controls.Add(this.radioButton3);
+            this.panelSelector.Controls.Add(this.radioButton1);
+            this.panelSelector.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSelector.Location = new System.Drawing.Point(0, 0);
+            this.panelSelector.Name = "panelSelector";
+            this.panelSelector.Size = new System.Drawing.Size(224, 65);
+            this.panelSelector.TabIndex = 36;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(125, 32);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(75, 17);
+            this.radioButton4.TabIndex = 5;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Nyomtatás";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged_1);
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(26, 32);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(51, 17);
+            this.radioButton3.TabIndex = 4;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Selejt";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged_1);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(26, 9);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(63, 17);
+            this.radioButton1.TabIndex = 2;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Keresés";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged_1);
             // 
             // FormBasin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
             this.Name = "FormBasin";
             this.Text = "FormBasin";
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.FormBasin_Load);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBasin)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panelSelector.ResumeLayout(false);
+            this.panelSelector.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button gtnGetById;
-        private System.Windows.Forms.Button btnGetAll;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox txtGetById;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.ComboBox txtPostName;
-        private System.Windows.Forms.Button btnPost;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox txtPostWeight;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox txtPostPlace;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView dataGridBasin;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelFill;
+        private System.Windows.Forms.Panel panelSelector;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }

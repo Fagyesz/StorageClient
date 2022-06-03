@@ -11,21 +11,20 @@ using System.Windows.Forms;
 
 namespace RestAPIKliens.Forms.Selectors
 {
-    public partial class ScrapAdd : Form
+    public partial class StatAdd : Form
     {
         public static string creator;
-        String URL = "http://127.0.0.1:3000/scrap/";
+        String URL = "http://127.0.0.1:3000/statistics/";
         private string text;
-        Scrap SC=new Scrap();
+        Stat ST = new Stat();
         int currentweight;
-
-        public ScrapAdd(string a)
+        public StatAdd(string a)
         {
             InitializeComponent();
             creator = a;
         }
 
-        private void ScrapAdd_Load(object sender, EventArgs e)
+        private void StatAdd_Load(object sender, EventArgs e)
         {
 
         }
@@ -35,59 +34,58 @@ namespace RestAPIKliens.Forms.Selectors
             switch (creator)
             {
                 case "FP":
-                    //SC = FormFP.Self.DataToScrapFP();
-                    //Selejt adatbázis nem tartalmaz kész terméket 
-                    //DB bővítés szükséges
+                    ST = FormFP.Self.DataToStatFP();
+                    
                     break;
                 case "RS":
-                    SC = FormRS.Self.DataToScrapRS();
+                   // ST = FormRS.Self.DataToStatRS();
                     break;
 
                 case "Dry":
-                    SC = FormDry.Self.DataToScrapDry();
+                   // ST = FormDry.Self.DataToStatDry();
                     break;
                 case "Basin":
-                    SC = FormBasin.Self.DataToScrapBasin();
+                   // ST = FormBasin.Self.DataToStatBasin();
                     break;
                 default:
                     break;
             }
-            SCmAdd();
+            StatmAdd();
         }
-        private void SCmAdd()
+        private void StatmAdd()
         {
-            SC.time = dateTimePicker1.Value;
+            
             if (!txtPostWeight.Text.All(char.IsDigit))
             {
                 MessageBox.Show("Hibás érték");
             }
             else
             {
-                currentweight = SC.weight;
-                SC.weight = int.Parse(txtPostWeight.Text);
-                SC.time=dateTimePicker1.Value;
-                if (currentweight < SC.weight)
+                currentweight = ST.weight;
+                ST.weight = int.Parse(txtPostWeight.Text);
+                ST.stated = dateTimePicker1.Value;
+                if (currentweight < ST.weight)
                 {
                     MessageBox.Show("Rossz súly érték \nNem lehet nagyob a meglévőnél");
                 }
                 else
                 {
-                    if (currentweight == SC.weight)
+                    if (currentweight == ST.weight)
                     {
                         switch (creator)
                         {
                             case "FP":
-                                FormFP.Self.DeleteBySC();
+                                FormFP.Self.DeleteByST();
                                 break;
                             case "RS":
-                                FormRS.Self.DeleteBySC();
+                               // FormRS.Self.DeleteByST();
                                 break;
 
                             case "Dry":
-                                FormDry.Self.DeleteBySC();
+                               // FormDry.Self.DeleteByST();
                                 break;
                             case "Basin":
-                                FormBasin.Self.DeleteBySC();
+                              //  FormBasin.Self.DeleteByST();
                                 break;
                             default:
                                 break;
@@ -96,21 +94,21 @@ namespace RestAPIKliens.Forms.Selectors
                     }
                     else
                     {
-                        int w = currentweight - SC.weight;
+                        int w = currentweight - ST.weight;
                         switch (creator)
                         {
                             case "FP":
-                                FormFP.Self.DecreaseBySC(w);
+                                FormFP.Self.DecreaseByST(w);
                                 break;
                             case "RS":
-                                FormRS.Self.DecreaseBySC(w);
+                               // FormRS.Self.DecreaseByST(w);
                                 break;
 
                             case "Dry":
-                                FormDry.Self.DecreaseBySC(w);
+                                //FormDry.Self.DecreaseByST(w);
                                 break;
                             case "Basin":
-                                FormBasin.Self.DecreaseBySC(w);
+                                //FormBasin.Self.DecreaseByST(w);
                                 break;
                             default:
                                 break;
@@ -123,11 +121,11 @@ namespace RestAPIKliens.Forms.Selectors
         private void DataPost()
         {
             bool check = false;
-            if (SC.name == "")
+            if (ST.name == "")
             {
                 check = true;
             }
-            if (SC.weight == 0)
+            if (ST.weight == 0)
             {
 
                 check = true;
@@ -148,14 +146,20 @@ namespace RestAPIKliens.Forms.Selectors
 
                 try
                 {
-                    request.AddBody(new Scrap
+                    request.AddBody(new Stat
                     {
-                        name = SC.name,
-                        weight = SC.weight,
-                        time=SC.time,
-                        rsid = SC.rsid,
-                        did = SC.did,
-                        bid = SC.bid
+                        fpid = ST.fpid,
+                        rsid = ST.rsid,
+                        did = ST.did,
+                        bid = ST.bid,
+                        name = ST.name,
+                        weight = ST.weight,
+                        place = ST.place,
+                        arrived = ST.arrived,
+                        marinated = ST.marinated,
+                        smoked = ST.smoked,
+                        stated = ST.stated
+                        
                     });
                 }
                 catch (Exception)
@@ -169,8 +173,7 @@ namespace RestAPIKliens.Forms.Selectors
 
             }
 
-            
-        }
 
+        }
     }
 }

@@ -129,6 +129,18 @@
     <Compile Include="Forms\Selectors\BasinAdd.Designer.cs">
       <DependentUpon>BasinAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Selectors\DryAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Selectors\DryAdd.Designer.cs">
+      <DependentUpon>DryAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Selectors\Print.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Selectors\Print.Designer.cs">
+      <DependentUpon>Print.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Selectors\RSAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +164,12 @@
     </Compile>
     <Compile Include="Forms\Selectors\Search.Designer.cs">
       <DependentUpon>Search.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Selectors\StatAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Selectors\StatAdd.Designer.cs">
+      <DependentUpon>StatAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -180,8 +198,14 @@
     <EmbeddedResource Include="Forms\Selectors\BasinAdd.resx">
       <DependentUpon>BasinAdd.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Selectors\DryAdd.resx">
+      <DependentUpon>DryAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Selectors\FPAdd.resx">
       <DependentUpon>FPAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Selectors\Print.resx">
+      <DependentUpon>Print.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Selectors\RSAdd.resx">
       <DependentUpon>RSAdd.cs</DependentUpon>
@@ -191,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Selectors\Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Selectors\StatAdd.resx">
+      <DependentUpon>StatAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

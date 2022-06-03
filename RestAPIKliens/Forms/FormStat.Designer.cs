@@ -28,123 +28,120 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.paneAll = new System.Windows.Forms.Panel();
+            this.dataGridRS = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelFill = new System.Windows.Forms.Panel();
+            this.panelSelector = new System.Windows.Forms.Panel();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.paneAll.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridRS)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panelSelector.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox3
+            // paneAll
             // 
-            this.textBox3.Location = new System.Drawing.Point(145, 149);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 16;
+            this.paneAll.Controls.Add(this.dataGridRS);
+            this.paneAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.paneAll.Location = new System.Drawing.Point(0, 0);
+            this.paneAll.Name = "paneAll";
+            this.paneAll.Size = new System.Drawing.Size(800, 450);
+            this.paneAll.TabIndex = 32;
             // 
-            // textBox2
+            // dataGridRS
             // 
-            this.textBox2.Location = new System.Drawing.Point(145, 91);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 14;
+            this.dataGridRS.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.dataGridRS.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridRS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridRS.Location = new System.Drawing.Point(0, 0);
+            this.dataGridRS.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
+            this.dataGridRS.Name = "dataGridRS";
+            this.dataGridRS.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridRS.Size = new System.Drawing.Size(800, 450);
+            this.dataGridRS.TabIndex = 22;
+            this.dataGridRS.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRS_CellValueChanged);
             // 
-            // textBox1
+            // panel1
             // 
-            this.textBox1.Location = new System.Drawing.Point(145, 52);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 15;
+            this.panel1.Controls.Add(this.panelFill);
+            this.panel1.Controls.Add(this.panelSelector);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(560, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(240, 450);
+            this.panel1.TabIndex = 33;
             // 
-            // label3
+            // panelFill
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(64, 149);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "label3";
+            this.panelFill.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelFill.Location = new System.Drawing.Point(0, 57);
+            this.panelFill.Name = "panelFill";
+            this.panelFill.Size = new System.Drawing.Size(240, 393);
+            this.panelFill.TabIndex = 34;
             // 
-            // label2
+            // panelSelector
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(64, 98);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "label2";
+            this.panelSelector.Controls.Add(this.radioButton4);
+            this.panelSelector.Controls.Add(this.radioButton1);
+            this.panelSelector.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSelector.Location = new System.Drawing.Point(0, 0);
+            this.panelSelector.Name = "panelSelector";
+            this.panelSelector.Size = new System.Drawing.Size(240, 57);
+            this.panelSelector.TabIndex = 32;
             // 
-            // label1
+            // radioButton4
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(64, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "label1";
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(125, 22);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(75, 17);
+            this.radioButton4.TabIndex = 5;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Nyomtatás";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged_2);
             // 
-            // button3
+            // radioButton1
             // 
-            this.button3.Location = new System.Drawing.Point(662, 376);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(554, 376);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(446, 376);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(26, 22);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(63, 17);
+            this.radioButton1.TabIndex = 2;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Keresés";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged_2);
             // 
             // FormStat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.paneAll);
             this.Name = "FormStat";
             this.Text = "FormStat";
+            this.Load += new System.EventHandler(this.FormStat_Load);
+            this.paneAll.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridRS)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panelSelector.ResumeLayout(false);
+            this.panelSelector.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel paneAll;
+        private System.Windows.Forms.DataGridView dataGridRS;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelFill;
+        private System.Windows.Forms.Panel panelSelector;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }

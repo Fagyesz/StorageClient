@@ -17,18 +17,54 @@ namespace RestAPIKliens.Forms
     {
         String URL = "http://127.0.0.1:3000/basin/";
         private List<Basin> RSList = new List<Basin>();
+        private static DateTime DataTimePut1 = new DateTime();
         public static FormBasin Self;
 
         public FormBasin()
         {
             InitializeComponent();
             GetData();
+            LoadTheme();
             Self = this;
         }
+        private void LoadTheme()
+        {
+            panelSelector.BackColor = ThemeColor.SecondaryColor;
+            panelSelector.ForeColor = Color.White;
+            foreach (Control btns in this.Controls)
+            {
+                if (btns.GetType() == typeof(Button))
+                {
+                    Button btn = (Button)btns;
+                    btn.BackColor = ThemeColor.PrimaryColor;
+                    btn.ForeColor = Color.White;
+                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+                    btn.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                }
+            }
+            //label1.ForeColor = ThemeColor.SecondaryColor;
+            //label2.ForeColor = ThemeColor.SecondaryColor;
+            //.ForeColor = ThemeColor.SecondaryColor;
+        }
+
+        internal Scrap DataToScrapBasin()
+        {
+
+            Scrap SC = new Scrap();
+
+            SC.bid = (int)dataGridBasin.SelectedRows[0].Cells[0].Value;
+            SC.name = (string)dataGridBasin.SelectedRows[0].Cells[1].Value;
+            SC.weight = (int)dataGridBasin.SelectedRows[0].Cells[2].Value;
+
+            return SC;
+        }
+        
+
+       
 
         private void GetData()
         {
-
+            try { 
 
             ClearDataGridViewRows(dataGridBasin, RSList);
 
@@ -45,14 +81,65 @@ namespace RestAPIKliens.Forms
 
             }
             dataGridBasin.DataSource = RSList;
+                DataGridDateFormating();
+            }
+            catch (Exception e)
+            {
 
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
 
 
         }
-        
+
+        internal void DeleteBySC()
+        {
+            Delete();
+        }
+
+        internal void ScrapDel(int weight)
+        {
+            int rowIndex = dataGridBasin.CurrentCell.RowIndex;
+            string tmp = dataGridBasin.SelectedRows[0].Cells[0].Value.ToString();
+            int currentweight = (int)dataGridBasin.SelectedRows[0].Cells[2].Value;
+            if (currentweight < weight)
+            {
+                MsExeption("Súly hiba", "Súly hiba");
+            }
+            else
+                if (currentweight == weight)
+            {
+                Delete();
+            }
+            else
+            {
+                dataGridBasin.SelectedRows[0].Cells[2].Value = currentweight - weight;
+            }
+
+        }
+
         private void btnGetAll_Click(object sender, EventArgs e)
         {
             //GetData();
+        }
+
+        internal void DecreaseBySC(int w)
+        {
+            try
+            {
+
+                int rowIndex = dataGridBasin.CurrentCell.RowIndex;
+                string tmp = dataGridBasin.SelectedRows[0].Cells[0].Value.ToString();
+
+
+                dataGridBasin.SelectedRows[0].Cells[2].Value = w;
+
+            }
+            catch
+            {
+
+                throw new Exception();
+            }
         }
 
         private void gtnGetById_Click(object sender, EventArgs e)
@@ -62,6 +149,7 @@ namespace RestAPIKliens.Forms
         
         private void GetDataID(string b)
         {
+            try { 
             ClearDataGridViewRows(dataGridBasin, RSList);
 
             RSList.Clear();
@@ -79,6 +167,13 @@ namespace RestAPIKliens.Forms
 
             RSList.Add(a);
             dataGridBasin.DataSource = RSList;
+                DataGridDateFormating();
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show( e.Message);
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -176,9 +271,10 @@ namespace RestAPIKliens.Forms
 
         private void dataGridDry_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            Put();
             try
             {
-                Put();
+                
             }
             catch (Exception ex)
             {
@@ -192,7 +288,7 @@ namespace RestAPIKliens.Forms
             int rowIndex = dataGridBasin.CurrentCell.RowIndex;
             string tmp = dataGridBasin.SelectedRows[0].Cells[0].Value.ToString();
 
-            DateTime theDate = dateTimePicker1.Value.Date;
+          //  DateTime theDate = dateTimePicker1.Value.Date;
 
             var client = new RestClient(URL);
             String ROUTE = "put/" + (int)dataGridBasin.SelectedRows[0].Cells[0].Value;
@@ -200,19 +296,20 @@ namespace RestAPIKliens.Forms
             request.RequestFormat = DataFormat.Json;
 
 
-            try
-            {
+            
 
 
                 string name, place;
                 int weight, rsid;
                 DateTime marinadestart, marinadeend, smoking, arrived;
+           // DateTime time = DateTime.MinValue;
 
+           // DataTimePut1 = (DateTime)dataGridBasin.SelectedRows[0].Cells[3].Value;
 
                 name = dataGridBasin.SelectedRows[0].Cells[1].Value.ToString();
                 weight = (int)dataGridBasin.SelectedRows[0].Cells[2].Value;
-                arrived = (DateTime)dataGridBasin.SelectedRows[0].Cells[3].Value;
-                place = dataGridBasin.SelectedRows[0].Cells[4].Value.ToString();
+                place = dataGridBasin.SelectedRows[0].Cells[3].Value.ToString();
+                arrived = (DateTime)dataGridBasin.SelectedRows[0].Cells[4].Value;
                 marinadestart = (DateTime)dataGridBasin.SelectedRows[0].Cells[5].Value;
                 marinadeend = (DateTime)dataGridBasin.SelectedRows[0].Cells[6].Value;
                 smoking = (DateTime)dataGridBasin.SelectedRows[0].Cells[7].Value;
@@ -234,13 +331,7 @@ namespace RestAPIKliens.Forms
                 });
 
 
-            }
-            catch (Exception)
-            {
-
-                throw;
-
-            }
+           
 
 
 
@@ -262,8 +353,69 @@ namespace RestAPIKliens.Forms
         }
         public void GetDataPublicId(string b)
         {
-            GetDataID(b);
-            this.Refresh();
+            if (!b.All(char.IsDigit))
+            {
+                MsExeption("Nem szám", "Hibás bemenet");
+            }
+            else
+            {
+                if (b == "")
+                {
+                    MsExeption("Üres mező", "Hibás bemenet");
+                }
+                else
+                {
+                    GetDataID(b);
+                    this.Refresh();
+                }
+            }
+        }
+
+        private void FormBasin_Load(object sender, EventArgs e)
+        {
+            LoadTheme();
+        }
+        private void DataGridDateFormating()
+
+        {
+            dataGridBasin.Columns[4].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            dataGridBasin.Columns[5].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            dataGridBasin.Columns[6].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            dataGridBasin.Columns[7].DefaultCellStyle.Format = "yyyy.MM.dd.";
+        }
+
+
+        private void OpenChildForm(Form childForm, object btnSender)
+        {
+
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            this.panelFill.Controls.Add(childForm);
+            this.panelFill.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+
+        }
+
+        private void dataGridBasin_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            Put();
+        }
+
+        private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.Search("Basin"), sender);
+        }
+
+        private void radioButton3_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.ScrapAdd("Basin"), sender);
+        }
+
+        private void radioButton4_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.Print("Basin"), sender);
         }
     }
 }
