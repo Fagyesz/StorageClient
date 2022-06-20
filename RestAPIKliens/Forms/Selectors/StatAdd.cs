@@ -175,5 +175,23 @@ namespace RestAPIKliens.Forms.Selectors
 
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (btnCollection.Visible)
+            {
+                btnCollection.Visible = false;
+            }
+            else
+            {
+                btnCollection.Visible = true;
+            }
+            
+        }
+
+        private void btnCollection_Click(object sender, EventArgs e)
+        {
+            txtPostWeight.Items.Add(txtPostWeight.Text);
+        }
     }
 }

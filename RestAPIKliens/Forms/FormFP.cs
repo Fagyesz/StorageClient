@@ -25,7 +25,7 @@ namespace RestAPIKliens.Forms
         public static FormFP Self;
 
         private bool ColumnChange =true;
-
+        private bool OrderBy=true;
         public FormFP()
         {
             
@@ -138,7 +138,7 @@ namespace RestAPIKliens.Forms
             dataGridFP.Columns[0].HeaderText = "Azonosító";
             dataGridFP.Columns[1].HeaderText = "Nyersanyag ID";
             dataGridFP.Columns[2].HeaderText = "Basin ID";
-            dataGridFP.Columns[3].HeaderText = "SzárazRaktár ID";
+            dataGridFP.Columns[3].HeaderText = "Száraz ID";
             dataGridFP.Columns[4].HeaderText = "Megnevezés";
             dataGridFP.Columns[5].HeaderText = "Súly";
             dataGridFP.Columns[6].HeaderText = "Származási hely";
@@ -492,8 +492,10 @@ namespace RestAPIKliens.Forms
 
         private void dataGridDry_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (!ColumnChange) 
-            Put();
+            if (!ColumnChange)
+            {
+                Put();
+            }
         }
 
         private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
@@ -523,29 +525,11 @@ namespace RestAPIKliens.Forms
 
         private void dataGridFP_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //dataGridFP.Sort(dataGridFP.Columns[1], ListSortDirection.Ascending);
-            /*
-                switch (e.ColumnIndex)
-                {
-                    case 0:
-                        
-
-                        break;
-                    case 1:
-                        dataGridFP.Sort(dataGridFP.Columns[1], ListSortDirection.Ascending);
-                    Sorting();
-                        break;
-
-                    case 2:
-                        // ST = FormDry.Self.DataToStatDry();
-                        break;
-                    case 3:
-                        // ST = FormBasin.Self.DataToStatBasin();
-                        break;
-                    default:
-                        break;
-                }
-            */
+            int col = e.ColumnIndex;
+            if (e.RowIndex == -1)
+            {
+                SortingMain(col);
+            }
 
         }
 
@@ -623,5 +607,154 @@ namespace RestAPIKliens.Forms
         {
 
         }
+        private void SortingMain(int col)
+        {
+            GetData();
+            GetSortingData(col);
+            SetColumsName();
+        }
+
+        private void GetSortingData(int col)
+        {
+            try
+            {
+
+                SortingData(FPList.Count, col);
+
+                dataGridFP.DataSource = FPList;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Nem megy a node server\n msg:  " + e, "Node Server");
+                throw;
+            }
+        }
+
+        private void SortingData(int a, int col)
+        {
+            FP[] RsArray = new FP[a];
+            for (int i = 0; i < a; i++)
+            {
+                RsArray[i] = FPList[i];
+            }
+
+            SortingVAR(RsArray, col);
+
+        }
+
+        private void SortingVAR(FP[] rsArray, int col)
+        {
+
+            dataGridFP.DataSource = null;
+            dataGridFP.Rows.Clear();
+
+
+            IEnumerable<FP> query;
+
+            if (OrderBy)
+            {
+
+
+                switch (col)
+                {
+                    case 0:
+                        query = rsArray.OrderBy(var => var.id);
+                        FPList = query.ToList();
+                        break;
+                    case 1:
+                        query = rsArray.OrderBy(var => var.rsid);
+                        FPList = query.ToList();
+                        break;
+                    case 2:
+                        query = rsArray.OrderBy(var => var.bid);
+                        FPList = query.ToList();
+                        break;
+                    case 3:
+                        query = rsArray.OrderBy(var => var.did);
+                        FPList = query.ToList();
+                        break;
+                    case 4:
+                        query = rsArray.OrderBy(var => var.name);
+                        FPList = query.ToList();
+                        break;
+                    case 5:
+                        query = rsArray.OrderBy(var => var.weight);
+                        FPList = query.ToList();
+                        break;
+                    case 6:
+                        query = rsArray.OrderBy(var => var.place);
+                        FPList = query.ToList();
+                        break;
+                    case 7:
+                        query = rsArray.OrderBy(var => var.arrived);
+                        FPList = query.ToList();
+                        break;
+                    case 8:
+                        query = rsArray.OrderBy(var => var.marinated);
+                        FPList = query.ToList();
+                        break;
+                    case 9:
+                        query = rsArray.OrderBy(var => var.smoked);
+                        FPList = query.ToList();
+                        break;
+
+                    default:
+                        break;
+                }
+                OrderBy = !OrderBy;
+
+            }
+            else
+            {
+                switch (col)
+                {
+                    case 0:
+                        query = rsArray.OrderByDescending(var => var.id);
+                        FPList = query.ToList();
+                        break;
+                    case 1:
+                        query = rsArray.OrderByDescending(var => var.rsid);
+                        FPList = query.ToList();
+                        break;
+                    case 2:
+                        query = rsArray.OrderByDescending(var => var.bid);
+                        FPList = query.ToList();
+                        break;
+                    case 3:
+                        query = rsArray.OrderByDescending(var => var.did);
+                        FPList = query.ToList();
+                        break;
+                    case 4:
+                        query = rsArray.OrderByDescending(var => var.name);
+                        FPList = query.ToList();
+                        break;
+                    case 5:
+                        query = rsArray.OrderByDescending(var => var.weight);
+                        FPList = query.ToList();
+                        break;
+                    case 6:
+                        query = rsArray.OrderByDescending(var => var.place);
+                        FPList = query.ToList();
+                        break;
+                    case 7:
+                        query = rsArray.OrderByDescending(var => var.arrived);
+                        FPList = query.ToList();
+                        break;
+                    case 8:
+                        query = rsArray.OrderByDescending(var => var.marinated);
+                        FPList = query.ToList();
+                        break;
+                    case 9:
+                        query = rsArray.OrderByDescending(var => var.smoked);
+                        FPList = query.ToList();
+                        break;
+
+                    default:
+                        break;
+                }
+                OrderBy = !OrderBy;
+            }
+        }
+
     }
 }

@@ -35,12 +35,15 @@
             this.btnSend = new System.Windows.Forms.Button();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnCollection = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(103, 21);
+            this.label8.Location = new System.Drawing.Point(55, 37);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(27, 13);
             this.label8.TabIndex = 42;
@@ -56,7 +59,7 @@
             "400",
             "500",
             "600"});
-            this.btnBasinw.Location = new System.Drawing.Point(69, 37);
+            this.btnBasinw.Location = new System.Drawing.Point(21, 53);
             this.btnBasinw.Name = "btnBasinw";
             this.btnBasinw.Size = new System.Drawing.Size(100, 21);
             this.btnBasinw.TabIndex = 39;
@@ -64,7 +67,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(83, 125);
+            this.label7.Location = new System.Drawing.Point(68, 139);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(66, 13);
             this.label7.TabIndex = 43;
@@ -73,7 +76,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(83, 73);
+            this.label6.Location = new System.Drawing.Point(68, 87);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 13);
             this.label6.TabIndex = 40;
@@ -82,7 +85,7 @@
             // btnSend
             // 
             this.btnSend.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnSend.Location = new System.Drawing.Point(65, 180);
+            this.btnSend.Location = new System.Drawing.Point(58, 192);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(104, 27);
             this.btnSend.TabIndex = 37;
@@ -92,24 +95,66 @@
             // 
             // dateTimePicker3
             // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(36, 141);
+            this.dateTimePicker3.Location = new System.Drawing.Point(21, 155);
             this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(169, 20);
+            this.dateTimePicker3.Size = new System.Drawing.Size(188, 20);
             this.dateTimePicker3.TabIndex = 41;
             // 
             // dateTimePicker4
             // 
             this.dateTimePicker4.CustomFormat = "";
-            this.dateTimePicker4.Location = new System.Drawing.Point(36, 89);
+            this.dateTimePicker4.Location = new System.Drawing.Point(21, 103);
             this.dateTimePicker4.Name = "dateTimePicker4";
-            this.dateTimePicker4.Size = new System.Drawing.Size(169, 20);
+            this.dateTimePicker4.Size = new System.Drawing.Size(188, 20);
             this.dateTimePicker4.TabIndex = 38;
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.Transparent;
+            this.btnClear.BackgroundImage = global::RestAPIKliens.Properties.Resources.icons8_erase_20;
+            this.btnClear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnClear.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnClear.Location = new System.Drawing.Point(7, 12);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(25, 24);
+            this.btnClear.TabIndex = 63;
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Visible = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnCollection
+            // 
+            this.btnCollection.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnCollection.Location = new System.Drawing.Point(142, 52);
+            this.btnCollection.Name = "btnCollection";
+            this.btnCollection.Size = new System.Drawing.Size(67, 21);
+            this.btnCollection.TabIndex = 62;
+            this.btnCollection.Text = "Bővítés";
+            this.btnCollection.UseVisualStyleBackColor = true;
+            this.btnCollection.Visible = false;
+            this.btnCollection.Click += new System.EventHandler(this.btnCollection_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.BackgroundImage = global::RestAPIKliens.Properties.Resources.icons8_gear_16;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button2.Location = new System.Drawing.Point(220, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(25, 24);
+            this.button2.TabIndex = 61;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // BasinAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(248, 219);
+            this.ClientSize = new System.Drawing.Size(248, 255);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnCollection);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btnBasinw);
             this.Controls.Add(this.label7);
@@ -134,5 +179,8 @@
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.DateTimePicker dateTimePicker3;
         private System.Windows.Forms.DateTimePicker dateTimePicker4;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnCollection;
+        private System.Windows.Forms.Button button2;
     }
 }

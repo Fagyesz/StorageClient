@@ -62,6 +62,7 @@
             this.dataGridBasin.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridBasin.Size = new System.Drawing.Size(800, 450);
             this.dataGridBasin.TabIndex = 22;
+            this.dataGridBasin.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridBasin_CellClick);
             this.dataGridBasin.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridBasin_CellValueChanged);
             // 
             // panel1

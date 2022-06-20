@@ -31,6 +31,8 @@
             this.gtnGetById = new System.Windows.Forms.Button();
             this.btnGetAll = new System.Windows.Forms.Button();
             this.txtGetById = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // gtnGetById
@@ -62,11 +64,37 @@
             this.txtGetById.Size = new System.Drawing.Size(100, 20);
             this.txtGetById.TabIndex = 6;
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button1.Location = new System.Drawing.Point(12, 123);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(104, 43);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Keresés";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.BackgroundImage = global::RestAPIKliens.Properties.Resources.icons8_gear_16;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button2.Location = new System.Drawing.Point(213, 18);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(25, 27);
+            this.button2.TabIndex = 8;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(235, 139);
+            this.ClientSize = new System.Drawing.Size(235, 203);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.gtnGetById);
             this.Controls.Add(this.btnGetAll);
             this.Controls.Add(this.txtGetById);
@@ -83,5 +111,7 @@
         private System.Windows.Forms.Button gtnGetById;
         private System.Windows.Forms.Button btnGetAll;
         private System.Windows.Forms.TextBox txtGetById;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

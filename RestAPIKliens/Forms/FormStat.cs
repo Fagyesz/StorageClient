@@ -17,6 +17,9 @@ namespace RestAPIKliens.Forms
         public static FormStat Self;
         String URL = "http://127.0.0.1:3000/statistics/";
         private List<Stat> StatList = new List<Stat>();
+        private bool OrderBy = true;
+        private bool ColumnChange = true;
+
         public FormStat()
         {
             InitializeComponent();
@@ -105,7 +108,7 @@ namespace RestAPIKliens.Forms
                 MessageBox.Show("Node server nem fut Kijelentkezés szükséges "+e.Message);
             }
             DataGridDateFormating();
-
+            SetColumsName();
         }
         private void GetDataID(string b)
         {
@@ -131,6 +134,7 @@ namespace RestAPIKliens.Forms
 
                 StatList.Add(a);
                 dataGridRS.DataSource = StatList;
+                SetColumsName();
             }
             catch (Exception e)
             {
@@ -246,7 +250,10 @@ namespace RestAPIKliens.Forms
 
         private void dataGridRS_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            Put();
+            if (!ColumnChange)
+            {
+                Put();
+            }
         }
 
        
@@ -263,7 +270,25 @@ namespace RestAPIKliens.Forms
             dataGridRS.Columns[9].DefaultCellStyle.Format = "yyyy.MM.dd.";
             dataGridRS.Columns[10].DefaultCellStyle.Format = "yyyy.MM.dd.";
             dataGridRS.Columns[11].DefaultCellStyle.Format = "yyyy.MM.dd.";
-        } 
+        }
+        private void SetColumsName()
+        {
+            ColumnChange = true;
+            dataGridRS.Columns[0].HeaderText = "Azonosító";
+            dataGridRS.Columns[1].HeaderText = "KészTermék ID";
+            dataGridRS.Columns[2].HeaderText = "Nyersanyag ID";
+            dataGridRS.Columns[3].HeaderText = "Basin ID";
+            dataGridRS.Columns[4].HeaderText = "SzárazRaktár ID";
+            dataGridRS.Columns[5].HeaderText = "Megnevezés";
+            dataGridRS.Columns[6].HeaderText = "Súly";
+            dataGridRS.Columns[7].HeaderText = "Származási hely";
+            dataGridRS.Columns[8].HeaderText = "Érkezési ideje";
+            dataGridRS.Columns[9].HeaderText = "Érlelés ideje";
+            dataGridRS.Columns[10].HeaderText = "Füstölés ideje";
+            dataGridRS.Columns[11].HeaderText = "Archiválás ideje";
+
+            ColumnChange = false;
+        }
 
         private void radioButton1_CheckedChanged_2(object sender, EventArgs e)
         {
@@ -273,6 +298,183 @@ namespace RestAPIKliens.Forms
         private void radioButton4_CheckedChanged_2(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.Selectors.Print("Stat"), sender);
+        }
+
+
+        private void SortingMain(int col)
+        {
+            GetData();
+            GetSortingData(col);
+            SetColumsName();
+        }
+
+        private void GetSortingData(int col)
+        {
+            try
+            {
+
+                SortingData(StatList.Count, col);
+
+                dataGridRS.DataSource = StatList;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Nem megy a node server\n msg:  " + e, "Node Server");
+                throw;
+            }
+        }
+
+        private void SortingData(int a, int col)
+        {
+            Stat[] RsArray = new Stat[a];
+            for (int i = 0; i < a; i++)
+            {
+                RsArray[i] = StatList[i];
+            }
+
+            SortingVAR(RsArray, col);
+
+        }
+
+        private void SortingVAR(Stat[] rsArray, int col)
+        {
+
+            dataGridRS.DataSource = null;
+            dataGridRS.Rows.Clear();
+
+
+            IEnumerable<Stat> query;
+
+            if (OrderBy)
+            {
+
+                switch (col)
+                {
+                    case 0:
+                        query = rsArray.OrderBy(var => var.id);
+                        StatList = query.ToList();
+                        break;
+                    case 1:
+                        query = rsArray.OrderBy(var => var.fpid);
+                        StatList = query.ToList();
+                        break;
+                    case 2:
+                        query = rsArray.OrderBy(var => var.rsid);
+                        StatList = query.ToList();
+                        break;
+                    case 3:
+                        query = rsArray.OrderBy(var => var.bid);
+                        StatList = query.ToList();
+                        break;
+                    case 4:
+                        query = rsArray.OrderBy(var => var.did);
+                        StatList = query.ToList();
+                        break;
+                    case 5:
+                        query = rsArray.OrderBy(var => var.name);
+                        StatList = query.ToList();
+                        break;
+                    case 6:
+                        query = rsArray.OrderBy(var => var.weight);
+                        StatList = query.ToList();
+                        break;
+                    case 7:
+                        query = rsArray.OrderBy(var => var.place);
+                        StatList = query.ToList();
+                        break;
+                    case 8:
+                        query = rsArray.OrderBy(var => var.arrived);
+                        StatList = query.ToList();
+                        break;
+                    case 9:
+                        query = rsArray.OrderBy(var => var.marinated);
+                        StatList = query.ToList();
+                        break;
+                    case 10:
+                        query = rsArray.OrderBy(var => var.smoked);
+                        StatList = query.ToList();
+                        break;
+                    case 11:
+                        query = rsArray.OrderBy(var => var.stated);
+                        StatList = query.ToList();
+                        break;
+                    default:
+                        break;
+                }
+                OrderBy = !OrderBy;
+            }
+            else
+            {
+                switch (col)
+                {
+                    case 0:
+                        query = rsArray.OrderByDescending(var => var.id);
+                        StatList = query.ToList();
+                        break;
+                    case 1:
+                        query = rsArray.OrderByDescending(var => var.fpid);
+                        StatList = query.ToList();
+                        break;
+                    case 2:
+                        query = rsArray.OrderByDescending(var => var.rsid);
+                        StatList = query.ToList();
+                        break;
+                    case 3:
+                        query = rsArray.OrderByDescending(var => var.bid);
+                        StatList = query.ToList();
+                        break;
+                    case 4:
+                        query = rsArray.OrderByDescending(var => var.did);
+                        StatList = query.ToList();
+                        break;
+                    case 5:
+                        query = rsArray.OrderByDescending(var => var.name);
+                        StatList = query.ToList();
+                        break;
+                    case 6:
+                        query = rsArray.OrderByDescending(var => var.weight);
+                        StatList = query.ToList();
+                        break;
+                    case 7:
+                        query = rsArray.OrderByDescending(var => var.place);
+                        StatList = query.ToList();
+                        break;
+                    case 8:
+                        query = rsArray.OrderByDescending(var => var.arrived);
+                        StatList = query.ToList();
+                        break;
+                    case 9:
+                        query = rsArray.OrderByDescending(var => var.marinated);
+                        StatList = query.ToList();
+                        break;
+                    case 10:
+                        query = rsArray.OrderByDescending(var => var.smoked);
+                        StatList = query.ToList();
+                        break;
+                    case 11:
+                        query = rsArray.OrderByDescending(var => var.stated);
+                        StatList = query.ToList();
+                        break;
+                    default:
+                        break;
+
+                }
+                OrderBy = !OrderBy;
+            }
+        }
+
+        private void dataGridRS_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int col = e.ColumnIndex;
+            if (e.RowIndex == -1)
+            {
+                SortingMain(col);
+            }
+        }
+
+        private void dataGridRS_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

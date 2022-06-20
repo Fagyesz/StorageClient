@@ -19,6 +19,8 @@ namespace RestAPIKliens.Forms
         private List<Basin> RSList = new List<Basin>();
         private static DateTime DataTimePut1 = new DateTime();
         public static FormBasin Self;
+        bool OrderBy=true;
+        private bool ColumnChange = true;
 
         public FormBasin()
         {
@@ -81,7 +83,7 @@ namespace RestAPIKliens.Forms
 
             }
             dataGridBasin.DataSource = RSList;
-                DataGridDateFormating();
+                DataGridDateFormating(); SetColumsName();
             }
             catch (Exception e)
             {
@@ -167,7 +169,7 @@ namespace RestAPIKliens.Forms
 
             RSList.Add(a);
             dataGridBasin.DataSource = RSList;
-                DataGridDateFormating();
+                DataGridDateFormating(); SetColumsName();
             }
             catch (Exception e)
             {
@@ -400,7 +402,10 @@ namespace RestAPIKliens.Forms
 
         private void dataGridBasin_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            Put();
+            if (!ColumnChange)
+            {
+                Put();
+            }
         }
 
         private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
@@ -416,6 +421,168 @@ namespace RestAPIKliens.Forms
         private void radioButton4_CheckedChanged_1(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.Selectors.Print("Basin"), sender);
+        }
+        private void SortingMain(int col)
+        {
+            GetData();
+            GetSortingData(col);
+            SetColumsName();
+        }
+        private void SetColumsName()
+        {
+            ColumnChange = true;
+            dataGridBasin.Columns[0].HeaderText = "Azonosító";
+            dataGridBasin.Columns[1].HeaderText = "Megnevezés";
+            dataGridBasin.Columns[2].HeaderText = "Súly";
+            dataGridBasin.Columns[3].HeaderText = "Származási hely";
+            dataGridBasin.Columns[4].HeaderText = "Érkezési idő";
+            dataGridBasin.Columns[5].HeaderText = "Érlelés kezdete";
+            dataGridBasin.Columns[6].HeaderText = "Érlelés vége"; 
+            dataGridBasin.Columns[7].HeaderText = "Füstölés ideje";
+            dataGridBasin.Columns[8].HeaderText = "Nyersanyag ID";
+            ColumnChange = false;
+        }
+
+        private void GetSortingData(int col)
+        {
+            try
+            {
+
+                SortingData(RSList.Count, col);
+
+                dataGridBasin.DataSource = RSList;
+            }
+            catch (Exception e)
+            {
+                MsExeption("Nem megy a node server\n msg:  " + e, "Node Server");
+                throw;
+            }
+        }
+
+        private void SortingData(int a, int col)
+        {
+            Basin[] RsArray = new Basin[a];
+            for (int i = 0; i < a; i++)
+            {
+                RsArray[i] = RSList[i];
+            }
+
+            SortingVAR(RsArray, col);
+
+        }
+
+        private void SortingVAR(Basin[] rsArray, int col)
+        {
+
+            dataGridBasin.DataSource = null;
+            dataGridBasin.Rows.Clear();
+
+
+            IEnumerable<Basin> query;
+            if (OrderBy)
+            {
+
+
+                switch (col)
+                {
+                    case 0:
+                        query = rsArray.OrderBy(var => var.id);
+                        RSList = query.ToList();
+                        break;
+                    case 1:
+                        query = rsArray.OrderBy(var => var.name);
+                        RSList = query.ToList();
+                        break;
+                    case 2:
+                        query = rsArray.OrderBy(var => var.weight);
+                        RSList = query.ToList();
+                        break;
+                    case 3:
+                        query = rsArray.OrderBy(var => var.place);
+                        RSList = query.ToList();
+                        break;
+                    case 4:
+                        query = rsArray.OrderBy(var => var.arrived);
+                        RSList = query.ToList();
+                        break;
+                    case 5:
+                        query = rsArray.OrderBy(var => var.marinadestart);
+                        RSList = query.ToList();
+                        break;
+                    case 6:
+                        query = rsArray.OrderBy(var => var.marinadeend);
+                        RSList = query.ToList();
+                        break;
+                    case 7:
+                        query = rsArray.OrderBy(var => var.smoking);
+                        RSList = query.ToList();
+                        break;
+                    case 8:
+                        query = rsArray.OrderBy(var => var.rsid);
+                        RSList = query.ToList();
+                        break;
+
+                    default:
+                        break;
+                }
+                OrderBy = !OrderBy;
+            }
+            else
+            {
+                switch (col)
+                {
+                    case 0:
+                        query = rsArray.OrderByDescending(var => var.id);
+                        RSList = query.ToList();
+                        break;
+                    case 1:
+                        query = rsArray.OrderByDescending(var => var.name);
+                        RSList = query.ToList();
+                        break;
+                    case 2:
+                        query = rsArray.OrderByDescending(var => var.weight);
+                        RSList = query.ToList();
+                        break;
+                    case 3:
+                        query = rsArray.OrderByDescending(var => var.place);
+                        RSList = query.ToList();
+                        break;
+                    case 4:
+                        query = rsArray.OrderByDescending(var => var.arrived);
+                        RSList = query.ToList();
+                        break;
+                    case 5:
+                        query = rsArray.OrderByDescending(var => var.marinadestart);
+                        RSList = query.ToList();
+                        break;
+                    case 6:
+                        query = rsArray.OrderByDescending(var => var.marinadeend);
+                        RSList = query.ToList();
+                        break;
+                    case 7:
+                        query = rsArray.OrderByDescending(var => var.smoking);
+                        RSList = query.ToList();
+                        break;
+                    case 8:
+                        query = rsArray.OrderByDescending(var => var.rsid);
+                        RSList = query.ToList();
+                        break;
+
+                    default:
+                        break;
+                }
+                OrderBy = !OrderBy;
+            }
+
+        }
+
+        private void dataGridBasin_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int col = e.ColumnIndex;
+            if (e.RowIndex == -1)
+            {
+                SortingMain(col);
+            }
         }
     }
 }

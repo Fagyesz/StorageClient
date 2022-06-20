@@ -65,7 +65,10 @@
             this.dataGridRS.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridRS.Size = new System.Drawing.Size(683, 477);
             this.dataGridRS.TabIndex = 22;
+            this.dataGridRS.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRS_CellClick);
+            this.dataGridRS.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRS_CellContentClick);
             this.dataGridRS.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRS_CellValueChanged_1);
+            this.dataGridRS.Click += new System.EventHandler(this.dataGridRS_Click);
             // 
             // panel1
             // 

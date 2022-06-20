@@ -303,5 +303,11 @@
   <ItemGroup>
     <None Include="Resources\icons8-close-64.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-gear-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-erase-20.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

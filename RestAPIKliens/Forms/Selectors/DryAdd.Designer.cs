@@ -41,6 +41,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnCollection3 = new System.Windows.Forms.Button();
+            this.btnCollection2 = new System.Windows.Forms.Button();
+            this.btnCollection = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtPostName
@@ -50,15 +55,15 @@
             "Comb",
             "Csülök",
             "kenyér"});
-            this.txtPostName.Location = new System.Drawing.Point(26, 45);
+            this.txtPostName.Location = new System.Drawing.Point(26, 42);
             this.txtPostName.Name = "txtPostName";
-            this.txtPostName.Size = new System.Drawing.Size(100, 21);
+            this.txtPostName.Size = new System.Drawing.Size(121, 21);
             this.txtPostName.TabIndex = 33;
             // 
             // btnPost
             // 
             this.btnPost.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnPost.Location = new System.Drawing.Point(85, 325);
+            this.btnPost.Location = new System.Drawing.Point(84, 319);
             this.btnPost.Name = "btnPost";
             this.btnPost.Size = new System.Drawing.Size(93, 37);
             this.btnPost.TabIndex = 32;
@@ -69,7 +74,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 77);
+            this.label3.Location = new System.Drawing.Point(30, 115);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 13);
             this.label3.TabIndex = 39;
@@ -85,15 +90,15 @@
             "400",
             "500",
             "600"});
-            this.txtPostWeight.Location = new System.Drawing.Point(145, 45);
+            this.txtPostWeight.Location = new System.Drawing.Point(26, 83);
             this.txtPostWeight.Name = "txtPostWeight";
-            this.txtPostWeight.Size = new System.Drawing.Size(100, 21);
+            this.txtPostWeight.Size = new System.Drawing.Size(121, 21);
             this.txtPostWeight.TabIndex = 34;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(180, 29);
+            this.label2.Location = new System.Drawing.Point(61, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 13);
             this.label2.TabIndex = 38;
@@ -107,15 +112,15 @@
             "Miskolc",
             "Gyöngyös",
             "Pásztó"});
-            this.txtPostPlace.Location = new System.Drawing.Point(26, 93);
+            this.txtPostPlace.Location = new System.Drawing.Point(26, 131);
             this.txtPostPlace.Name = "txtPostPlace";
-            this.txtPostPlace.Size = new System.Drawing.Size(100, 21);
+            this.txtPostPlace.Size = new System.Drawing.Size(121, 21);
             this.txtPostPlace.TabIndex = 35;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 29);
+            this.label1.Location = new System.Drawing.Point(36, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 13);
             this.label1.TabIndex = 37;
@@ -123,7 +128,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(26, 147);
+            this.dateTimePicker1.Location = new System.Drawing.Point(26, 181);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(219, 20);
             this.dateTimePicker1.TabIndex = 36;
@@ -131,7 +136,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 131);
+            this.label4.Location = new System.Drawing.Point(30, 165);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 13);
             this.label4.TabIndex = 40;
@@ -139,7 +144,7 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(26, 213);
+            this.dateTimePicker2.Location = new System.Drawing.Point(26, 232);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(219, 20);
             this.dateTimePicker2.TabIndex = 41;
@@ -147,7 +152,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(30, 197);
+            this.label5.Location = new System.Drawing.Point(30, 216);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 13);
             this.label5.TabIndex = 42;
@@ -156,25 +161,93 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(26, 274);
+            this.comboBox1.Location = new System.Drawing.Point(26, 281);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 43;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(30, 258);
+            this.label6.Location = new System.Drawing.Point(30, 265);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 13);
             this.label6.TabIndex = 44;
             this.label6.Text = "Azonosító";
             // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.Transparent;
+            this.btnClear.BackgroundImage = global::RestAPIKliens.Properties.Resources.icons8_erase_20;
+            this.btnClear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnClear.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnClear.Location = new System.Drawing.Point(26, 2);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(25, 24);
+            this.btnClear.TabIndex = 65;
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Visible = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnCollection3
+            // 
+            this.btnCollection3.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnCollection3.Location = new System.Drawing.Point(178, 130);
+            this.btnCollection3.Name = "btnCollection3";
+            this.btnCollection3.Size = new System.Drawing.Size(67, 21);
+            this.btnCollection3.TabIndex = 64;
+            this.btnCollection3.Text = "Bővítés";
+            this.btnCollection3.UseVisualStyleBackColor = true;
+            this.btnCollection3.Visible = false;
+            this.btnCollection3.Click += new System.EventHandler(this.btnCollection3_Click);
+            // 
+            // btnCollection2
+            // 
+            this.btnCollection2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnCollection2.Location = new System.Drawing.Point(178, 83);
+            this.btnCollection2.Name = "btnCollection2";
+            this.btnCollection2.Size = new System.Drawing.Size(67, 21);
+            this.btnCollection2.TabIndex = 63;
+            this.btnCollection2.Text = "Bővítés";
+            this.btnCollection2.UseVisualStyleBackColor = true;
+            this.btnCollection2.Visible = false;
+            this.btnCollection2.Click += new System.EventHandler(this.btnCollection2_Click);
+            // 
+            // btnCollection
+            // 
+            this.btnCollection.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnCollection.Location = new System.Drawing.Point(178, 42);
+            this.btnCollection.Name = "btnCollection";
+            this.btnCollection.Size = new System.Drawing.Size(67, 21);
+            this.btnCollection.TabIndex = 62;
+            this.btnCollection.Text = "Bővítés";
+            this.btnCollection.UseVisualStyleBackColor = true;
+            this.btnCollection.Visible = false;
+            this.btnCollection.Click += new System.EventHandler(this.btnCollection_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.BackgroundImage = global::RestAPIKliens.Properties.Resources.icons8_gear_16;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button2.Location = new System.Drawing.Point(223, 2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(25, 24);
+            this.button2.TabIndex = 61;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // DryAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 388);
+            this.ClientSize = new System.Drawing.Size(260, 365);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnCollection3);
+            this.Controls.Add(this.btnCollection2);
+            this.Controls.Add(this.btnCollection);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -190,6 +263,7 @@
             this.Controls.Add(this.dateTimePicker1);
             this.Name = "DryAdd";
             this.Text = "DryAdd";
+            this.Load += new System.EventHandler(this.DryAdd_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,5 +284,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnCollection3;
+        private System.Windows.Forms.Button btnCollection2;
+        private System.Windows.Forms.Button btnCollection;
+        private System.Windows.Forms.Button button2;
     }
 }

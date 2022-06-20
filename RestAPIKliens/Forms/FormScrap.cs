@@ -18,7 +18,9 @@ namespace RestAPIKliens.Forms
         String URL = "http://127.0.0.1:3000/scrap/";
         private List<Scrap> ScrapList = new List<Scrap>();
         private Scrap SC = new Scrap();
-        
+        private bool OrderBy = true;
+        private bool ColumnChange = true;
+
         public FormScrap()
         {
             InitializeComponent();
@@ -60,6 +62,18 @@ namespace RestAPIKliens.Forms
         {
             dataGridRS.Columns[3].DefaultCellStyle.Format = "yyyy.MM.dd.";
             
+        }
+        private void SetColumsName()
+        {
+            ColumnChange = true;
+            dataGridRS.Columns[0].HeaderText = "Azonosító";
+            dataGridRS.Columns[1].HeaderText = "Megnevezés";
+            dataGridRS.Columns[2].HeaderText = "Súly";
+            dataGridRS.Columns[3].HeaderText = "Érkezési ideje";
+            dataGridRS.Columns[4].HeaderText = "Nyersanyag ID";
+            dataGridRS.Columns[5].HeaderText = "SzárazRaktár ID";
+            dataGridRS.Columns[6].HeaderText = "Basin ID";
+            ColumnChange = false;
         }
 
         internal int DoNothing()
@@ -134,6 +148,7 @@ namespace RestAPIKliens.Forms
             }
             dataGridRS.DataSource = ScrapList;
                 DataGridDateFormating();
+                SetColumsName();
             }
             catch (Exception e)
             {
@@ -170,7 +185,8 @@ namespace RestAPIKliens.Forms
             ScrapList.Add(a);
             dataGridRS.DataSource = ScrapList;
                 DataGridDateFormating();
-        }
+                SetColumsName();
+            }
             catch (Exception e)
             {
 
@@ -280,7 +296,10 @@ namespace RestAPIKliens.Forms
 
         private void dataGridRS_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            Put();
+            if (!ColumnChange)
+            {
+                Put();
+            }
         }
 
 
@@ -347,6 +366,139 @@ namespace RestAPIKliens.Forms
 
             }
             GetData();
+        }
+
+        private void SortingMain(int col)
+        {
+            GetData();
+            GetSortingData(col);
+            SetColumsName();
+        }
+
+        private void GetSortingData(int col)
+        {
+            try
+            {
+
+                SortingData(ScrapList.Count, col);
+
+                dataGridRS.DataSource = ScrapList;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Nem megy a node server\n msg:  " + e, "Node Server");
+                throw;
+            }
+        }
+
+        private void SortingData(int a, int col)
+        {
+            Scrap[] RsArray = new Scrap[a];
+            for (int i = 0; i < a; i++)
+            {
+                RsArray[i] = ScrapList[i];
+            }
+
+            SortingVAR(RsArray, col);
+
+        }
+
+        private void SortingVAR(Scrap[] rsArray, int col)
+        {
+
+            dataGridRS.DataSource = null;
+            dataGridRS.Rows.Clear();
+
+
+            IEnumerable<Scrap> query;
+            if(OrderBy)
+            {
+                switch (col)
+                {
+                    case 0:
+                        query = rsArray.OrderBy(var => var.id);
+                        ScrapList = query.ToList();
+                        break;
+                    case 1:
+                        query = rsArray.OrderBy(var => var.name);
+                        ScrapList = query.ToList();
+                        break;
+                    case 2:
+                        query = rsArray.OrderBy(var => var.weight);
+                        ScrapList = query.ToList();
+                        break;
+                    case 3:
+                        query = rsArray.OrderBy(var => var.time);
+                        ScrapList = query.ToList();
+                        break;
+                    case 4:
+                        query = rsArray.OrderBy(var => var.rsid);
+                        ScrapList = query.ToList();
+                        break;
+                    case 5:
+                        query = rsArray.OrderBy(var => var.did);
+                        ScrapList = query.ToList();
+                        break;
+                    case 6:
+                        query = rsArray.OrderBy(var => var.bid);
+                        ScrapList = query.ToList();
+                        break;
+
+                    default:
+                        break;
+                }
+                OrderBy = !OrderBy;
+            }
+            else
+            {
+                switch (col)
+                {
+                    case 0:
+                        query = rsArray.OrderByDescending(var => var.id);
+                        ScrapList = query.ToList();
+                        break;
+                    case 1:
+                        query = rsArray.OrderByDescending(var => var.name);
+                        ScrapList = query.ToList();
+                        break;
+                    case 2:
+                        query = rsArray.OrderByDescending(var => var.weight);
+                        ScrapList = query.ToList();
+                        break;
+                    case 3:
+                        query = rsArray.OrderByDescending(var => var.time);
+                        ScrapList = query.ToList();
+                        break;
+                    case 4:
+                        query = rsArray.OrderByDescending(var => var.rsid);
+                        ScrapList = query.ToList();
+                        break;
+                    case 5:
+                        query = rsArray.OrderByDescending(var => var.did);
+                        ScrapList = query.ToList();
+                        break;
+                    case 6:
+                        query = rsArray.OrderByDescending(var => var.bid);
+                        ScrapList = query.ToList();
+                        break;
+
+                    default:
+                        break;
+                }
+                OrderBy = !OrderBy;
+            }
+            
+
+        }
+
+        private void dataGridRS_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int col = e.ColumnIndex;
+            if (e.RowIndex == -1)
+            {
+                SortingMain(col);
+            }
+
         }
     }
 }

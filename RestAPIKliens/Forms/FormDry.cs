@@ -21,6 +21,9 @@ namespace RestAPIKliens.Forms
         private static DateTime DataTimePut1 = new DateTime();
         public static FormDry Self;
         public static bool id = false;
+        private bool OrderBy=true;
+        private bool ColumnChange=true;
+
         public FormDry()
         {
             InitializeComponent();
@@ -85,6 +88,7 @@ namespace RestAPIKliens.Forms
             dataGridDry.DataSource = DryList;
             GridForming();
             DataGridDateFormating();
+                SetColumsName();
             }
             catch (Exception e)
             {
@@ -256,6 +260,7 @@ namespace RestAPIKliens.Forms
             dataGridDry.DataSource = DryList;
             GridForming();
             DataGridDateFormating();
+                SetColumsName();
             }
             catch (Exception e)
             {
@@ -631,7 +636,10 @@ namespace RestAPIKliens.Forms
 
         private void dataGridDry_CellValueChanged_1(object sender, DataGridViewCellEventArgs e)
         {
-            Put();
+            if (!ColumnChange)
+            {
+                Put();
+            }
         }
 
         private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
@@ -657,6 +665,149 @@ namespace RestAPIKliens.Forms
         private void radioButton5_CheckedChanged_1(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.Selectors.FPAdd("Dry"), sender);
+        }
+        private void SortingMain(int col)
+        {
+            GetData();
+            GetSortingData(col);
+            SetColumsName();
+        }
+        private void SetColumsName()
+        {
+            ColumnChange = true;
+            dataGridDry.Columns[0].HeaderText = "Azonosító";
+            dataGridDry.Columns[1].HeaderText = "Megnevezés";
+            dataGridDry.Columns[2].HeaderText = "Súly";
+            dataGridDry.Columns[3].HeaderText = "Érkezési idő";
+            dataGridDry.Columns[4].HeaderText = "Származási hely";
+            dataGridDry.Columns[5].HeaderText = "Lejárati idő";
+            dataGridDry.Columns[6].HeaderText = "Külső Azonosító";
+            ColumnChange = false;
+        }
+
+        private void GetSortingData(int col)
+        {
+            try
+            {
+
+                SortingData(DryList.Count, col);
+
+                dataGridDry.DataSource = DryList;
+            }
+            catch (Exception e)
+            {
+                MsExeption("Nem megy a node server\n msg:  " + e, "Node Server");
+                throw;
+            }
+        }
+
+        private void SortingData(int a, int col)
+        {
+            Dry[] RsArray = new Dry[a];
+            for (int i = 0; i < a; i++)
+            {
+                RsArray[i] = DryList[i];
+            }
+
+            SortingVAR(RsArray, col);
+
+        }
+
+        private void SortingVAR(Dry[] rsArray, int col)
+        {
+
+            dataGridDry.DataSource = null;
+            dataGridDry.Rows.Clear();
+
+
+            IEnumerable<Dry> query;
+            if (OrderBy)
+            {
+
+
+                switch (col)
+                {
+                    case 0:
+                        query = rsArray.OrderBy(var => var.id);
+                        DryList = query.ToList();
+                        break;
+                    case 1:
+                        query = rsArray.OrderBy(var => var.name);
+                        DryList = query.ToList();
+                        break;
+                    case 2:
+                        query = rsArray.OrderBy(var => var.weight);
+                        DryList = query.ToList();
+                        break;
+                    case 3:
+                        query = rsArray.OrderBy(var => var.arrived);
+                        DryList = query.ToList();
+                        break;
+                    case 4:
+                        query = rsArray.OrderBy(var => var.place);
+                        DryList = query.ToList();
+                        break;
+                    case 5:
+                        query = rsArray.OrderBy(var => var.expiration);
+                        DryList = query.ToList();
+                        break;
+                    case 6:
+                        query = rsArray.OrderBy(var => var.ExternaliD);
+                        DryList = query.ToList();
+                        break;
+
+                    default:
+                        break;
+                }
+                OrderBy = !OrderBy;
+            }
+            else
+            {
+                switch (col)
+                {
+                    case 0:
+                        query = rsArray.OrderByDescending(var => var.id);
+                        DryList = query.ToList();
+                        break;
+                    case 1:
+                        query = rsArray.OrderByDescending(var => var.name);
+                        DryList = query.ToList();
+                        break;
+                    case 2:
+                        query = rsArray.OrderByDescending(var => var.weight);
+                        DryList = query.ToList();
+                        break;
+                    case 3:
+                        query = rsArray.OrderByDescending(var => var.arrived);
+                        DryList = query.ToList();
+                        break;
+                    case 4:
+                        query = rsArray.OrderByDescending(var => var.place);
+                        DryList = query.ToList();
+                        break;
+                    case 5:
+                        query = rsArray.OrderByDescending(var => var.expiration);
+                        DryList = query.ToList();
+                        break;
+                    case 6:
+                        query = rsArray.OrderByDescending(var => var.ExternaliD);
+                        DryList = query.ToList();
+                        break;
+
+                    default:
+                        break;
+                }
+                OrderBy = !OrderBy;
+            }
+        }
+
+        private void dataGridDry_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int col = e.ColumnIndex;
+            if (e.RowIndex == -1)
+            {
+                SortingMain(col);
+            }
         }
     }
 }

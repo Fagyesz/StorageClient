@@ -17,9 +17,11 @@ namespace RestAPIKliens.Forms
     public partial class FormRS : Form
     {
         
-        String URL = "http://127.0.0.1:3000/resourcestorage/";
+        static String URL = "http://127.0.0.1:3000/resourcestorage/";
         String URLbasin = "http://127.0.0.1:3000/basin/";
         private List<RS> RSList = new List<RS>();
+        public  List<RS> RSL = new List<RS>();
+        
         private List<Basin> BasinList = new List<Basin>();
         public static FormRS Self;
         private List<RS> Rs = new List<RS>();
@@ -27,6 +29,7 @@ namespace RestAPIKliens.Forms
         private static DateTime DataTimePut1=new DateTime();
         private static DateTime DataTimePut2=new DateTime();
         private bool ColumnChange = true;
+        private bool OrderBy = true;
         public FormRS()
         {
             InitializeComponent();
@@ -148,8 +151,17 @@ namespace RestAPIKliens.Forms
 
         private void GridFormating()
         {
-            dataGridRS.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
-            dataGridRS.Columns[4].DefaultCellStyle.Format = "MM/dd/yyyy";
+            try
+            {
+                dataGridRS.Columns[3].DefaultCellStyle.Format = "MM/dd/yyyy";
+                dataGridRS.Columns[4].DefaultCellStyle.Format = "MM/dd/yyyy";
+            }
+            catch (Exception)
+            {
+
+               
+            }
+            
         }
 
         private void GetDataID(string b)
@@ -178,7 +190,8 @@ namespace RestAPIKliens.Forms
 
                 MessageBox.Show(e.Message);
             }
-}
+        }
+        
 
         /*
 public class RS
@@ -732,6 +745,7 @@ public class RS
 
         private void SetColumsName()
         {
+            ColumnChange = true;
             dataGridRS.Columns[0].HeaderText = "Azonosító";
             dataGridRS.Columns[1].HeaderText = "Megnevezés";
             dataGridRS.Columns[2].HeaderText = "Súly";
@@ -806,6 +820,309 @@ public class RS
             SC.weight= (int)dataGridRS.SelectedRows[0].Cells[2].Value;
 
             return SC;
+        }
+
+
+
+
+       
+        /*
+        public void OrderByEX(bool Order,string s)
+        {
+            
+            List<RS> RSLt = new List<RS>();
+             GetOrderData();
+                
+
+            int l = RSL.Count();
+            RS[] rs = new RS[l];
+            
+            IEnumerable<RS> query;
+            if (Order)
+            {
+                switch (s)
+                {
+                    case "name":
+                        query = RSL.OrderBy(RS => RS.name);
+                        break;
+                    case "weight":
+                        query = RSL.OrderBy(RS => RS.weight);
+                        break;
+                    case "place":
+                        query = RSL.OrderBy(RS => RS.place);
+                        break;
+                    case "butchered":
+                        query = RSL.OrderBy(RS => RS.butchered);
+                        break;
+                    case "arrived":
+                        query = RSL.OrderBy(RS => RS.arrived);
+                        break;
+                    case "id":
+                        query = RSL.OrderBy(RS => RS.id);
+                        break;
+
+                    default:
+                        query = RSL.OrderBy(RS => RS.id);
+                        break;
+                }
+                
+
+
+            }
+            else
+            {
+                switch (s)
+                {
+                    case "name":
+                        query = RSL.OrderByDescending(RS => RS.name);
+                        break;
+                    case "weight":
+                        query = RSL.OrderByDescending(RS => RS.weight);
+                        break;
+                    case "place":
+                        query = RSL.OrderByDescending(RS => RS.place);
+                        break;
+                    case "butchered":
+                        query = RSL.OrderByDescending(RS => RS.butchered);
+                        break;
+                    case "arrived":
+                        query = RSL.OrderByDescending(RS => RS.arrived);
+                        break;
+                    case "id":
+                        query = RSL.OrderByDescending(RS => RS.id);
+                        break;
+
+                    default:
+                        query = RSL.OrderByDescending(RS => RS.id);
+                        break;
+                }
+                
+
+            }
+            
+            //query = RSL.OrderByDescending(RS=>RS.weight);
+            
+            foreach (RS rss in query)
+            {
+                
+                RSLt.Add(rss);
+            }
+            try
+            {
+                dataGridRS.DataSource = RSLt;
+                GridFormating();
+
+            }
+            catch (Exception)
+            {
+
+                
+            }
+            
+            
+            
+
+        }*/
+
+        private void GetOrderData()
+        {
+            try
+            {
+
+                ClearDataGridViewRows(dataGridRS, RSL);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<RS>> response = client.Execute<List<RS>>(request);
+                foreach (RS a in response.Data)
+                {
+
+                    RSL.Add(a);
+
+                }
+                
+                
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
+        }
+
+        private void dataGridRS_Click(object sender, EventArgs e)
+        {
+            //CallOrder();
+           
+
+        }
+        /*
+        private void CallOrder()
+        {
+            int colIndex = dataGridRS.CurrentCell.ColumnIndex;
+            //string tmp = dataGridRS.SelectedRows[0].Cells[0].Value.ToString();
+            bool order = true;
+
+            switch (colIndex)
+            {
+                case 0:
+                    OrderByEX(order, "id");
+                    break;
+                case 1:
+                    OrderByEX(order, "name");
+                    break;
+                case 2:
+                    OrderByEX(order, "weight");
+                    break;
+                case 3:
+                    OrderByEX(order, "arrived");
+                    break;
+                case 4:
+                    OrderByEX(order, "butchered");
+                    break;
+                case 5:
+                    OrderByEX(order, "place");
+                    break;
+
+                default:
+                    break;
+            }
+        }*/
+
+        private void dataGridRS_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void SortingMain(int col)
+        {
+
+            GetData();
+            GetSortingData(col);
+            SetColumsName();
+        }
+
+        private void GetSortingData(int col)
+        {
+            try
+            {
+
+                SortingData(RSList.Count, col);
+
+                dataGridRS.DataSource = RSList;
+            }
+            catch (Exception e)
+            {
+                MsExeption("Nem megy a node server\n msg:  " + e, "Node Server");
+                throw;
+            }
+        }
+
+        private void SortingData(int a, int col)
+        {
+            RS[] RsArray = new RS[a];
+            for (int i = 0; i < a; i++)
+            {
+                RsArray[i] = RSList[i];
+            }
+
+            SortingVAR(RsArray, col);
+
+        }
+
+        private void SortingVAR(RS[] rsArray, int col)
+        {
+
+            dataGridRS.DataSource = null;
+            dataGridRS.Rows.Clear();
+
+
+            IEnumerable<RS> query;
+            if (OrderBy)
+            {
+                switch (col)
+                {
+                    case 0:
+                        query = rsArray.OrderBy(var => var.id);
+                        RSList = query.ToList();
+                        break;
+                    case 1:
+                        query = rsArray.OrderBy(var => var.name);
+                        RSList = query.ToList();
+                        break;
+                    case 2:
+                        query = rsArray.OrderBy(var => var.weight);
+                        RSList = query.ToList();
+                        break;
+                    case 3:
+                        query = rsArray.OrderBy(var => var.arrived);
+                        RSList = query.ToList();
+                        break;
+                    case 4:
+                        query = rsArray.OrderBy(var => var.butchered);
+                        RSList = query.ToList();
+                        break;
+                    case 5:
+                        query = rsArray.OrderBy(var => var.place);
+                        RSList = query.ToList();
+                        break;
+
+                    default:
+                        break;
+                }
+                OrderBy = !OrderBy;
+            }
+            else
+            {
+                switch (col)
+                {
+                    case 0:
+                        query = rsArray.OrderByDescending(var => var.id);
+                        RSList = query.ToList();
+                        break;
+                    case 1:
+                        query = rsArray.OrderByDescending(var => var.name);
+                        RSList = query.ToList();
+                        break;
+                    case 2:
+                        query = rsArray.OrderByDescending(var => var.weight);
+                        RSList = query.ToList();
+                        break;
+                    case 3:
+                        query = rsArray.OrderByDescending(var => var.arrived);
+                        RSList = query.ToList();
+                        break;
+                    case 4:
+                        query = rsArray.OrderByDescending(var => var.butchered);
+                        RSList = query.ToList();
+                        break;
+                    case 5:
+                        query = rsArray.OrderByDescending(var => var.place);
+                        RSList = query.ToList();
+                        break;
+
+                    default:
+                        break;
+                }
+                OrderBy = !OrderBy;
+            }
+
+           
+
+        }
+
+        private void dataGridRS_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int col = e.ColumnIndex;
+            if (e.RowIndex==-1)
+            {
+                SortingMain(col);
+            }
+            
         }
     }
 }

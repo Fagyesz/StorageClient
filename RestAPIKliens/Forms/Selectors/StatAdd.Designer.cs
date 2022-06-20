@@ -33,6 +33,8 @@
             this.txtPostWeight = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnCollection = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -86,11 +88,38 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(219, 20);
             this.dateTimePicker1.TabIndex = 50;
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.BackgroundImage = global::RestAPIKliens.Properties.Resources.icons8_gear_16;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button2.Location = new System.Drawing.Point(242, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(25, 24);
+            this.button2.TabIndex = 53;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btnCollection
+            // 
+            this.btnCollection.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnCollection.Location = new System.Drawing.Point(181, 67);
+            this.btnCollection.Name = "btnCollection";
+            this.btnCollection.Size = new System.Drawing.Size(67, 21);
+            this.btnCollection.TabIndex = 54;
+            this.btnCollection.Text = "Bővítés";
+            this.btnCollection.UseVisualStyleBackColor = true;
+            this.btnCollection.Visible = false;
+            this.btnCollection.Click += new System.EventHandler(this.btnCollection_Click);
+            // 
             // StatAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(267, 242);
+            this.Controls.Add(this.btnCollection);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnPost);
             this.Controls.Add(this.txtPostWeight);
@@ -111,5 +140,7 @@
         private System.Windows.Forms.ComboBox txtPostWeight;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCollection;
     }
 }

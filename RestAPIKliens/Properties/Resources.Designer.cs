@@ -93,6 +93,26 @@ namespace RestAPIKliens.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_erase_20 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-erase-20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_gear_16 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-gear-16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_meat_64 {
             get {
                 object obj = ResourceManager.GetObject("icons8-meat-64", resourceCulture);
