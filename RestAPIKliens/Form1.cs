@@ -453,9 +453,10 @@ namespace RestAPIKliens
         public int id { get; set; }
         public string name { get; set; }
         public int weight { get; set; }
+        public string place { get; set; }
         public DateTime arrived { get; set; }
         public DateTime butchered { get; set; }
-        public string place { get; set; }
+
 
     }
     public class Dry
@@ -463,9 +464,12 @@ namespace RestAPIKliens
 
         public int id { get; set; }
         public string name { get; set; }
+
         public int weight { get; set; }
-        public DateTime arrived { get; set; }
+
         public string place { get; set; }
+        public DateTime arrived { get; set; }
+
         public DateTime expiration { get; set; }
         public string ExternaliD { get; set; }
 
@@ -511,6 +515,7 @@ namespace RestAPIKliens
         public int id { get; set; }
         public string name { get; set; }
         public int weight { get; set; }
+        public string place { get; set; }
         public DateTime time { get; set; }
         public int rsid { get; set; }
         public int did { get; set; }
