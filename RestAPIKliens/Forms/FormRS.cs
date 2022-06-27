@@ -130,6 +130,11 @@ namespace RestAPIKliens.Forms
             GetDataID();
 
         }*/
+        internal void GetDataPublicTime(DateTime time)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void DecreaseBySC(int w)
         {
             try
@@ -147,6 +152,11 @@ namespace RestAPIKliens.Forms
 
                 throw new Exception();
             }
+        }
+
+        internal void GetDataPublicPlace(string text)
+        {
+            throw new NotImplementedException();
         }
 
         private void GridFormating()
@@ -191,7 +201,12 @@ namespace RestAPIKliens.Forms
                 MessageBox.Show(e.Message);
             }
         }
-        
+
+        internal void GetDataPublicWeight(string text)
+        {
+            throw new NotImplementedException();
+        }
+
 
         /*
 public class RS
@@ -267,6 +282,62 @@ public class RS
             }*/
         }
 
+        internal void GetDataPublicName(string SearchedName)
+        {
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridRS, RSList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<RS>> response = client.Execute<List<RS>>(request);
+                foreach (RS a in response.Data)
+                {
+
+                    RSList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //Name Search
+
+                RS[] RsArray = new RS[RSList.Count];
+                
+                for (int i = 0; i < RSList.Count; i++)
+                {
+                    RsArray[i] = RSList[i];
+                }
+                RSList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    if (RsArray[i].name==SearchedName)
+                    {
+                        RSList.Add(RsArray[i]);
+                    }
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridRS.DataSource = RSList;
+
+                
+                GridFormating(); SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
+        }
+
         public static void ClearDataGridViewRows(DataGridView dataGridView, List<RS> DryList)
         {
             dataGridView.DataSource = null;
@@ -326,8 +397,8 @@ public class RS
 
 
 
-            DataTimePut1 = (DateTime)dataGridRS.SelectedRows[0].Cells[3].Value;
-            DataTimePut2 = (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value;
+            DataTimePut1 = (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value;
+            DataTimePut2 = (DateTime)dataGridRS.SelectedRows[0].Cells[5].Value;
 
             
             DateTime a, b;
@@ -340,7 +411,7 @@ public class RS
                 weight = (int)dataGridRS.SelectedRows[0].Cells[2].Value,
                 arrived = a,
                 butchered = b,
-                place = (string)dataGridRS.SelectedRows[0].Cells[5].Value
+                place = (string)dataGridRS.SelectedRows[0].Cells[3].Value
 
 
 
@@ -681,7 +752,8 @@ public class RS
             GetData();
             dataGridRS.Columns[3].DefaultCellStyle.Format = "yyyy.MM.dd.";
             dataGridRS.Columns[4].DefaultCellStyle.Format = "yyyy.MM.dd.";
-            this.Refresh();
+            
+            SetColumsName();
         }
         public void GetDataPublicId(string b)
         {
@@ -701,6 +773,7 @@ public class RS
                     dataGridRS.Columns[3].DefaultCellStyle.Format = "yyyy.MM.dd.";
                     dataGridRS.Columns[4].DefaultCellStyle.Format = "yyyy.MM.dd.";
                     this.Refresh();
+                    SetColumsName();
                 }
 
             }
@@ -749,9 +822,10 @@ public class RS
             dataGridRS.Columns[0].HeaderText = "Azonosító";
             dataGridRS.Columns[1].HeaderText = "Megnevezés";
             dataGridRS.Columns[2].HeaderText = "Súly";
-            dataGridRS.Columns[3].HeaderText = "Érkezési idő";
-            dataGridRS.Columns[4].HeaderText = "Vágási idő";
-            dataGridRS.Columns[5].HeaderText = "Származási hely";
+            dataGridRS.Columns[3].HeaderText = "Származási hely";
+            dataGridRS.Columns[4].HeaderText = "Érkezési idő";
+            dataGridRS.Columns[5].HeaderText = "Vágási idő";
+            
             ColumnChange = false;
         }
 
@@ -818,6 +892,7 @@ public class RS
             SC.name = (string)dataGridRS.SelectedRows[0].Cells[1].Value;
             SC.rsid = (int)dataGridRS.SelectedRows[0].Cells[0].Value;
             SC.weight= (int)dataGridRS.SelectedRows[0].Cells[2].Value;
+            SC.place= (string)dataGridRS.SelectedRows[0].Cells[3].Value;
 
             return SC;
         }
@@ -1058,15 +1133,15 @@ public class RS
                         query = rsArray.OrderBy(var => var.weight);
                         RSList = query.ToList();
                         break;
-                    case 3:
+                    case 4:
                         query = rsArray.OrderBy(var => var.arrived);
                         RSList = query.ToList();
                         break;
-                    case 4:
+                    case 5:
                         query = rsArray.OrderBy(var => var.butchered);
                         RSList = query.ToList();
                         break;
-                    case 5:
+                    case 3:
                         query = rsArray.OrderBy(var => var.place);
                         RSList = query.ToList();
                         break;
@@ -1093,17 +1168,18 @@ public class RS
                         RSList = query.ToList();
                         break;
                     case 3:
-                        query = rsArray.OrderByDescending(var => var.arrived);
-                        RSList = query.ToList();
-                        break;
-                    case 4:
-                        query = rsArray.OrderByDescending(var => var.butchered);
-                        RSList = query.ToList();
-                        break;
-                    case 5:
                         query = rsArray.OrderByDescending(var => var.place);
                         RSList = query.ToList();
                         break;
+                    case 4:
+                        query = rsArray.OrderByDescending(var => var.arrived);
+                        RSList = query.ToList();
+                        break;
+                    case 5:
+                        query = rsArray.OrderByDescending(var => var.butchered);
+                        RSList = query.ToList();
+                        break;
+                    
 
                     default:
                         break;

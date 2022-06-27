@@ -33,6 +33,7 @@ namespace RestAPIKliens.Forms
 
             GetData();
             this.Refresh();
+            SetColumsName();
         }
         public void GetDataPublicId(string s)
         {
@@ -50,6 +51,7 @@ namespace RestAPIKliens.Forms
                 {
                     GetDataID(s);
                     this.Refresh();
+                    SetColumsName();
                 }
             }
         }
@@ -69,10 +71,11 @@ namespace RestAPIKliens.Forms
             dataGridRS.Columns[0].HeaderText = "Azonosító";
             dataGridRS.Columns[1].HeaderText = "Megnevezés";
             dataGridRS.Columns[2].HeaderText = "Súly";
-            dataGridRS.Columns[3].HeaderText = "Érkezési ideje";
-            dataGridRS.Columns[4].HeaderText = "Nyersanyag ID";
-            dataGridRS.Columns[5].HeaderText = "SzárazRaktár ID";
-            dataGridRS.Columns[6].HeaderText = "Basin ID";
+            dataGridRS.Columns[3].HeaderText = "Származási hely";
+            dataGridRS.Columns[4].HeaderText = "Érkezési ideje";
+            dataGridRS.Columns[5].HeaderText = "Nyersanyag ID";
+            dataGridRS.Columns[6].HeaderText = "SzárazRaktár ID";
+            dataGridRS.Columns[7].HeaderText = "Basin ID";
             ColumnChange = false;
         }
 
@@ -125,6 +128,11 @@ namespace RestAPIKliens.Forms
             
         }
 
+        internal void GetDataPublicTime(DateTime time)
+        {
+            throw new NotImplementedException();
+        }
+
         private void GetData()
         {
 
@@ -158,11 +166,10 @@ namespace RestAPIKliens.Forms
 
 }
 
-       
-
-        
-
-        
+        internal void GetDataPublicPlace(string text)
+        {
+            throw new NotImplementedException();
+        }
 
         private void GetDataID(string b)
         {
@@ -193,6 +200,12 @@ namespace RestAPIKliens.Forms
                 MessageBox.Show(e.Message);
             }
 }
+
+        internal void GetDataPublicWeight(string text)
+        {
+            throw new NotImplementedException();
+        }
+
         public static void ClearDataGridViewRows(DataGridView dataGridView, List<Scrap> ScrapList)
         {
             dataGridView.DataSource = null;
@@ -209,6 +222,92 @@ namespace RestAPIKliens.Forms
             else
             {
                 MessageBox.Show("Nem lett törölve");
+            }
+        }
+
+        internal void GetDataPublicSearch(string text,string SortType)
+        {
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridRS, ScrapList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Scrap>> response = client.Execute<List<Scrap>>(request);
+                foreach (Scrap a in response.Data)
+                {
+
+                    ScrapList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //Name Search
+
+                Scrap[] RsArray = new Scrap[ScrapList.Count];
+
+                for (int i = 0; i < ScrapList.Count; i++)
+                {
+                    RsArray[i] = ScrapList[i];
+                }
+                ScrapList.Clear();
+
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    switch (SortType)
+                    {
+                        case "id":
+                            if (RsArray[i].id == int.Parse(text))
+                            {
+                                ScrapList.Add(RsArray[i]);
+                            }
+                            break;
+                        case "name":
+                            if (RsArray[i].name == text)
+                            {
+                                ScrapList.Add(RsArray[i]);
+                            }
+                            break;
+                        case "weight":
+                            if (RsArray[i].weight == int.Parse(text))
+                            {
+                                ScrapList.Add(RsArray[i]);
+                            }
+                            break;
+                        case "place":
+                            if (RsArray[i].place == text)
+                            {
+                                ScrapList.Add(RsArray[i]);
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+                    
+
+
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridRS.DataSource = ScrapList;
+
+
+                 SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
             }
         }
 
@@ -244,9 +343,10 @@ namespace RestAPIKliens.Forms
 
                 name = (string)dataGridRS.SelectedRows[0].Cells[1].Value,
                 weight = (int)dataGridRS.SelectedRows[0].Cells[2].Value,
-                time = (DateTime)dataGridRS.SelectedRows[0].Cells[3].Value,
-                rsid=(int)dataGridRS.SelectedRows[0].Cells[4].Value,
-                did= (int)dataGridRS.SelectedRows[0].Cells[5].Value
+                place = (string)dataGridRS.SelectedRows[0].Cells[3].Value,
+                time = (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value,
+                rsid=(int)dataGridRS.SelectedRows[0].Cells[5].Value,
+                did= (int)dataGridRS.SelectedRows[0].Cells[6].Value
 
 
 

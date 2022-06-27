@@ -57,6 +57,7 @@ namespace RestAPIKliens.Forms
             SC.bid = (int)dataGridBasin.SelectedRows[0].Cells[0].Value;
             SC.name = (string)dataGridBasin.SelectedRows[0].Cells[1].Value;
             SC.weight = (int)dataGridBasin.SelectedRows[0].Cells[2].Value;
+            SC.place = (string)dataGridBasin.SelectedRows[0].Cells[3].Value;
 
             return SC;
         }
@@ -144,6 +145,11 @@ namespace RestAPIKliens.Forms
             }
         }
 
+        internal void GetDataPublicTime(DateTime time)
+        {
+            throw new NotImplementedException();
+        }
+
         private void gtnGetById_Click(object sender, EventArgs e)
         {
            // GetDataID();
@@ -176,6 +182,11 @@ namespace RestAPIKliens.Forms
 
                 MessageBox.Show( e.Message);
             }
+        }
+
+        internal void GetDataPublicPlace(string text)
+        {
+            throw new NotImplementedException();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -224,12 +235,75 @@ namespace RestAPIKliens.Forms
 
 
         }
+
+        internal void GetDataPublicWeight(string text)
+        {
+            throw new NotImplementedException();
+        }
+
         public static void ClearDataGridViewRows(DataGridView dataGridView, List<Basin> DryList)
         {
             dataGridView.DataSource = null;
             dataGridView.Rows.Clear();
             DryList.Clear();
         }
+
+        internal void GetDataPublicName(string text)
+        {
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridBasin, RSList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Basin>> response = client.Execute<List<Basin>>(request);
+                foreach (Basin a in response.Data)
+                {
+
+                    RSList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //Name Search
+
+                Basin[] RsArray = new Basin[RSList.Count];
+
+                for (int i = 0; i < RSList.Count; i++)
+                {
+                    RsArray[i] = RSList[i];
+                }
+                RSList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    if (RsArray[i].name == text)
+                    {
+                        RSList.Add(RsArray[i]);
+                    }
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridBasin.DataSource = RSList;
+
+
+                 SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
+        }
+
         private void Confirmation()
         {
             DialogResult result = MessageBox.Show("Biztos Törölni akarod?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Information);

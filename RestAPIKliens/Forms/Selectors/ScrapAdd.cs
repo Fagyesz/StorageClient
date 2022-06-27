@@ -154,6 +154,7 @@ namespace RestAPIKliens.Forms.Selectors
                     {
                         name = SC.name,
                         weight = SC.weight,
+                        place = SC.place,
                         time = SC.time,
                         rsid = SC.rsid,
                         did = SC.did,

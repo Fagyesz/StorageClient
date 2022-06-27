@@ -112,6 +112,11 @@ namespace RestAPIKliens.Forms
             
         }
 
+        internal void GetDataPublicTime(DateTime time)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void DeleteByST()
         {
             Delete();
@@ -148,6 +153,11 @@ namespace RestAPIKliens.Forms
             ColumnChange = false;
         }
 
+        internal void GetDataPublicPlace(string text)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void DecreaseByST(int w)
         {
             try
@@ -165,6 +175,11 @@ namespace RestAPIKliens.Forms
 
                 throw new Exception();
             }
+        }
+
+        internal void GetDataPublicWeight(string text)
+        {
+            throw new NotImplementedException();
         }
 
         private void LoadTheme()
@@ -211,6 +226,62 @@ namespace RestAPIKliens.Forms
                 dataGridFP.SelectedRows[0].Cells[5].Value = currentweight - weight;
             }
 
+        }
+
+        internal void GetDataPublicName(string text)
+        {
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridFP, FPList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<FP>> response = client.Execute<List<FP>>(request);
+                foreach (FP a in response.Data)
+                {
+
+                    FPList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //Name Search
+
+                FP[] RsArray = new FP[FPList.Count];
+
+                for (int i = 0; i < FPList.Count; i++)
+                {
+                    RsArray[i] = FPList[i];
+                }
+                FPList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    if (RsArray[i].name == text)
+                    {
+                        FPList.Add(RsArray[i]);
+                    }
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridFP.DataSource = FPList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
         }
 
         internal void DeleteBySC()
@@ -434,7 +505,7 @@ namespace RestAPIKliens.Forms
         {
 
             GetData();
-            this.Refresh();
+            
         }
         public void GetDataPublicId(string b)
         {
@@ -452,6 +523,7 @@ namespace RestAPIKliens.Forms
                 {
                     GetDataID(b);
                     this.Refresh();
+                    CallColumns();
                 }
             }
         }

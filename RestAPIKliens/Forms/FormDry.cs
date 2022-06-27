@@ -60,6 +60,7 @@ namespace RestAPIKliens.Forms
             SC.did = (int)dataGridDry.SelectedRows[0].Cells[0].Value;
             SC.name = (string)dataGridDry.SelectedRows[0].Cells[1].Value;
             SC.weight = (int)dataGridDry.SelectedRows[0].Cells[2].Value;
+            SC.place = (string)dataGridDry.SelectedRows[0].Cells[3].Value;
 
             return SC;
         }
@@ -124,6 +125,11 @@ namespace RestAPIKliens.Forms
 
         }
 
+        internal void GetDataPublicTime(DateTime time)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void DecreaseBySC(int w)
         {
             try
@@ -147,6 +153,11 @@ namespace RestAPIKliens.Forms
         {
             dataGridDry.Columns[3].DefaultCellStyle.Format = "yyyy.MM.dd.";
             dataGridDry.Columns[4].DefaultCellStyle.Format = "yyyy.MM.dd.";
+        }
+
+        internal void GetDataPublicPlace(string text)
+        {
+            throw new NotImplementedException();
         }
 
         public void DataList(Dry d)
@@ -215,12 +226,73 @@ namespace RestAPIKliens.Forms
             GetData();
         }
 
+        internal void GetDataPublicWeight(string text)
+        {
+            throw new NotImplementedException();
+        }
+
         private void btnGetAll_Click(object sender, EventArgs e)
         {
 
            // GetData();
 
 
+        }
+
+        internal void GetDataPublicName(string text)
+        {
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridDry, DryList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Dry>> response = client.Execute<List<Dry>>(request);
+                foreach (Dry a in response.Data)
+                {
+
+                    DryList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //Name Search
+
+                Dry[] RsArray = new Dry[DryList.Count];
+
+                for (int i = 0; i < DryList.Count; i++)
+                {
+                    RsArray[i] = DryList[i];
+                }
+                DryList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    if (RsArray[i].name == text)
+                    {
+                        DryList.Add(RsArray[i]);
+                    }
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridDry.DataSource = DryList;
+
+
+                 SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
         }
 
         private void gtnGetById_Click(object sender, EventArgs e)
@@ -411,7 +483,7 @@ namespace RestAPIKliens.Forms
         {
             DateTime time= DateTime.MinValue; 
 
-            DataTimePut1 = (DateTime)dataGridDry.SelectedRows[0].Cells[3].Value;
+            DataTimePut1 = (DateTime)dataGridDry.SelectedRows[0].Cells[4].Value;
             if (id)
             {
                 time = PutGET();
@@ -435,7 +507,7 @@ namespace RestAPIKliens.Forms
                 name = (string)dataGridDry.SelectedRows[0].Cells[1].Value,
                 weight = (int)dataGridDry.SelectedRows[0].Cells[2].Value,
                 arrived = time,
-                place = (string)dataGridDry.SelectedRows[0].Cells[4].Value,
+                place = (string)dataGridDry.SelectedRows[0].Cells[3].Value,
                 expiration=(DateTime)dataGridDry.SelectedRows[0].Cells[5].Value,
                 ExternaliD=(string)dataGridDry.SelectedRows[0].Cells[6].Value,
 
@@ -678,8 +750,8 @@ namespace RestAPIKliens.Forms
             dataGridDry.Columns[0].HeaderText = "Azonosító";
             dataGridDry.Columns[1].HeaderText = "Megnevezés";
             dataGridDry.Columns[2].HeaderText = "Súly";
-            dataGridDry.Columns[3].HeaderText = "Érkezési idő";
-            dataGridDry.Columns[4].HeaderText = "Származási hely";
+            dataGridDry.Columns[3].HeaderText = "Származási hely";
+            dataGridDry.Columns[4].HeaderText = "Érkezési idő";
             dataGridDry.Columns[5].HeaderText = "Lejárati idő";
             dataGridDry.Columns[6].HeaderText = "Külső Azonosító";
             ColumnChange = false;
@@ -739,11 +811,11 @@ namespace RestAPIKliens.Forms
                         query = rsArray.OrderBy(var => var.weight);
                         DryList = query.ToList();
                         break;
-                    case 3:
+                    case 4:
                         query = rsArray.OrderBy(var => var.arrived);
                         DryList = query.ToList();
                         break;
-                    case 4:
+                    case 3:
                         query = rsArray.OrderBy(var => var.place);
                         DryList = query.ToList();
                         break;
@@ -777,11 +849,11 @@ namespace RestAPIKliens.Forms
                         query = rsArray.OrderByDescending(var => var.weight);
                         DryList = query.ToList();
                         break;
-                    case 3:
+                    case 4:
                         query = rsArray.OrderByDescending(var => var.arrived);
                         DryList = query.ToList();
                         break;
-                    case 4:
+                    case 3:
                         query = rsArray.OrderByDescending(var => var.place);
                         DryList = query.ToList();
                         break;

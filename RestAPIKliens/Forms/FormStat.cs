@@ -143,6 +143,12 @@ namespace RestAPIKliens.Forms
             }
             DataGridDateFormating();
         }
+
+        internal void GetDataPublicTime(DateTime time)
+        {
+            throw new NotImplementedException();
+        }
+
         public static void ClearDataGridViewRows(DataGridView dataGridView, List<Stat> StatList)
         {
             dataGridView.DataSource = null;
@@ -160,6 +166,11 @@ namespace RestAPIKliens.Forms
             {
                 MessageBox.Show("Nem lett törölve");
             }
+        }
+
+        internal void GetDataPublicPlace(string text)
+        {
+            throw new NotImplementedException();
         }
 
         private void Delete()
@@ -209,6 +220,67 @@ namespace RestAPIKliens.Forms
             IRestResponse response = client.Execute(request);
 
             MessageBox.Show(response.Content);
+        }
+
+        internal void GetDataPublicWeight(string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void GetDataPublicName(string text)
+        {
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridRS, StatList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Stat>> response = client.Execute<List<Stat>>(request);
+                foreach (Stat a in response.Data)
+                {
+
+                    StatList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //Name Search
+
+                Stat[] RsArray = new Stat[StatList.Count];
+
+                for (int i = 0; i < StatList.Count; i++)
+                {
+                    RsArray[i] = StatList[i];
+                }
+                StatList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    if (RsArray[i].name == text)
+                    {
+                        StatList.Add(RsArray[i]);
+                    }
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridRS.DataSource = StatList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
