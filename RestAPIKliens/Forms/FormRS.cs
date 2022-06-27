@@ -397,8 +397,8 @@ public class RS
 
 
 
-            DataTimePut1 = (DateTime)dataGridRS.SelectedRows[0].Cells[3].Value;
-            DataTimePut2 = (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value;
+            DataTimePut1 = (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value;
+            DataTimePut2 = (DateTime)dataGridRS.SelectedRows[0].Cells[5].Value;
 
             
             DateTime a, b;
@@ -411,7 +411,7 @@ public class RS
                 weight = (int)dataGridRS.SelectedRows[0].Cells[2].Value,
                 arrived = a,
                 butchered = b,
-                place = (string)dataGridRS.SelectedRows[0].Cells[5].Value
+                place = (string)dataGridRS.SelectedRows[0].Cells[3].Value
 
 
 

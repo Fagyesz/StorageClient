@@ -483,7 +483,7 @@ namespace RestAPIKliens.Forms
         {
             DateTime time= DateTime.MinValue; 
 
-            DataTimePut1 = (DateTime)dataGridDry.SelectedRows[0].Cells[3].Value;
+            DataTimePut1 = (DateTime)dataGridDry.SelectedRows[0].Cells[4].Value;
             if (id)
             {
                 time = PutGET();
@@ -507,7 +507,7 @@ namespace RestAPIKliens.Forms
                 name = (string)dataGridDry.SelectedRows[0].Cells[1].Value,
                 weight = (int)dataGridDry.SelectedRows[0].Cells[2].Value,
                 arrived = time,
-                place = (string)dataGridDry.SelectedRows[0].Cells[4].Value,
+                place = (string)dataGridDry.SelectedRows[0].Cells[3].Value,
                 expiration=(DateTime)dataGridDry.SelectedRows[0].Cells[5].Value,
                 ExternaliD=(string)dataGridDry.SelectedRows[0].Cells[6].Value,
 
