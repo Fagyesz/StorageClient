@@ -83,9 +83,6 @@ namespace RestAPIKliens.Forms
         {
             try
             {
-
-            
-
             ClearDataGridViewRows(dataGridRS, StatList);
 
             var client = new RestClient(URL);

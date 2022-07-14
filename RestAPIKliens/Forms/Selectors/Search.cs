@@ -58,13 +58,19 @@ namespace RestAPIKliens.Forms.Selectors
 
         private void btnGetAll_Click(object sender, EventArgs e)
         {
+            GetALL();
+
+        }
+
+        public static void GetALL()
+        {
             switch (creator)
             {
                 case "FP":
                     FormFP.Self.GetDataPublic();
                     break;
                 case "RS":
-                    FormRS.Self.GetDataPublic(); 
+                    FormRS.Self.GetDataPublic();
                     break;
                 case "Scrap":
                     FormScrap.Self.GetDataPublic();
@@ -81,10 +87,6 @@ namespace RestAPIKliens.Forms.Selectors
                 default:
                     break;
             }
-
-            
-            
-            
         }
 
         private void gtnGetById_Click(object sender, EventArgs e)

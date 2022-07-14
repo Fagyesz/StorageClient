@@ -749,7 +749,8 @@ namespace RestAPIKliens.Forms
 
         private void radioButton5_CheckedChanged_1(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.Selectors.FPAdd("Dry"), sender);
+            OpenChildForm(new Forms.Selectors.FPCreate("Dry"), sender);
+           
         }
         private void SortingMain(int col)
         {

@@ -38,7 +38,6 @@
             this.cmbWeight = new System.Windows.Forms.ComboBox();
             this.btnPrepToPrint = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnDelFromPrepToPrint = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -88,7 +87,6 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.cmbWeight);
             this.panel2.Controls.Add(this.btnDelFromPrepToPrint);
             this.panel2.Controls.Add(this.btnPrepToPrint);
@@ -126,16 +124,6 @@
             this.btnPrint.Text = "Létrehozás";
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(190, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(34, 37);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Létrehozás";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnDelFromPrepToPrint
             // 
@@ -183,7 +171,6 @@
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.ComboBox cmbWeight;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnDelFromPrepToPrint;
     }
