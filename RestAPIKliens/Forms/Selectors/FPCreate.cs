@@ -75,7 +75,10 @@ namespace RestAPIKliens.Forms.Selectors
                     FPList.Add(fp);
                     fp = null;
                     sh = null;
-                   // Form1.Self.DataRefreshFP(ShortList, FPList);
+                    ClearGrid();
+                    dataGridView.DataSource = ShortList;
+                    
+
                     break;
 
                 case "Dry":
@@ -111,11 +114,17 @@ namespace RestAPIKliens.Forms.Selectors
                     break;
             }
 
-            RefreshGrid();
+            // RefreshGrid();
+            Save();
 
         }
-
-        private void Save(string s)
+        private void Save()
+        {
+            Save("short");
+            Save("fp");
+        
+        }
+            private void Save(string s)
         {
             string sPath = "";
             Directory.CreateDirectory("FpCreate");
@@ -141,16 +150,16 @@ namespace RestAPIKliens.Forms.Selectors
 
             switch (s)
             {
-                case "Short":
+                case "short":
                     for (int i = 0; i < ShortList.Count; i++)
                     {
-                        SaveFile.WriteLine(ShortList[i]);
+                        SaveFile.WriteLine(ShortList[i].id+","+ShortList[i].name+","+ ShortList[i].weight+","+ ShortList[i].Class);
                     }
                     break;
-                case "FP":
-                    foreach (var item in cmbWeight.Items)
+                case "fp":
+                    for (int i = 0; i < FPList.Count; i++)
                     {
-                        SaveFile.WriteLine(item);
+                        SaveFile.WriteLine(FPList[i].id + ","+FPList[i].rsid + ","+FPList[i].bid + ","+FPList[i].did + ","+FPList[i].name + ","+FPList[i].weight + ","+FPList[i].place);
                     }
                     break;
                 case "weight":
@@ -184,6 +193,7 @@ namespace RestAPIKliens.Forms.Selectors
         }
         private void RefreshGrid()
         {
+           // Save();
             ClearGrid();
           // ShortList=Form1.Self.DataRefreshFPGetsh();
            //FPList = Form1.Self.DataRefreshFPGetfp();
@@ -192,37 +202,38 @@ namespace RestAPIKliens.Forms.Selectors
             string filePath = "FpCreate/FP.txt";
             if (File.Exists(filePath))
             {
-                string[] FPArray =File.ReadAllText(filePath).Split('#');
+                string[] FPArray =File.ReadAllLines(filePath);
                 for (int i = 0; i < FPArray.Length; i++)
                 {
-                    for (int j = 0; i < FPArray[i].Length; i++)
-                    {
-                        string[] tmp = FPArray[i].Split(',');
-                        for (int h = 0; h < tmp.Length; h++)
-                        {
 
-                        }
-                    }
-                    
+                    string[] tmp = FPArray[i].Split(',');
+
+                    FP fp = new FP();
+                    int id = int.Parse(tmp[0]);
+                    fp.id = id;
+                    fp.weight = int.Parse(tmp[5]);
+                    FPList.Add(fp);
+                    fp = null;
+
+
                 }
             }
             filePath = "FpCreate/Short.txt";
             if (File.Exists(filePath))
             {
-                Short sh = new Short();
-                string[] ShortArray = File.ReadAllText(filePath).Split('#');
+                
+                string[] ShortArray = File.ReadAllLines(filePath);
                 for (int i = 0; i < ShortArray.Length; i++)
                 {
-                    for (int j = 0; i < ShortArray[i].Length; i++)
-                    {
-                        string[] tmp = ShortArray[i].Split(',');
+                    Short sh = new Short();
+                    string[] tmp = ShortArray[i].Split(',');
 
-                        sh.id = int.Parse( tmp[0]);
-                        sh.name = tmp[1].ToString();
-                        sh.weight = int.Parse(tmp[2]);
-                        sh.Class = tmp[3].ToString();
-                        ShortList.Add(sh);
-                    }
+                    sh.id = int.Parse(tmp[0]);
+                    sh.name = tmp[1].ToString();
+                    sh.weight = int.Parse(tmp[2]);
+                    sh.Class = tmp[3].ToString();
+                    ShortList.Add(sh);
+                    sh = null;
 
                 }
 
@@ -240,6 +251,7 @@ namespace RestAPIKliens.Forms.Selectors
         private void FPCreate_Load(object sender, EventArgs e)
         {
             dataGridView.RowHeadersVisible=false;
+            RefreshGrid();
         }
 
         private void btnDelFromPrepToPrint_Click(object sender, EventArgs e)
@@ -274,8 +286,8 @@ namespace RestAPIKliens.Forms.Selectors
             //string tmp = dataGridView.SelectedRows[0].Cells[0].Value.ToString();
 
             int idInList = 0;
-            List<Short> ShortListcopy = ShortList;
-            foreach (var sh in ShortListcopy)
+           
+            foreach (var sh in ShortList)
             {
 
 
@@ -293,7 +305,22 @@ namespace RestAPIKliens.Forms.Selectors
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Save("short");
+            RefreshGrid();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string filePath = "FpCreate/Short.txt";
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+            filePath = "FpCreate/FP.txt";
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+            RefreshGrid();
         }
     }
 }
