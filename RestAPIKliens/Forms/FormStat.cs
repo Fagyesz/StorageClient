@@ -210,13 +210,15 @@ namespace RestAPIKliens.Forms
                 name = (string)dataGridRS.SelectedRows[0].Cells[5].Value,
                 weight = (int)dataGridRS.SelectedRows[0].Cells[6].Value,
                 place = (string)dataGridRS.SelectedRows[0].Cells[7].Value,
-                arrived = (DateTime)dataGridRS.SelectedRows[0].Cells[8].Value,
-                marinated = (DateTime)dataGridRS.SelectedRows[0].Cells[9].Value,
-                smoked = (DateTime)dataGridRS.SelectedRows[0].Cells[10].Value
+                butchered = (DateTime)dataGridRS.SelectedRows[0].Cells[8].Value,
+                arrived = (DateTime)dataGridRS.SelectedRows[0].Cells[9].Value,
+                marinated = (DateTime)dataGridRS.SelectedRows[0].Cells[10].Value,
+                smoked = (DateTime)dataGridRS.SelectedRows[0].Cells[11].Value,
+                stated = (DateTime)dataGridRS.SelectedRows[0].Cells[12].Value
 
 
 
-            });
+            }) ;
             IRestResponse response = client.Execute(request);
 
             MessageBox.Show(response.Content);
@@ -342,6 +344,7 @@ namespace RestAPIKliens.Forms
             dataGridRS.Columns[9].DefaultCellStyle.Format = "yyyy.MM.dd.";
             dataGridRS.Columns[10].DefaultCellStyle.Format = "yyyy.MM.dd.";
             dataGridRS.Columns[11].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            dataGridRS.Columns[12].DefaultCellStyle.Format = "yyyy.MM.dd.";
         }
         private void SetColumsName()
         {
@@ -355,9 +358,10 @@ namespace RestAPIKliens.Forms
             dataGridRS.Columns[6].HeaderText = "Súly";
             dataGridRS.Columns[7].HeaderText = "Származási hely";
             dataGridRS.Columns[8].HeaderText = "Érkezési ideje";
-            dataGridRS.Columns[9].HeaderText = "Érlelés ideje";
-            dataGridRS.Columns[10].HeaderText = "Füstölés ideje";
-            dataGridRS.Columns[11].HeaderText = "Archiválás ideje";
+            dataGridRS.Columns[9].HeaderText = "Vágás ideje";
+            dataGridRS.Columns[10].HeaderText = "Érlelés ideje";
+            dataGridRS.Columns[11].HeaderText = "Füstölés ideje";
+            dataGridRS.Columns[12].HeaderText = "Archiválás ideje";
 
             ColumnChange = false;
         }
@@ -459,14 +463,18 @@ namespace RestAPIKliens.Forms
                         StatList = query.ToList();
                         break;
                     case 9:
-                        query = rsArray.OrderBy(var => var.marinated);
+                        query = rsArray.OrderBy(var => var.butchered);
                         StatList = query.ToList();
                         break;
                     case 10:
-                        query = rsArray.OrderBy(var => var.smoked);
+                        query = rsArray.OrderBy(var => var.marinated);
                         StatList = query.ToList();
                         break;
                     case 11:
+                        query = rsArray.OrderBy(var => var.smoked);
+                        StatList = query.ToList();
+                        break;
+                    case 12:
                         query = rsArray.OrderBy(var => var.stated);
                         StatList = query.ToList();
                         break;
@@ -516,14 +524,18 @@ namespace RestAPIKliens.Forms
                         StatList = query.ToList();
                         break;
                     case 9:
-                        query = rsArray.OrderByDescending(var => var.marinated);
+                        query = rsArray.OrderByDescending(var => var.butchered);
                         StatList = query.ToList();
                         break;
                     case 10:
-                        query = rsArray.OrderByDescending(var => var.smoked);
+                        query = rsArray.OrderByDescending(var => var.marinated);
                         StatList = query.ToList();
                         break;
                     case 11:
+                        query = rsArray.OrderByDescending(var => var.smoked);
+                        StatList = query.ToList();
+                        break;
+                    case 12:
                         query = rsArray.OrderByDescending(var => var.stated);
                         StatList = query.ToList();
                         break;

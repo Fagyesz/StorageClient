@@ -49,6 +49,27 @@ namespace RestAPIKliens.Forms
             //.ForeColor = ThemeColor.SecondaryColor;
         }
 
+        internal FP GetDataCreateFP()
+        {
+
+            FP data = new FP();
+
+            data.id = (int)dataGridBasin.SelectedRows[0].Cells[0].Value;
+            data.name = (string)dataGridBasin.SelectedRows[0].Cells[1].Value;
+            data.weight = (int)dataGridBasin.SelectedRows[0].Cells[2].Value;
+            data.place = (string)dataGridBasin.SelectedRows[0].Cells[3].Value;
+            data.arrived = (DateTime)dataGridBasin.SelectedRows[0].Cells[4].Value;
+            data.marinated = (DateTime)dataGridBasin.SelectedRows[0].Cells[6].Value;
+            data.smoked = (DateTime)dataGridBasin.SelectedRows[0].Cells[7].Value;
+            data.rsid = (int)dataGridBasin.SelectedRows[0].Cells[8].Value;
+            return data;
+        }
+
+        internal void DataRefreshFP(List<Short> shortList, List<FP> fPList)
+        {
+            throw new NotImplementedException();
+        }
+
         internal Scrap DataToScrapBasin()
         {
 

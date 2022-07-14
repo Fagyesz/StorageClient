@@ -25,8 +25,14 @@ namespace RestAPIKliens
         //Fields
         private Button currentButton;
         Random random;
+        public static Form1 Self;
         private int tempIndex;
         private Form activeForm;
+
+
+        private List<Short> shList = new List<Short>();
+        private List<FP> fpList = new List<FP>();
+
         public Form1()
         {
             InitializeComponent();
@@ -42,166 +48,7 @@ namespace RestAPIKliens
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
 
-        private void btnGetAll_Click(object sender, EventArgs e)
-        {
-
-
-            /*
-            Állatok.Items.Clear();
-            var client = new RestClient(URL);
-            String ROUTE = "";
-            var request = new RestRequest(ROUTE, Method.GET);
-            request.RequestFormat = DataFormat.Json;
-
-            IRestResponse<List<Animal>> response = client.Execute<List<Animal>>(request);
-            foreach(Animal a in response.Data)
-            {
-                if (a.Pet==1)
-                {
-                    Állatok.Items.Add("Id: " + a.id + " Név: " + a.Name + " Osztály: " + a.Class + " Lábak száma: " + a.Legs + " Háziállat?: Igen" );
-                }
-                else
-                {
-                    Állatok.Items.Add("Id: " + a.id + " Név: " + a.Name + " Osztály: " + a.Class + " Lábak száma: " + a.Legs + " Háziállat?: Nem" );
-                }
-               
-            }
-            */
-
-        }
-
-
-        private void gtnGetById_Click(object sender, EventArgs e)
-        {/*
-            if (Loggedin)
-            {
-
-            
-            Állatok.Items.Clear();
-            var client = new RestClient(URL);
-            String ROUTE = txtGetById.Text;
-            var request = new RestRequest(ROUTE, Method.GET);
-            IRestResponse<Animal> response = client.Execute<Animal>(request);
-            var content = response.Content;
-            //Animal a = new Animal();
-            //a = JsonSerializer.Deserialize<Animal>(content);
-            Állatok.Items.Add(content);
-            }
-            else
-            {
-                notLogedIn();
-            }
-            */
-        }
-
-        private void btnDeleteById_Click(object sender, EventArgs e)
-        {/*
-            if (Loggedin)
-            {
-
-
-                var client = new RestClient(URL);
-                String ROUTE = "delete/" + txtDeleteById.Text;
-                var request = new RestRequest(ROUTE, Method.DELETE);
-                IRestResponse response = client.Execute(request);
-                MessageBox.Show(response.Content);
-            }
-            else
-            {
-                notLogedIn();
-            }*/
-        }
-
-        private void btnPost_Click(object sender, EventArgs e)
-        {/*
-            if (Loggedin)
-            {
-
-
-                var client = new RestClient(URL);
-                String ROUTE = "post";
-                var request = new RestRequest(ROUTE, Method.POST);
-                request.RequestFormat = DataFormat.Json;
-                request.AddBody(new Animal
-                {
-                    Name = txtPostName.Text,
-                    Class = txtPostAge.Text,
-                    Legs = int.Parse(txtPostPos.Text),
-                    Pet = int.Parse(txtPostValue.Text)
-                });
-                IRestResponse response = client.Execute(request);
-                MessageBox.Show("Animal succesfully added.");
-            }
-            else
-            {
-                notLogedIn();
-            }*/
-        }
-
-        private void btnPut_Click(object sender, EventArgs e)
-        {/*
-            if (Loggedin)
-            {
-
-
-                var client = new RestClient(URL);
-                String ROUTE = "put/" + txtPutIdText.Text;
-                var request = new RestRequest(ROUTE, Method.PUT);
-                request.RequestFormat = DataFormat.Json;
-                request.AddJsonBody(new Animal
-                {
-
-                    Name = txtPutName.Text,
-                    Class = txtPutAge.Text,
-                    Legs = int.Parse(txtPutPosition.Text),
-                    Pet = int.Parse(txtPutValue.Text)
-
-                });
-                IRestResponse response = client.Execute(request);
-                MessageBox.Show(response.Content);
-            }
-            else
-            {
-                notLogedIn();
-            }*/
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            /*
-            var client = new RestClient(URLuser);
-            String ROUTE = "";
-            var request = new RestRequest(ROUTE, Method.GET);
-            request.RequestFormat = DataFormat.Json;
-
-            IRestResponse<List<User>> response = client.Execute<List<User>>(request);
-            foreach (User a in response.Data)
-            {
-                if (a.Name==username.Text&&a.Password==password.Text)
-                {
-                    Loggedin = true;
-                    Állatok.Items.Clear();
-                    Állatok.Items.Add("Sikeres Bejelentkezés!");
-                }
-
-            }
-            if (Loggedin==false)
-            {
-                Állatok.Items.Clear();
-                Állatok.Items.Add("Hibás Felhasználónév Jelszó kombináció!");
-            }
-            lblInfo.ForeColor = Color.Green;
-            lblInfo.Text = "Succesfully Loaded all the animals.";
-            */
-        }
-        private void notLogedIn()
-        {/*
-            
-                Állatok.Items.Clear();
-                Állatok.Items.Add("Nincs bejelentkezve!");
-                */
-
-        }
+ 
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -245,6 +92,12 @@ namespace RestAPIKliens
                 }
             }
         }
+
+        internal void DataRefreshFP(List<Short> shortList, List<FP> fPList)
+        {
+            shList = shortList; fpList = fPList;
+        }
+
         private void DisableButton()
         {
             foreach (Control previousBtn in panelMenu.Controls)
@@ -257,6 +110,17 @@ namespace RestAPIKliens
                 }
             }
         }
+
+        internal List<FP> DataRefreshFPGetfp()
+        {
+            return fpList;
+        }
+
+        internal List<Short> DataRefreshFPGetsh()
+        {
+           return shList;
+        }
+
         private void OpenChildForm(Form childForm, object btnSender)
         {
             if (activeForm != null)
@@ -349,7 +213,7 @@ namespace RestAPIKliens
         private void btnStat_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormStat(), sender);
-            this.Width = 1727;
+            this.Width = 1815;
         }
 
         private void btnScrap_Click(object sender, EventArgs e)
@@ -360,7 +224,7 @@ namespace RestAPIKliens
         private void FPbtn_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormFP(), sender);
-            this.Width = 1533;
+            this.Width = 1633;
         }
         private void Home_Click(object sender, EventArgs e)
         {
@@ -505,6 +369,7 @@ namespace RestAPIKliens
         public int weight { get; set; }
         public string place { get; set; }
         public DateTime arrived { get; set; }
+        public DateTime butchered { get; set; }
         public DateTime marinated { get; set; }
         public DateTime smoked { get; set; }
 
@@ -535,6 +400,7 @@ namespace RestAPIKliens
         public int weight { get; set; }
         public string place { get; set; }
         public DateTime arrived { get; set; }
+        public DateTime butchered { get; set; }
         public DateTime marinated { get; set; }
         public DateTime smoked { get; set; }
         public DateTime stated { get; set; }
@@ -550,5 +416,15 @@ namespace RestAPIKliens
 
 
     }
+    public class Short
+    {
 
+        public int id { get; set; }
+        public string name { get; set; }
+        public int weight { get; set; }
+        public string Class { get; set; }
+
+
+
+    }
 }

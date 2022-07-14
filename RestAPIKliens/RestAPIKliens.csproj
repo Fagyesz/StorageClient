@@ -138,6 +138,12 @@
     <Compile Include="Forms\Selectors\DryAdd.Designer.cs">
       <DependentUpon>DryAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Selectors\FPCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Selectors\FPCreate.Designer.cs">
+      <DependentUpon>FPCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Selectors\Print.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Selectors\FPAdd.resx">
       <DependentUpon>FPAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Selectors\FPCreate.resx">
+      <DependentUpon>FPCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Selectors\Print.resx">
       <DependentUpon>Print.cs</DependentUpon>

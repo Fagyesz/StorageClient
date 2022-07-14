@@ -27,6 +27,24 @@ namespace RestAPIKliens.Forms
         private List<RS> Rs = new List<RS>();
         private RS singlers = new RS();
         private static DateTime DataTimePut1=new DateTime();
+
+        private List<Short> shList = new List<Short>();
+        private List<FP> fpList = new List<FP>();
+
+
+        internal FP GetDataCreateFP()
+        {
+            FP data = new FP();
+
+            data.id = (int)dataGridRS.SelectedRows[0].Cells[0].Value;
+            data.name = (string)dataGridRS.SelectedRows[0].Cells[1].Value;
+            data.weight= (int)dataGridRS.SelectedRows[0].Cells[2].Value;
+            data.place = (string)dataGridRS.SelectedRows[0].Cells[3].Value;
+            data.arrived= (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value;
+            data.butchered=(DateTime)dataGridRS.SelectedRows[0].Cells[5].Value;
+            return data;
+        }
+
         private static DateTime DataTimePut2=new DateTime();
         private bool ColumnChange = true;
         private bool OrderBy = true;
@@ -59,6 +77,7 @@ namespace RestAPIKliens.Forms
             //.ForeColor = ThemeColor.SecondaryColor;
         }
 
+        
 
         internal void ScrapDel(int weight)
         {
@@ -881,7 +900,7 @@ public class RS
 
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.Selectors.FPAdd("RS"), sender);
+            OpenChildForm(new Forms.Selectors.FPCreate("RS"), sender);
         }
         public Scrap DataToScrapRS()
         {

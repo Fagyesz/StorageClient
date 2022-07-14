@@ -53,6 +53,19 @@ namespace RestAPIKliens.Forms
             //.ForeColor = ThemeColor.SecondaryColor;
         }
 
+        internal FP GetDataCreateFP()
+        {
+
+            FP data = new FP();
+
+            data.id = (int)dataGridDry.SelectedRows[0].Cells[0].Value;
+            data.name = (string)dataGridDry.SelectedRows[0].Cells[1].Value;
+            data.weight = (int)dataGridDry.SelectedRows[0].Cells[2].Value;
+            data.place = (string)dataGridDry.SelectedRows[0].Cells[3].Value;
+            data.arrived = (DateTime)dataGridDry.SelectedRows[0].Cells[4].Value;
+            return data;
+        }
+
         internal Scrap DataToScrapDry()
         {
             Scrap SC = new Scrap();

@@ -26,6 +26,12 @@ namespace RestAPIKliens.Forms
 
         private bool ColumnChange =true;
         private bool OrderBy=true;
+
+        internal FP GetDataCreateFP()
+        {
+            throw new NotImplementedException();
+        }
+
         public FormFP()
         {
             
@@ -53,8 +59,8 @@ namespace RestAPIKliens.Forms
             ST.did = (int)dataGridFP.SelectedRows[0].Cells[3].Value;
             ST.place = (string)dataGridFP.SelectedRows[0].Cells[6].Value;
             ST.arrived=(DateTime)dataGridFP.SelectedRows[0].Cells[7].Value;
-            ST.marinated = (DateTime)dataGridFP.SelectedRows[0].Cells[8].Value; 
-            ST.smoked = (DateTime)dataGridFP.SelectedRows[0].Cells[9].Value; 
+            ST.marinated = (DateTime)dataGridFP.SelectedRows[0].Cells[9].Value; 
+            ST.smoked = (DateTime)dataGridFP.SelectedRows[0].Cells[10].Value; 
 
             
 
@@ -148,8 +154,9 @@ namespace RestAPIKliens.Forms
             dataGridFP.Columns[5].HeaderText = "Súly";
             dataGridFP.Columns[6].HeaderText = "Származási hely";
             dataGridFP.Columns[7].HeaderText = "Érkezési idő";
-            dataGridFP.Columns[8].HeaderText = "Érlelés ideje";
-            dataGridFP.Columns[9].HeaderText = "Füstölés ideje";
+            dataGridFP.Columns[8].HeaderText = "Vágás ideje";
+            dataGridFP.Columns[9].HeaderText = "Érlelés ideje";
+            dataGridFP.Columns[10].HeaderText = "Füstölés ideje";
             ColumnChange = false;
         }
 
@@ -389,9 +396,12 @@ namespace RestAPIKliens.Forms
                 name = (string)dataGridFP.SelectedRows[0].Cells[4].Value,
                 weight = (int)dataGridFP.SelectedRows[0].Cells[5].Value,
                 place = (string)dataGridFP.SelectedRows[0].Cells[6].Value,
-                arrived = (DateTime)dataGridFP.SelectedRows[0].Cells[7].Value
-                
-                
+                arrived = (DateTime)dataGridFP.SelectedRows[0].Cells[7].Value,
+                butchered = (DateTime)dataGridFP.SelectedRows[0].Cells[8].Value,
+                marinated = (DateTime)dataGridFP.SelectedRows[0].Cells[9].Value,
+                smoked = (DateTime)dataGridFP.SelectedRows[0].Cells[10].Value
+
+
 
 
             });
@@ -499,6 +509,7 @@ namespace RestAPIKliens.Forms
             dataGridFP.Columns[7].DefaultCellStyle.Format = "yyyy.MM.dd.";
             dataGridFP.Columns[8].DefaultCellStyle.Format = "yyyy.MM.dd.";
             dataGridFP.Columns[9].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            dataGridFP.Columns[10].DefaultCellStyle.Format = "yyyy.MM.dd.";
         }
 
         public void GetDataPublic()
@@ -762,10 +773,14 @@ namespace RestAPIKliens.Forms
                         FPList = query.ToList();
                         break;
                     case 8:
-                        query = rsArray.OrderBy(var => var.marinated);
+                        query = rsArray.OrderBy(var => var.butchered);
                         FPList = query.ToList();
                         break;
                     case 9:
+                        query = rsArray.OrderBy(var => var.marinated);
+                        FPList = query.ToList();
+                        break;
+                    case 10:
                         query = rsArray.OrderBy(var => var.smoked);
                         FPList = query.ToList();
                         break;
@@ -813,10 +828,14 @@ namespace RestAPIKliens.Forms
                         FPList = query.ToList();
                         break;
                     case 8:
-                        query = rsArray.OrderByDescending(var => var.marinated);
+                        query = rsArray.OrderByDescending(var => var.butchered);
                         FPList = query.ToList();
                         break;
                     case 9:
+                        query = rsArray.OrderByDescending(var => var.marinated);
+                        FPList = query.ToList();
+                        break;
+                    case 10:
                         query = rsArray.OrderByDescending(var => var.smoked);
                         FPList = query.ToList();
                         break;
