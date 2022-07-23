@@ -26,6 +26,11 @@ namespace RestAPIKliens.Forms.Selectors
         RS rs = new RS();
         Dry dry = new Dry();
         Basin b = new Basin();
+        int fpWeight = 0;
+        
+        FP fpcreator = new FP();
+        bool CreatorRS=false,CreatorDry=false,CreatorBasin=false;
+
         public FPCreate(string a)
         {
             InitializeComponent();
@@ -46,6 +51,15 @@ namespace RestAPIKliens.Forms.Selectors
             IRestResponse response = client.Execute(request);
             //  MessageBox.Show(response.Content);
         }
+        private static DateTime TimeCreator(DateTime time)
+        {
+            // PlusTime();
+            int year, month, day;
+            year = time.Year; day = time.Day; month = time.Month;
+            DateTime a = new DateTime(year, month, day, 1, 1, 1);
+
+            return a;
+        }
         private void Put(string URL,int id,int realweight,string type)
         {
 
@@ -57,7 +71,7 @@ namespace RestAPIKliens.Forms.Selectors
             GetDataID(id, type);
             DateTime tmp, tmp2, tmp3; tmp = rs.arrived; tmp2 = rs.butchered;
             tmp=time(tmp);
-
+            
             switch (type)
             {
                 case "RS":
@@ -67,8 +81,8 @@ namespace RestAPIKliens.Forms.Selectors
 
                         name = rs.name,
                         weight = realweight,
-                        arrived = time(rs.arrived),
-                        butchered = time(rs.butchered),
+                        arrived = TimeCreator(rs.arrived),
+                        butchered = TimeCreator(rs.butchered),
                         place = rs.place
 
 
@@ -84,10 +98,10 @@ namespace RestAPIKliens.Forms.Selectors
 
                         name = dry.name,
                         weight = realweight,
-                        arrived = dry.arrived,
+                        arrived = TimeCreator( dry.arrived),
                         place = dry.place,
                         expiration = dry.expiration,
-                        ExternaliD = dry.ExternaliD,
+                        externalid = dry.externalid,
 
 
 
@@ -101,10 +115,10 @@ namespace RestAPIKliens.Forms.Selectors
                         name = b.name,
                         weight = realweight,
                         place = b.place,
-                        arrived = b.arrived,
-                        marinadestart = b.marinadestart,
-                        marinadeend = b.marinadeend,
-                        smoking = b.smoking,
+                        arrived = TimeCreator(b.arrived),
+                        marinadestart = TimeCreator(b.marinadestart),
+                        marinadeend = TimeCreator(b.marinadeend),
+                        smoking = TimeCreator(b.smoking),
                         rsid = b.rsid,
 
 
@@ -125,7 +139,8 @@ namespace RestAPIKliens.Forms.Selectors
         {
             int year, month, day;
             year = time.Year; day = time.Day; month = time.Month;
-            day = day + 2;
+          
+           // day = day + 2;
             time = new DateTime(year, month, day);
             return time;
         }
@@ -133,6 +148,13 @@ namespace RestAPIKliens.Forms.Selectors
         private void btnPrepToPrint_Click(object sender, EventArgs e)
         {
             AddToPrep();
+        }
+        private void GetDataID(int id)
+        {
+            GetDataID(id,"RS");
+            GetDataID(id,"Dry");
+            GetDataID(id,"Basin");
+            GetDataID(id, "Basin");
         }
         private void GetDataID(int id,string type)
         {
@@ -214,6 +236,7 @@ namespace RestAPIKliens.Forms.Selectors
             return a;
         }
 
+
         private void AddToPrep()
         {
             Short sh = new Short();
@@ -274,6 +297,7 @@ namespace RestAPIKliens.Forms.Selectors
                                 }
                                 break;
                             case "Basin":
+                                fp = FormBasin.Self.GetDataCreateFP();
                                 if (fp.weight > sh.weight)
                                 {
                                     fp = FormBasin.Self.GetDataCreateFP();
@@ -489,16 +513,50 @@ namespace RestAPIKliens.Forms.Selectors
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            
             PutOrDel();
             RefreshGrid();
-            Selectors.Search.GetALL();
+            GetAllCreatorGrid();
+            DelAll();
+
+        }
+
+        private static void GetAllCreatorGrid()
+        {
+            switch (creator)
+            {
+                case "FP":
+                    FormFP.Self.GetDataPublic();
+                    break;
+                case "RS":
+                    FormRS.Self.GetDataPublic();
+                    break;
+                case "Scrap":
+                    FormScrap.Self.GetDataPublic();
+                    break;
+                case "Dry":
+                    FormDry.Self.GetDataPublic();
+                    break;
+                case "Basin":
+                    FormBasin.Self.GetDataPublic();
+                    break;
+                case "Stat":
+                    FormStat.Self.GetDataPublic();
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void PutOrDel()
         {
             int[] fpWeight; int[] shWeight;
             string filePath = "";
-
+            fpcreator = null;
+            fpcreator = new FP();
+            CreatorBasin = false;
+            CreatorDry=false;
+            CreatorRS=false;
 
             filePath = "FpCreate/Short.txt";
             if (File.Exists(filePath))
@@ -540,12 +598,17 @@ namespace RestAPIKliens.Forms.Selectors
                             {
                                 case "Nyersanyag":
                                     Delete(URLr, id[i]);
+                                    PostFPCreator(URLr, id[i], shWeight[i], "RS", fpWeight.Length,i);
                                     break;
                                 case "Száraz":
                                     Delete(URLd, id[i]);
+                                    PostFPCreator(URLd, id[i], shWeight[i], "Dry", fpWeight.Length,i);
+
                                     break;
                                 case "Basin":
                                     Delete(URLb, id[i]);
+                                    PostFPCreator(URLb,id[i], shWeight[i], "Basin", fpWeight.Length,i);
+
                                     break;
                                 default:
                                     break;
@@ -558,12 +621,15 @@ namespace RestAPIKliens.Forms.Selectors
                             {
                                 case "Nyersanyag":
                                     Put(URLr, id[i],realWeight,"RS");
+                                    PostFPCreator(URLr, id[i], shWeight[i], "RS", fpWeight.Length,i);
                                     break;
                                 case "Száraz":
                                     Put(URLd, id[i], realWeight,"Dry");
+                                    PostFPCreator(URLd, id[i], shWeight[i], "Dry", fpWeight.Length,i);
                                     break;
                                 case "Basin":
                                     Put(URLb, id[i], realWeight,"Basin");
+                                    PostFPCreator(URLb, id[i], shWeight[i],"Basin", fpWeight.Length,i);
                                     break;
                                 default:
                                     break;
@@ -576,6 +642,227 @@ namespace RestAPIKliens.Forms.Selectors
 
             
             
+            
+        }
+
+        private void PostFPCreator(string URL,int id, int weight, string type,int length,int interation)
+        {
+            fpWeight += weight;
+            switch (type)
+                {
+                    case "RS":
+                        GetDataID(id, type);
+                        
+
+                        fpcreator.rsid = rs.id;
+                        //fp.name = rs.name;
+                        fpcreator.weight = fpWeight;
+                        fpcreator.place = rs.place;
+                        fpcreator.arrived = TimeCreator(rs.arrived);
+                        fpcreator.butchered = TimeCreator(rs.butchered);
+                        /*
+                        fp.bid = 0;
+                        fp.did = 0;
+                        fp.externalid = 0;
+                        fp.marinated = DateTime.MinValue;
+                        fp.smoked=DateTime.MinValue;
+                        */
+                        CreatorRS = true;
+                        break;
+                    case "Dry":
+
+                    GetDataID(id, type);
+                    fpcreator.did = dry.id;
+                        fpcreator.externalid = dry.externalid;
+                        //fp.name=dry.name;
+                        fpcreator.weight = fpWeight;
+                        fpcreator.place = dry.place;
+                      //  fpcreator.arrived = TimeCreator(dry.arrived);
+                        /*
+                        fp.rsid = 0;
+                        fp.bid = 0;
+                        fp.butchered = DateTime.MinValue;
+                        fp.marinated = DateTime.MinValue;
+                        fp.smoked = DateTime.MinValue;
+                        */
+                        CreatorDry=true;
+                        break;
+                    case "Basin":
+                    GetDataID(id, type);
+                    fpcreator.rsid = b.rsid;
+                        fpcreator.bid = b.id;
+                        // fp.name=b.name;
+                        fpcreator.weight = fpWeight;
+                        fpcreator.place = b.place;
+                        fpcreator.arrived = TimeCreator(b.arrived);
+                        fpcreator.marinated = TimeCreator(b.marinadeend);
+                        fpcreator.smoked = TimeCreator(b.smoking);
+                        /*
+                        fp.butchered = DateTime.MinValue;
+                        fp.did = 0;
+                        */
+                        CreatorBasin=true;
+                        break;
+                    default:
+                        break;
+                }
+            
+
+
+
+
+            if (interation == length - 1)
+            {
+                
+                if (!CreatorRS)
+                {
+
+                    if (!CreatorDry)
+                    {
+                        fpcreator.did = 0;
+                        fpcreator.externalid = 0;
+                    }
+                    if (!CreatorBasin)
+                    {
+                        fpcreator.bid = 0;
+                        fpcreator.marinated = DateTime.MinValue;
+                        fpcreator.smoked = DateTime.MinValue;
+                    }
+                }
+                if (!CreatorDry)
+                {
+                   
+                    if (!CreatorBasin)
+                    {
+                        fpcreator.bid = 0;
+                        fpcreator.marinated = DateTime.MinValue;
+                    }
+                    if (!CreatorBasin&&!CreatorRS)
+                    {
+                        fpcreator.butchered = DateTime.MinValue;
+                        fpcreator.rsid = 0;
+                        fpcreator.smoked = DateTime.MinValue;
+                    }
+                }
+                if (!CreatorBasin)
+                {
+                    if (!CreatorRS)
+                    {
+                        fpcreator.butchered = DateTime.MinValue;
+                    }
+                    if (!CreatorDry)
+                    {
+                        fpcreator.did = 0;
+                    }
+                    
+                }
+                if (!CreatorBasin && !CreatorRS)
+                {
+                    GetDataID(id, "Dry");
+                    if (dry.place!=null)
+                    {
+                        fpcreator.place = dry.place;
+                        fpcreator.arrived = TimeCreator(dry.arrived);
+                    }
+                    else
+                    {
+                        fpcreator.place = "Hiány";
+                        fpcreator.arrived = DateTime.Now;
+                    }
+                    
+                }
+                if (cmbName.Text.All(char.IsLetterOrDigit))
+                {
+                    
+                    
+                    if (cmbName.Text=="")
+                    {
+                        
+                        fpcreator.name = "Hiány";
+                    }
+                    else
+                    {
+                        fpcreator.name = cmbName.Text;
+                    }
+                    DataPost(fpcreator, URL);
+                }
+                else
+                {
+                    MessageBox.Show("Csak szám és betű lehet a név");
+                }
+                
+            }
+            else
+            {
+                
+            }
+        }
+
+        private void DataPost(FP a,string URL)
+        {
+            bool check = false;
+            if (a.name == "")
+            {
+                check = true;
+            }/*
+            if (a.weight == null)
+            {
+                check = true;
+            }*/
+            if (a.weight == 0)
+            {
+
+                check = true;
+
+            }
+
+
+            if (a.place == "")
+            {
+                check = true;
+            }
+            if (check)
+            {
+                MessageBox.Show("Hiányzó adatok ", "Hibás adatok");
+            }
+            else
+            {
+                URL = "http://127.0.0.1:3000/finalproduct/";
+
+                var client = new RestClient(URL);
+                String ROUTE = "post";
+                var request = new RestRequest(ROUTE, Method.POST);
+                request.RequestFormat = DataFormat.Json;
+                //DateTime time = TimeCreator();
+                try
+                {
+                    request.AddBody(new FP
+                    {
+                        id = a.id,
+                        rsid = a.rsid,
+                        bid = a.bid,
+                        did = a.did,
+                        externalid = a.externalid,
+                        name = a.name,
+                        weight = a.weight,
+                        place = a.place,
+                        arrived = TimeCreator(a.arrived),
+                        butchered = TimeCreator(a.butchered),
+                        marinated = TimeCreator(a.marinated),
+                        smoked = TimeCreator(a.smoked),
+
+                    }) ;
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Hibás feltöltés", "");
+                }
+
+                IRestResponse response = client.Execute(request);
+                MessageBox.Show("Sikeresen Hozzáadva.");
+                GetAllCreatorGrid();
+            }
             
         }
 
@@ -630,7 +917,22 @@ namespace RestAPIKliens.Forms.Selectors
             RefreshGrid();
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            GetDataID(6);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button2_Click(object sender, EventArgs e)
+        {
+            DelAll();
+        }
+
+        private void DelAll()
         {
             string filePath = "FpCreate/Short.txt";
             if (File.Exists(filePath))

@@ -222,7 +222,7 @@ namespace RestAPIKliens.Forms
                         arrived = d.arrived.AddDays(1),
                         place = d.place,
                         expiration = d.expiration,
-                        ExternaliD = d.ExternaliD
+                        externalid = d.externalid
 
                     }) ;
                 }
@@ -522,7 +522,7 @@ namespace RestAPIKliens.Forms
                 arrived = time,
                 place = (string)dataGridDry.SelectedRows[0].Cells[3].Value,
                 expiration=(DateTime)dataGridDry.SelectedRows[0].Cells[5].Value,
-                ExternaliD=(string)dataGridDry.SelectedRows[0].Cells[6].Value,
+                externalid=(int)dataGridDry.SelectedRows[0].Cells[6].Value,
 
 
 
@@ -538,7 +538,7 @@ namespace RestAPIKliens.Forms
             // PlusTime();
             int year, month, day;
             year = DataTimePut1.Year; day = DataTimePut1.Day ; month = DataTimePut1.Month;
-            DateTime a = new DateTime(year, month, day);
+            DateTime a = new DateTime(year, month, day, 1, 1, 1);
             return a;
         }
         private static DateTime PutGETid()
@@ -546,7 +546,7 @@ namespace RestAPIKliens.Forms
             // PlusTime();
             int year, month, day;
             year = DataTimePut1.Year; day = DataTimePut1.Day ; month = DataTimePut1.Month;
-            DateTime b = new DateTime(year, month, day);
+            DateTime b = new DateTime(year, month, day, 1, 1, 1);
             return b;
         }
 
@@ -838,7 +838,7 @@ namespace RestAPIKliens.Forms
                         DryList = query.ToList();
                         break;
                     case 6:
-                        query = rsArray.OrderBy(var => var.ExternaliD);
+                        query = rsArray.OrderBy(var => var.externalid);
                         DryList = query.ToList();
                         break;
 
@@ -876,7 +876,7 @@ namespace RestAPIKliens.Forms
                         DryList = query.ToList();
                         break;
                     case 6:
-                        query = rsArray.OrderByDescending(var => var.ExternaliD);
+                        query = rsArray.OrderByDescending(var => var.externalid);
                         DryList = query.ToList();
                         break;
 

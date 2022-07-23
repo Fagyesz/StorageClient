@@ -50,7 +50,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(610, 447);
+            this.panel3.Size = new System.Drawing.Size(683, 477);
             this.panel3.TabIndex = 30;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -63,7 +63,7 @@
             this.dataGridDry.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
             this.dataGridDry.Name = "dataGridDry";
             this.dataGridDry.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridDry.Size = new System.Drawing.Size(610, 447);
+            this.dataGridDry.Size = new System.Drawing.Size(683, 477);
             this.dataGridDry.TabIndex = 22;
             this.dataGridDry.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDry_CellClick);
             this.dataGridDry.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDry_CellValueChanged_1);
@@ -73,17 +73,17 @@
             this.panel1.Controls.Add(this.panelFill);
             this.panel1.Controls.Add(this.panelSelector);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(364, 0);
+            this.panel1.Location = new System.Drawing.Point(437, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(246, 447);
+            this.panel1.Size = new System.Drawing.Size(246, 477);
             this.panel1.TabIndex = 31;
             // 
             // panelFill
             // 
             this.panelFill.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelFill.Location = new System.Drawing.Point(0, 84);
+            this.panelFill.Location = new System.Drawing.Point(0, 83);
             this.panelFill.Name = "panelFill";
-            this.panelFill.Size = new System.Drawing.Size(246, 363);
+            this.panelFill.Size = new System.Drawing.Size(246, 394);
             this.panelFill.TabIndex = 35;
             // 
             // panelSelector
@@ -96,13 +96,13 @@
             this.panelSelector.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSelector.Location = new System.Drawing.Point(0, 0);
             this.panelSelector.Name = "panelSelector";
-            this.panelSelector.Size = new System.Drawing.Size(246, 84);
+            this.panelSelector.Size = new System.Drawing.Size(246, 83);
             this.panelSelector.TabIndex = 34;
             // 
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(26, 55);
+            this.radioButton5.Location = new System.Drawing.Point(125, 55);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(80, 17);
             this.radioButton5.TabIndex = 6;
@@ -114,7 +114,7 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(125, 32);
+            this.radioButton4.Location = new System.Drawing.Point(26, 55);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(75, 17);
             this.radioButton4.TabIndex = 5;
@@ -163,7 +163,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(610, 447);
+            this.ClientSize = new System.Drawing.Size(683, 477);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
             this.Name = "FormDry";

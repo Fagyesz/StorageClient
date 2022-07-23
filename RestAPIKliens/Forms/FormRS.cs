@@ -30,7 +30,7 @@ namespace RestAPIKliens.Forms
 
         private List<Short> shList = new List<Short>();
         private List<FP> fpList = new List<FP>();
-
+        public static bool id = false;
 
         internal FP GetDataCreateFP()
         {
@@ -107,6 +107,7 @@ namespace RestAPIKliens.Forms
 
         private void GetData()
         {
+            id = false;
             try {
 
             ClearDataGridViewRows(dataGridRS, RSList);
@@ -420,9 +421,25 @@ public class RS
             DataTimePut2 = (DateTime)dataGridRS.SelectedRows[0].Cells[5].Value;
 
             
-            DateTime a, b;
+            DateTime a = DateTime.MinValue, b = DateTime.MinValue;
             PutTime(out a, out b);
+
+            DateTime time = DateTime.MinValue;
+
             
+                a = PutGET();
+            
+                b = PutGETid();
+           /*
+            if (id)
+            {
+                b = PutGET(DataTimePut2);
+            }
+            else
+            {
+                b = PutGETid(DataTimePut2);
+            }*/
+
             request.AddJsonBody(new RS
             {
 
@@ -439,7 +456,23 @@ public class RS
 
             MessageBox.Show(response.Content);
         }
-
+        private static DateTime PutGET()
+        {
+            // PlusTime();
+            int year, month, day;
+            year = DataTimePut1.Year; day = DataTimePut1.Day; month = DataTimePut1.Month;
+            DateTime a = new DateTime(year, month, day,1,1,1);
+            
+            return a; 
+        }
+        private static DateTime PutGETid()
+        {
+            // PlusTime();
+            int year, month, day;
+            year = DataTimePut2.Year; day = DataTimePut2.Day; month = DataTimePut2.Month;
+            DateTime b = new DateTime(year, month, day, 1, 1, 1);
+            return b;
+        }
         private static void PutTime(out DateTime a, out DateTime b)
         {
             // PlusTime();

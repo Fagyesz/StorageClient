@@ -219,12 +219,12 @@ namespace RestAPIKliens
         private void btnScrap_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormScrap(), sender);
-            this.Width = 1227;
+            this.Width = 1327;
         }
         private void FPbtn_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormFP(), sender);
-            this.Width = 1633;
+            this.Width = 1733;
         }
         private void Home_Click(object sender, EventArgs e)
         {
@@ -335,7 +335,7 @@ namespace RestAPIKliens
         public DateTime arrived { get; set; }
 
         public DateTime expiration { get; set; }
-        public string ExternaliD { get; set; }
+        public int externalid { get; set; }
 
     }
     public class Basin
@@ -365,6 +365,8 @@ namespace RestAPIKliens
         public int rsid { get; set; }
         public int bid { get; set; }
         public int did { get; set; }
+        
+        public int externalid { get; set; }
         public string name { get; set; }
         public int weight { get; set; }
         public string place { get; set; }

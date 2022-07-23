@@ -150,13 +150,14 @@ namespace RestAPIKliens.Forms
             dataGridFP.Columns[1].HeaderText = "Nyersanyag ID";
             dataGridFP.Columns[2].HeaderText = "Basin ID";
             dataGridFP.Columns[3].HeaderText = "Száraz ID";
-            dataGridFP.Columns[4].HeaderText = "Megnevezés";
-            dataGridFP.Columns[5].HeaderText = "Súly";
-            dataGridFP.Columns[6].HeaderText = "Származási hely";
-            dataGridFP.Columns[7].HeaderText = "Érkezési idő";
-            dataGridFP.Columns[8].HeaderText = "Vágás ideje";
-            dataGridFP.Columns[9].HeaderText = "Érlelés ideje";
-            dataGridFP.Columns[10].HeaderText = "Füstölés ideje";
+            dataGridFP.Columns[4].HeaderText = "Külső ID";
+            dataGridFP.Columns[5].HeaderText = "Megnevezés";
+            dataGridFP.Columns[6].HeaderText = "Súly";
+            dataGridFP.Columns[7].HeaderText = "Származási hely";
+            dataGridFP.Columns[8].HeaderText = "Érkezési idő";
+            dataGridFP.Columns[9].HeaderText = "Vágás ideje";
+            dataGridFP.Columns[10].HeaderText = "Érlelés ideje";
+            dataGridFP.Columns[11].HeaderText = "Füstölés ideje";
             ColumnChange = false;
         }
 
