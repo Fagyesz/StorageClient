@@ -484,12 +484,6 @@ namespace RestAPIKliens.Forms.Selectors
             dataGridView.Rows.Clear();
         }
 
-        private void FPCreate_Load(object sender, EventArgs e)
-        {
-            dataGridView.RowHeadersVisible=false;
-            RefreshGrid();
-            
-        }
         private void SetColumsName()
         {
             ColumnChange = true;
@@ -501,6 +495,13 @@ namespace RestAPIKliens.Forms.Selectors
 
             ColumnChange = false;
         }
+        private void FPCreate_Load(object sender, EventArgs e)
+        {
+            dataGridView.RowHeadersVisible=false;
+            RefreshGrid();
+            
+        }
+        
         private void btnDelFromPrepToPrint_Click(object sender, EventArgs e)
         {
             ClearGrid();

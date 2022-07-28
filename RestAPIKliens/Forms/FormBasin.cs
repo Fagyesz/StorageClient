@@ -64,6 +64,27 @@ namespace RestAPIKliens.Forms
             data.rsid = (int)dataGridBasin.SelectedRows[0].Cells[8].Value;
             return data;
         }
+        internal Basin GetDataCreateBasin()
+        {
+
+            Basin data = new Basin();
+
+            data.id = (int)dataGridBasin.SelectedRows[0].Cells[0].Value;
+            data.name = (string)dataGridBasin.SelectedRows[0].Cells[1].Value;
+            data.weight = (int)dataGridBasin.SelectedRows[0].Cells[2].Value;
+            data.place = (string)dataGridBasin.SelectedRows[0].Cells[3].Value;
+            data.arrived = (DateTime)dataGridBasin.SelectedRows[0].Cells[4].Value;
+            data.marinadestart = (DateTime)dataGridBasin.SelectedRows[0].Cells[5].Value;
+            data.marinadeend = (DateTime)dataGridBasin.SelectedRows[0].Cells[6].Value;
+            data.smoking = (DateTime)dataGridBasin.SelectedRows[0].Cells[7].Value;
+            data.rsid = (int)dataGridBasin.SelectedRows[0].Cells[8].Value;
+            return data;
+        }
+
+        internal int GetBasinID()
+        {
+           return (int)dataGridBasin.SelectedRows[0].Cells[0].Value;
+        }
 
         internal void DataRefreshFP(List<Short> shortList, List<FP> fPList)
         {

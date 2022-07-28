@@ -37,17 +37,19 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnPrint = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dataGridPrint = new System.Windows.Forms.DataGridView();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.button2 = new System.Windows.Forms.Button();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridPrint)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.btnDelFromPrepToPrint);
             this.panel1.Controls.Add(this.btnPrepToPrint);
@@ -72,7 +74,7 @@
             // 
             // btnDelFromPrepToPrint
             // 
-            this.btnDelFromPrepToPrint.Location = new System.Drawing.Point(166, 99);
+            this.btnDelFromPrepToPrint.Location = new System.Drawing.Point(129, 99);
             this.btnDelFromPrepToPrint.Name = "btnDelFromPrepToPrint";
             this.btnDelFromPrepToPrint.Size = new System.Drawing.Size(48, 23);
             this.btnDelFromPrepToPrint.TabIndex = 4;
@@ -82,7 +84,7 @@
             // 
             // btnPrepToPrint
             // 
-            this.btnPrepToPrint.Location = new System.Drawing.Point(22, 99);
+            this.btnPrepToPrint.Location = new System.Drawing.Point(12, 99);
             this.btnPrepToPrint.Name = "btnPrepToPrint";
             this.btnPrepToPrint.Size = new System.Drawing.Size(111, 23);
             this.btnPrepToPrint.TabIndex = 3;
@@ -119,25 +121,12 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.dataGridPrint);
+            this.panel2.Controls.Add(this.dataGridView);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 128);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(222, 332);
             this.panel2.TabIndex = 1;
-            // 
-            // dataGridPrint
-            // 
-            this.dataGridPrint.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.dataGridPrint.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridPrint.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridPrint.Location = new System.Drawing.Point(0, 0);
-            this.dataGridPrint.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
-            this.dataGridPrint.Name = "dataGridPrint";
-            this.dataGridPrint.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridPrint.Size = new System.Drawing.Size(222, 332);
-            this.dataGridPrint.TabIndex = 24;
-            this.dataGridPrint.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridSearch_CellContentClick);
             // 
             // printDialog1
             // 
@@ -158,6 +147,35 @@
             this.printPreviewDialog1.Visible = false;
             this.printPreviewDialog1.Load += new System.EventHandler(this.printPreviewDialog1_Load);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(186, 99);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(24, 23);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Törlés";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // dataGridView
+            // 
+            this.dataGridView.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.dataGridView.AllowUserToAddRows = false;
+            this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.AllowUserToResizeColumns = false;
+            this.dataGridView.AllowUserToResizeRows = false;
+            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.ReadOnly = true;
+            this.dataGridView.ShowCellErrors = false;
+            this.dataGridView.Size = new System.Drawing.Size(222, 332);
+            this.dataGridView.TabIndex = 7;
+            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
+            // 
             // Print
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,7 +189,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridPrint)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -185,10 +203,11 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnDelFromPrepToPrint;
         private System.Windows.Forms.Button btnPrepToPrint;
-        private System.Windows.Forms.DataGridView dataGridPrint;
         private System.Windows.Forms.PrintDialog printDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridView dataGridView;
     }
 }

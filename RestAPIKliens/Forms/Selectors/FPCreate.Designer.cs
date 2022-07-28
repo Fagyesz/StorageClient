@@ -35,14 +35,14 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.cmbName = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
             this.cmbWeight = new System.Windows.Forms.ComboBox();
             this.btnDelFromPrepToPrint = new System.Windows.Forms.Button();
             this.btnPrepToPrint = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel2.SuspendLayout();
@@ -74,7 +74,8 @@
             // 
             // dataGridView
             // 
-            this.dataGridView.AllowUserToOrderColumns = true;
+            this.dataGridView.AllowUserToAddRows = false;
+            this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeColumns = false;
             this.dataGridView.AllowUserToResizeRows = false;
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
@@ -102,6 +103,25 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(227, 140);
             this.panel2.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(165, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(27, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Súly";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(36, 65);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Megnevezés";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // cmbName
             // 
@@ -161,25 +181,6 @@
             this.btnPrint.Text = "Létrehozás";
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 65);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Megnevezés";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(165, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(27, 13);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Súly";
             // 
             // FPCreate
             // 

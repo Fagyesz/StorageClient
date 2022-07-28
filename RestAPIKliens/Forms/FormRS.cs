@@ -44,10 +44,30 @@ namespace RestAPIKliens.Forms
             data.butchered=(DateTime)dataGridRS.SelectedRows[0].Cells[5].Value;
             return data;
         }
+        internal RS GetDataCreateRS()
+        {
+            RS data = new RS();
+
+            data.id = (int)dataGridRS.SelectedRows[0].Cells[0].Value;
+            data.name = (string)dataGridRS.SelectedRows[0].Cells[1].Value;
+            data.weight = (int)dataGridRS.SelectedRows[0].Cells[2].Value;
+            data.place = (string)dataGridRS.SelectedRows[0].Cells[3].Value;
+            data.arrived = (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value;
+            data.butchered = (DateTime)dataGridRS.SelectedRows[0].Cells[5].Value;
+            return data;
+        }
 
         private static DateTime DataTimePut2=new DateTime();
         private bool ColumnChange = true;
         private bool OrderBy = true;
+
+        internal int GetRsID()
+        {
+            int id = (int)dataGridRS.SelectedRows[0].Cells[0].Value;
+
+            return id;
+        }
+
         public FormRS()
         {
             InitializeComponent();
