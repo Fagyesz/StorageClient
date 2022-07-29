@@ -1,6 +1,6 @@
-﻿namespace RestAPIKliens.Print_Semantics
+﻿namespace RestAPIKliens.PrintSemantics
 {
-    partial class PrintSemanticRs
+    partial class PrintSemanticDry
     {
         /// <summary>
         /// Required designer variable.
@@ -28,53 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintSemanticRs));
-            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txt_name1 = new System.Windows.Forms.Label();
-            this.txt_arrived1 = new System.Windows.Forms.Label();
-            this.id1 = new System.Windows.Forms.Label();
-            this.txt_weight1 = new System.Windows.Forms.Label();
-            this.name1 = new System.Windows.Forms.Label();
-            this.txt_id1 = new System.Windows.Forms.Label();
-            this.txt_butchered1 = new System.Windows.Forms.Label();
-            this.weight1 = new System.Windows.Forms.Label();
-            this.txt_place1 = new System.Windows.Forms.Label();
-            this.place1 = new System.Windows.Forms.Label();
-            this.butchered1 = new System.Windows.Forms.Label();
-            this.arrived1 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintSemanticDry));
+            this.name4 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.id3 = new System.Windows.Forms.Label();
             this.arrived3 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.name3 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.weight3 = new System.Windows.Forms.Label();
-            this.butcherd3 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.place3 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.weight4 = new System.Windows.Forms.Label();
+            this.butcherd4 = new System.Windows.Forms.Label();
+            this.butcherd3 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.place4 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label39 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label15 = new System.Windows.Forms.Label();
             this.id4 = new System.Windows.Forms.Label();
             this.arrived4 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.name4 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.weight4 = new System.Windows.Forms.Label();
-            this.butcherd4 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.place4 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txt_arrived1 = new System.Windows.Forms.Label();
+            this.id1 = new System.Windows.Forms.Label();
+            this.name1 = new System.Windows.Forms.Label();
+            this.txt_butchered1 = new System.Windows.Forms.Label();
+            this.weight1 = new System.Windows.Forms.Label();
+            this.txt_place1 = new System.Windows.Forms.Label();
+            this.place1 = new System.Windows.Forms.Label();
+            this.butchered1 = new System.Windows.Forms.Label();
+            this.arrived1 = new System.Windows.Forms.Label();
+            this.txt_id1 = new System.Windows.Forms.Label();
+            this.txt_name1 = new System.Windows.Forms.Label();
+            this.txt_weight1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.id2 = new System.Windows.Forms.Label();
             this.arrived2 = new System.Windows.Forms.Label();
@@ -89,252 +87,26 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.panel1.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // printPreviewDialog1
+            // name4
             // 
-            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog1.Enabled = true;
-            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
-            this.printPreviewDialog1.Name = "printPreviewDialog1";
-            this.printPreviewDialog1.Visible = false;
-            // 
-            // printDocument1
-            // 
-            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
-            // 
-            // printDialog1
-            // 
-            this.printDialog1.UseEXDialog = true;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.17647F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.82353F));
-            this.tableLayoutPanel1.Controls.Add(this.label11, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txt_arrived1, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.id1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.name1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txt_butchered1, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.weight1, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txt_place1, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.place1, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.butchered1, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.arrived1, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.txt_id1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txt_name1, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txt_weight1, 1, 3);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.35484F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(407, 567);
-            this.tableLayoutPanel1.TabIndex = 39;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.label11, 2);
-            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Font = new System.Drawing.Font("Verdana", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(3, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(401, 109);
-            this.label11.TabIndex = 38;
-            this.label11.Text = "Nyersanyag Raktár";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txt_name1
-            // 
-            this.txt_name1.AutoSize = true;
-            this.txt_name1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_name1.Location = new System.Drawing.Point(170, 185);
-            this.txt_name1.Name = "txt_name1";
-            this.txt_name1.Size = new System.Drawing.Size(175, 25);
-            this.txt_name1.TabIndex = 29;
-            this.txt_name1.Text = "--Placeholder--";
-            // 
-            // txt_arrived1
-            // 
-            this.txt_arrived1.AutoSize = true;
-            this.txt_arrived1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_arrived1.Location = new System.Drawing.Point(170, 413);
-            this.txt_arrived1.Name = "txt_arrived1";
-            this.txt_arrived1.Size = new System.Drawing.Size(175, 25);
-            this.txt_arrived1.TabIndex = 35;
-            this.txt_arrived1.Text = "--Placeholder--";
-            // 
-            // id1
-            // 
-            this.id1.AutoSize = true;
-            this.id1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.id1.Location = new System.Drawing.Point(3, 109);
-            this.id1.Name = "id1";
-            this.id1.Size = new System.Drawing.Size(46, 25);
-            this.id1.TabIndex = 26;
-            this.id1.Text = "ID:";
-            // 
-            // txt_weight1
-            // 
-            this.txt_weight1.AutoSize = true;
-            this.txt_weight1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_weight1.Location = new System.Drawing.Point(170, 261);
-            this.txt_weight1.Name = "txt_weight1";
-            this.txt_weight1.Size = new System.Drawing.Size(175, 25);
-            this.txt_weight1.TabIndex = 31;
-            this.txt_weight1.Text = "--Placeholder--";
-            // 
-            // name1
-            // 
-            this.name1.AutoSize = true;
-            this.name1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.name1.Location = new System.Drawing.Point(3, 185);
-            this.name1.Name = "name1";
-            this.name1.Size = new System.Drawing.Size(152, 25);
-            this.name1.TabIndex = 28;
-            this.name1.Text = "Megnevezés:";
-            // 
-            // txt_id1
-            // 
-            this.txt_id1.AutoSize = true;
-            this.txt_id1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_id1.Location = new System.Drawing.Point(170, 109);
-            this.txt_id1.Name = "txt_id1";
-            this.txt_id1.Size = new System.Drawing.Size(175, 25);
-            this.txt_id1.TabIndex = 27;
-            this.txt_id1.Text = "--Placeholder--";
-            // 
-            // txt_butchered1
-            // 
-            this.txt_butchered1.AutoSize = true;
-            this.txt_butchered1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_butchered1.Location = new System.Drawing.Point(170, 489);
-            this.txt_butchered1.Name = "txt_butchered1";
-            this.txt_butchered1.Size = new System.Drawing.Size(175, 25);
-            this.txt_butchered1.TabIndex = 33;
-            this.txt_butchered1.Text = "--Placeholder--";
-            // 
-            // weight1
-            // 
-            this.weight1.AutoSize = true;
-            this.weight1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.weight1.Location = new System.Drawing.Point(3, 261);
-            this.weight1.Name = "weight1";
-            this.weight1.Size = new System.Drawing.Size(67, 25);
-            this.weight1.TabIndex = 30;
-            this.weight1.Text = "Súly:";
-            // 
-            // txt_place1
-            // 
-            this.txt_place1.AutoSize = true;
-            this.txt_place1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_place1.Location = new System.Drawing.Point(170, 337);
-            this.txt_place1.Name = "txt_place1";
-            this.txt_place1.Size = new System.Drawing.Size(175, 25);
-            this.txt_place1.TabIndex = 37;
-            this.txt_place1.Text = "--Placeholder--";
-            // 
-            // place1
-            // 
-            this.place1.AutoSize = true;
-            this.place1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.place1.Location = new System.Drawing.Point(3, 337);
-            this.place1.Name = "place1";
-            this.place1.Size = new System.Drawing.Size(109, 50);
-            this.place1.TabIndex = 36;
-            this.place1.Text = "Honnan érkezett:";
-            // 
-            // butchered1
-            // 
-            this.butchered1.AutoSize = true;
-            this.butchered1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.butchered1.Location = new System.Drawing.Point(3, 489);
-            this.butchered1.Name = "butchered1";
-            this.butchered1.Size = new System.Drawing.Size(145, 25);
-            this.butchered1.TabIndex = 34;
-            this.butchered1.Text = "Vágás ideje:";
-            // 
-            // arrived1
-            // 
-            this.arrived1.AutoSize = true;
-            this.arrived1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.arrived1.Location = new System.Drawing.Point(3, 413);
-            this.arrived1.Name = "arrived1";
-            this.arrived1.Size = new System.Drawing.Size(128, 50);
-            this.arrived1.TabIndex = 32;
-            this.arrived1.Text = "Beérkezés ideje:";
-            // 
-            // tableLayoutPanel
-            // 
-            this.tableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel.ColumnCount = 2;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.Controls.Add(this.tableLayoutPanel3, 0, 1);
-            this.tableLayoutPanel.Controls.Add(this.tableLayoutPanel4, 0, 1);
-            this.tableLayoutPanel.Controls.Add(this.tableLayoutPanel1, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.tableLayoutPanel2, 1, 0);
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 2;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(830, 1150);
-            this.tableLayoutPanel.TabIndex = 40;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.AutoSize = true;
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.44444F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.55556F));
-            this.tableLayoutPanel3.Controls.Add(this.label28, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.id3, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.arrived3, 1, 5);
-            this.tableLayoutPanel3.Controls.Add(this.label31, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.name3, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.label33, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.weight3, 1, 3);
-            this.tableLayoutPanel3.Controls.Add(this.butcherd3, 1, 6);
-            this.tableLayoutPanel3.Controls.Add(this.label36, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.place3, 1, 4);
-            this.tableLayoutPanel3.Controls.Add(this.label38, 0, 4);
-            this.tableLayoutPanel3.Controls.Add(this.label39, 0, 6);
-            this.tableLayoutPanel3.Controls.Add(this.label40, 0, 5);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(4, 578);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 7;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.35484F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(407, 568);
-            this.tableLayoutPanel3.TabIndex = 42;
+            this.name4.AutoSize = true;
+            this.name4.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.name4.Location = new System.Drawing.Point(184, 185);
+            this.name4.Name = "name4";
+            this.name4.Size = new System.Drawing.Size(175, 25);
+            this.name4.TabIndex = 31;
+            this.name4.Text = "--Placeholder--";
             // 
             // label28
             // 
@@ -399,6 +171,16 @@
             this.label33.TabIndex = 28;
             this.label33.Text = "Megnevezés:";
             // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(3, 261);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(67, 25);
+            this.label23.TabIndex = 30;
+            this.label23.Text = "Súly:";
+            // 
             // weight3
             // 
             this.weight3.AutoSize = true;
@@ -408,16 +190,6 @@
             this.weight3.Size = new System.Drawing.Size(175, 25);
             this.weight3.TabIndex = 27;
             this.weight3.Text = "--Placeholder--";
-            // 
-            // butcherd3
-            // 
-            this.butcherd3.AutoSize = true;
-            this.butcherd3.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.butcherd3.Location = new System.Drawing.Point(183, 489);
-            this.butcherd3.Name = "butcherd3";
-            this.butcherd3.Size = new System.Drawing.Size(175, 25);
-            this.butcherd3.TabIndex = 33;
-            this.butcherd3.Text = "--Placeholder--";
             // 
             // label36
             // 
@@ -448,6 +220,127 @@
             this.label38.Size = new System.Drawing.Size(109, 50);
             this.label38.TabIndex = 36;
             this.label38.Text = "Honnan érkezett:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(3, 185);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(152, 25);
+            this.label20.TabIndex = 28;
+            this.label20.Text = "Megnevezés:";
+            // 
+            // weight4
+            // 
+            this.weight4.AutoSize = true;
+            this.weight4.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.weight4.Location = new System.Drawing.Point(184, 261);
+            this.weight4.Name = "weight4";
+            this.weight4.Size = new System.Drawing.Size(175, 25);
+            this.weight4.TabIndex = 27;
+            this.weight4.Text = "--Placeholder--";
+            // 
+            // butcherd4
+            // 
+            this.butcherd4.AutoSize = true;
+            this.butcherd4.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.butcherd4.Location = new System.Drawing.Point(184, 489);
+            this.butcherd4.Name = "butcherd4";
+            this.butcherd4.Size = new System.Drawing.Size(175, 25);
+            this.butcherd4.TabIndex = 33;
+            this.butcherd4.Text = "--Placeholder--";
+            // 
+            // butcherd3
+            // 
+            this.butcherd3.AutoSize = true;
+            this.butcherd3.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.butcherd3.Location = new System.Drawing.Point(183, 489);
+            this.butcherd3.Name = "butcherd3";
+            this.butcherd3.Size = new System.Drawing.Size(175, 25);
+            this.butcherd3.TabIndex = 33;
+            this.butcherd3.Text = "--Placeholder--";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(3, 109);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(46, 25);
+            this.label18.TabIndex = 26;
+            this.label18.Text = "ID:";
+            // 
+            // place4
+            // 
+            this.place4.AutoSize = true;
+            this.place4.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.place4.Location = new System.Drawing.Point(184, 337);
+            this.place4.Name = "place4";
+            this.place4.Size = new System.Drawing.Size(175, 25);
+            this.place4.TabIndex = 37;
+            this.place4.Text = "--Placeholder--";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tableLayoutPanel);
+            this.panel1.Location = new System.Drawing.Point(-15, -350);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(830, 1150);
+            this.panel1.TabIndex = 2;
+            // 
+            // tableLayoutPanel
+            // 
+            this.tableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel.ColumnCount = 2;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel.Controls.Add(this.tableLayoutPanel3, 0, 1);
+            this.tableLayoutPanel.Controls.Add(this.tableLayoutPanel4, 0, 1);
+            this.tableLayoutPanel.Controls.Add(this.tableLayoutPanel1, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.tableLayoutPanel2, 1, 0);
+            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 2;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(830, 1150);
+            this.tableLayoutPanel.TabIndex = 40;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.AutoSize = true;
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.44444F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.55556F));
+            this.tableLayoutPanel3.Controls.Add(this.label28, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.id3, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.arrived3, 1, 5);
+            this.tableLayoutPanel3.Controls.Add(this.label31, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.name3, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.label33, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.weight3, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.butcherd3, 1, 6);
+            this.tableLayoutPanel3.Controls.Add(this.label36, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.place3, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.label38, 0, 4);
+            this.tableLayoutPanel3.Controls.Add(this.label39, 0, 6);
+            this.tableLayoutPanel3.Controls.Add(this.label40, 0, 5);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(4, 578);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 7;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.35484F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(407, 568);
+            this.tableLayoutPanel3.TabIndex = 42;
             // 
             // label39
             // 
@@ -535,76 +428,6 @@
             this.arrived4.TabIndex = 35;
             this.arrived4.Text = "--Placeholder--";
             // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(3, 109);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(46, 25);
-            this.label18.TabIndex = 26;
-            this.label18.Text = "ID:";
-            // 
-            // name4
-            // 
-            this.name4.AutoSize = true;
-            this.name4.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.name4.Location = new System.Drawing.Point(184, 185);
-            this.name4.Name = "name4";
-            this.name4.Size = new System.Drawing.Size(175, 25);
-            this.name4.TabIndex = 31;
-            this.name4.Text = "--Placeholder--";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(3, 185);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(152, 25);
-            this.label20.TabIndex = 28;
-            this.label20.Text = "Megnevezés:";
-            // 
-            // weight4
-            // 
-            this.weight4.AutoSize = true;
-            this.weight4.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.weight4.Location = new System.Drawing.Point(184, 261);
-            this.weight4.Name = "weight4";
-            this.weight4.Size = new System.Drawing.Size(175, 25);
-            this.weight4.TabIndex = 27;
-            this.weight4.Text = "--Placeholder--";
-            // 
-            // butcherd4
-            // 
-            this.butcherd4.AutoSize = true;
-            this.butcherd4.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.butcherd4.Location = new System.Drawing.Point(184, 489);
-            this.butcherd4.Name = "butcherd4";
-            this.butcherd4.Size = new System.Drawing.Size(175, 25);
-            this.butcherd4.TabIndex = 33;
-            this.butcherd4.Text = "--Placeholder--";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(3, 261);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(67, 25);
-            this.label23.TabIndex = 30;
-            this.label23.Text = "Súly:";
-            // 
-            // place4
-            // 
-            this.place4.AutoSize = true;
-            this.place4.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.place4.Location = new System.Drawing.Point(184, 337);
-            this.place4.Name = "place4";
-            this.place4.Size = new System.Drawing.Size(175, 25);
-            this.place4.TabIndex = 37;
-            this.place4.Text = "--Placeholder--";
-            // 
             // label25
             // 
             this.label25.AutoSize = true;
@@ -634,6 +457,173 @@
             this.label27.Size = new System.Drawing.Size(128, 50);
             this.label27.TabIndex = 32;
             this.label27.Text = "Beérkezés ideje:";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.17647F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.82353F));
+            this.tableLayoutPanel1.Controls.Add(this.label11, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txt_arrived1, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.id1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.name1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txt_butchered1, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.weight1, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txt_place1, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.place1, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.butchered1, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.arrived1, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.txt_id1, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txt_name1, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txt_weight1, 1, 3);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.35484F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.44086F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(407, 567);
+            this.tableLayoutPanel1.TabIndex = 39;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.label11, 2);
+            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label11.Font = new System.Drawing.Font("Verdana", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(3, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(401, 109);
+            this.label11.TabIndex = 38;
+            this.label11.Text = "Nyersanyag Raktár";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txt_arrived1
+            // 
+            this.txt_arrived1.AutoSize = true;
+            this.txt_arrived1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_arrived1.Location = new System.Drawing.Point(170, 413);
+            this.txt_arrived1.Name = "txt_arrived1";
+            this.txt_arrived1.Size = new System.Drawing.Size(175, 25);
+            this.txt_arrived1.TabIndex = 35;
+            this.txt_arrived1.Text = "--Placeholder--";
+            // 
+            // id1
+            // 
+            this.id1.AutoSize = true;
+            this.id1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.id1.Location = new System.Drawing.Point(3, 109);
+            this.id1.Name = "id1";
+            this.id1.Size = new System.Drawing.Size(46, 25);
+            this.id1.TabIndex = 26;
+            this.id1.Text = "ID:";
+            // 
+            // name1
+            // 
+            this.name1.AutoSize = true;
+            this.name1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.name1.Location = new System.Drawing.Point(3, 185);
+            this.name1.Name = "name1";
+            this.name1.Size = new System.Drawing.Size(152, 25);
+            this.name1.TabIndex = 28;
+            this.name1.Text = "Megnevezés:";
+            // 
+            // txt_butchered1
+            // 
+            this.txt_butchered1.AutoSize = true;
+            this.txt_butchered1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_butchered1.Location = new System.Drawing.Point(170, 489);
+            this.txt_butchered1.Name = "txt_butchered1";
+            this.txt_butchered1.Size = new System.Drawing.Size(175, 25);
+            this.txt_butchered1.TabIndex = 33;
+            this.txt_butchered1.Text = "--Placeholder--";
+            // 
+            // weight1
+            // 
+            this.weight1.AutoSize = true;
+            this.weight1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.weight1.Location = new System.Drawing.Point(3, 261);
+            this.weight1.Name = "weight1";
+            this.weight1.Size = new System.Drawing.Size(67, 25);
+            this.weight1.TabIndex = 30;
+            this.weight1.Text = "Súly:";
+            // 
+            // txt_place1
+            // 
+            this.txt_place1.AutoSize = true;
+            this.txt_place1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_place1.Location = new System.Drawing.Point(170, 337);
+            this.txt_place1.Name = "txt_place1";
+            this.txt_place1.Size = new System.Drawing.Size(175, 25);
+            this.txt_place1.TabIndex = 37;
+            this.txt_place1.Text = "--Placeholder--";
+            // 
+            // place1
+            // 
+            this.place1.AutoSize = true;
+            this.place1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.place1.Location = new System.Drawing.Point(3, 337);
+            this.place1.Name = "place1";
+            this.place1.Size = new System.Drawing.Size(109, 50);
+            this.place1.TabIndex = 36;
+            this.place1.Text = "Honnan érkezett:";
+            // 
+            // butchered1
+            // 
+            this.butchered1.AutoSize = true;
+            this.butchered1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.butchered1.Location = new System.Drawing.Point(3, 489);
+            this.butchered1.Name = "butchered1";
+            this.butchered1.Size = new System.Drawing.Size(145, 25);
+            this.butchered1.TabIndex = 34;
+            this.butchered1.Text = "Vágás ideje:";
+            // 
+            // arrived1
+            // 
+            this.arrived1.AutoSize = true;
+            this.arrived1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.arrived1.Location = new System.Drawing.Point(3, 413);
+            this.arrived1.Name = "arrived1";
+            this.arrived1.Size = new System.Drawing.Size(128, 50);
+            this.arrived1.TabIndex = 32;
+            this.arrived1.Text = "Beérkezés ideje:";
+            // 
+            // txt_id1
+            // 
+            this.txt_id1.AutoSize = true;
+            this.txt_id1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_id1.Location = new System.Drawing.Point(170, 109);
+            this.txt_id1.Name = "txt_id1";
+            this.txt_id1.Size = new System.Drawing.Size(175, 25);
+            this.txt_id1.TabIndex = 27;
+            this.txt_id1.Text = "--Placeholder--";
+            // 
+            // txt_name1
+            // 
+            this.txt_name1.AutoSize = true;
+            this.txt_name1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_name1.Location = new System.Drawing.Point(170, 185);
+            this.txt_name1.Name = "txt_name1";
+            this.txt_name1.Size = new System.Drawing.Size(175, 25);
+            this.txt_name1.TabIndex = 29;
+            this.txt_name1.Text = "--Placeholder--";
+            // 
+            // txt_weight1
+            // 
+            this.txt_weight1.AutoSize = true;
+            this.txt_weight1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_weight1.Location = new System.Drawing.Point(170, 261);
+            this.txt_weight1.Name = "txt_weight1";
+            this.txt_weight1.Size = new System.Drawing.Size(175, 25);
+            this.txt_weight1.TabIndex = 31;
+            this.txt_weight1.Text = "--Placeholder--";
             // 
             // tableLayoutPanel2
             // 
@@ -803,61 +793,48 @@
             this.label1.Text = "Nyersanyag Raktár";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel1
+            // printPreviewDialog1
             // 
-            this.panel1.Controls.Add(this.tableLayoutPanel);
-            this.panel1.Location = new System.Drawing.Point(0, 1);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(830, 1150);
-            this.panel1.TabIndex = 1;
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
             // 
-            // PrintSemanticRs
+            // printDialog1
+            // 
+            this.printDialog1.UseEXDialog = true;
+            // 
+            // PrintSemanticDry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 1061);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "PrintSemanticRs";
-            this.Text = "PrintSemanticRs";
-            this.Load += new System.EventHandler(this.PrintSemanticRs_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.Name = "PrintSemanticDry";
+            this.Text = "PrintSemanticDry";
+            this.panel1.ResumeLayout(false);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
 
-        private System.Windows.Forms.PrintDialog printDialog1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label txt_name1;
-        private System.Windows.Forms.Label id1;
-        private System.Windows.Forms.Label txt_arrived1;
-        private System.Windows.Forms.Label txt_weight1;
-        private System.Windows.Forms.Label name1;
-        private System.Windows.Forms.Label txt_id1;
-        private System.Windows.Forms.Label txt_butchered1;
-        private System.Windows.Forms.Label weight1;
-        private System.Windows.Forms.Label txt_place1;
-        private System.Windows.Forms.Label place1;
-        private System.Windows.Forms.Label butchered1;
-        private System.Windows.Forms.Label arrived1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label name4;
         private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label id3;
         private System.Windows.Forms.Label arrived3;
         private System.Windows.Forms.Label label31;
@@ -870,20 +847,35 @@
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label weight4;
+        private System.Windows.Forms.Label butcherd4;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label place4;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label id4;
         private System.Windows.Forms.Label arrived4;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label name4;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label weight4;
-        private System.Windows.Forms.Label butcherd4;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label place4;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label txt_arrived1;
+        private System.Windows.Forms.Label id1;
+        private System.Windows.Forms.Label name1;
+        private System.Windows.Forms.Label txt_butchered1;
+        private System.Windows.Forms.Label weight1;
+        private System.Windows.Forms.Label txt_place1;
+        private System.Windows.Forms.Label place1;
+        private System.Windows.Forms.Label butchered1;
+        private System.Windows.Forms.Label arrived1;
+        private System.Windows.Forms.Label txt_id1;
+        private System.Windows.Forms.Label txt_name1;
+        private System.Windows.Forms.Label txt_weight1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label id2;
         private System.Windows.Forms.Label arrived2;
@@ -898,5 +890,8 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PrintDialog printDialog1;
     }
 }

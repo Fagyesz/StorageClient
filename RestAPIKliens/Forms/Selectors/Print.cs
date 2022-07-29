@@ -96,7 +96,7 @@ namespace RestAPIKliens.Forms.Selectors
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            Printing();
+            Printing(1);
 
         }
 
@@ -468,7 +468,7 @@ namespace RestAPIKliens.Forms.Selectors
         {
 
         }
-        private void Printing()
+        private void Printing(int v)
         {
 
             printDialog1.Document = printDocument1;
@@ -486,11 +486,6 @@ namespace RestAPIKliens.Forms.Selectors
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-           
-
-            
-
             PreviewHub();
         }
 
@@ -518,8 +513,11 @@ namespace RestAPIKliens.Forms.Selectors
 
                     }
                     
-                    Print_Semantics.PrintSemanticRs psRS = new Print_Semantics.PrintSemanticRs(list);
+                    Print_Semantics.PrintSemanticRs psRS = new Print_Semantics.PrintSemanticRs(list,0);
+                    
                     psRS.ShowDialog();
+                    
+                        
                     
                     //PrintPreview();
 
@@ -529,7 +527,7 @@ namespace RestAPIKliens.Forms.Selectors
 
                     break;
                 case "Basin":
-
+                    Print_Semantics.PrintSemanticBasin psB = new Print_Semantics.PrintSemanticBasin(list, 0);
                     //b = GetBasinByID(id);
 
                     break;
@@ -565,6 +563,11 @@ namespace RestAPIKliens.Forms.Selectors
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Printing(2);
         }
     }
 }
