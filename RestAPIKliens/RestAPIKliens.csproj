@@ -180,17 +180,17 @@
     <Compile Include="Forms\Selectors\StatAdd.Designer.cs">
       <DependentUpon>StatAdd.cs</DependentUpon>
     </Compile>
-    <Compile Include="PrintSemantics\PrintSemantic.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PrintSemantics\PrintSemantic.Designer.cs">
-      <DependentUpon>PrintSemantic.cs</DependentUpon>
-    </Compile>
     <Compile Include="PrintSemantics\PrintSemanticBasin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PrintSemantics\PrintSemanticBasin.Designer.cs">
       <DependentUpon>PrintSemanticBasin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintSemantics\PrintSemanticT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintSemantics\PrintSemanticT.Designer.cs">
+      <DependentUpon>PrintSemanticT.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintSemantics\PrintSemanticDry.cs">
       <SubType>Form</SubType>
@@ -261,11 +261,11 @@
     <EmbeddedResource Include="Forms\Selectors\StatAdd.resx">
       <DependentUpon>StatAdd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PrintSemantics\PrintSemantic.resx">
-      <DependentUpon>PrintSemantic.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PrintSemantics\PrintSemanticBasin.resx">
       <DependentUpon>PrintSemanticBasin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintSemantics\PrintSemanticT.resx">
+      <DependentUpon>PrintSemanticT.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintSemantics\PrintSemanticDry.resx">
       <DependentUpon>PrintSemanticDry.cs</DependentUpon>

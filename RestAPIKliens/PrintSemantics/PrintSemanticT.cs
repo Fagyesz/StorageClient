@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RestAPIKliens.Print_Semantics
+namespace RestAPIKliens.PrintSemantics
 {
-    public partial class PrintSemantic : Form
+    public partial class PrintSemanticT : Form
     {
         Basin[] Printarray;
         List<Basin> Printlist;
@@ -20,7 +20,7 @@ namespace RestAPIKliens.Print_Semantics
         private PrintDocument printDocument1 = new PrintDocument();
         private PrintPreviewDialog previewdlg = new PrintPreviewDialog();
         int type = 0;
-        public PrintSemantic(List<Basin> RsOrigin, int type2)
+        public PrintSemanticT(List<Basin> RsOrigin, int type2)
         {
             InitializeComponent();
             Printlist = RsOrigin;
@@ -28,6 +28,12 @@ namespace RestAPIKliens.Print_Semantics
             printDocument1.PrintPage += new PrintPageEventHandler(printdoc1_PrintPage);
             type = type2;
         }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void PrintSemanticBasin_Load(object sender, EventArgs e)
         {
             Hide();
@@ -56,7 +62,7 @@ namespace RestAPIKliens.Print_Semantics
                         marinatedstart1.Text = TimeCreator(Printarray[0].marinadestart).ToString("yyyy/MM/dd");
                         marinatedend1.Text = TimeCreator(Printarray[0].marinadeend).ToString("yyyy/MM/dd");
                         smoke1.Text = TimeCreator(Printarray[0].smoking).ToString("yyyy/MM/dd");
-                        rsid1.Text = Printarray[0].rsid.ToString();
+                        rsid1.Text=Printarray[0].rsid.ToString();
                         tableLayoutPanel1.Visible = true;
                     }
                     if (Printlist.Count >= 2)
@@ -184,20 +190,9 @@ namespace RestAPIKliens.Print_Semantics
             e.Graphics.DrawImage(MemoryImage, (pagearea.Width / 2) - (this.panel1.Width / 2), this.panel1.Location.Y);
         }
 
-        private void PrintSemantic_Load(object sender, EventArgs e)
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-            Hide();
-            LoadDataToSemantics();
-            PrintThisPanel(type);
-            Size = new Size(1, 1);
-        }
 
-        private void PrintSemantic_Load_1(object sender, EventArgs e)
-        {
-            Hide();
-            LoadDataToSemantics();
-            PrintThisPanel(type);
-            Size = new Size(1, 1);
         }
     }
 }

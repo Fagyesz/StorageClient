@@ -36,6 +36,7 @@ namespace RestAPIKliens.Forms.Selectors
         int PrintMaxInt=0;
         int print = 0;
         private bool ColumnChange;
+        private int PrintType;
 
         public Print(string a)
         {
@@ -96,7 +97,8 @@ namespace RestAPIKliens.Forms.Selectors
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            Printing(1);
+            PrintType = 1;
+            PreviewHub(PrintType);
 
         }
 
@@ -486,10 +488,11 @@ namespace RestAPIKliens.Forms.Selectors
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PreviewHub();
+            PrintType = 0;
+            PreviewHub(PrintType);
         }
 
-        private void PreviewHub()
+        private void PreviewHub(int PrintType)
         {
             int id=0;
             switch (creator)
@@ -513,8 +516,8 @@ namespace RestAPIKliens.Forms.Selectors
 
                     }
                     
-                    Print_Semantics.PrintSemanticRs psRS = new Print_Semantics.PrintSemanticRs(list,0);
-                    
+                    Print_Semantics.PrintSemanticRs psRS = new Print_Semantics.PrintSemanticRs(list,PrintType);
+                   
                     psRS.ShowDialog();
                     
                         
@@ -527,8 +530,25 @@ namespace RestAPIKliens.Forms.Selectors
 
                     break;
                 case "Basin":
-                    Print_Semantics.PrintSemanticBasin psB = new Print_Semantics.PrintSemanticBasin(list, 0);
+                   
+                    List<Basin> blist = new List<Basin>();
+                    for (int i = 0; i < ShortList.Count; i++)
+                    {
+                        id = ShortList[i].id;
+
+                        GetDataID(id);
+                        blist.Add(b);
+                      
+
+                    }
+                    Print_Semantics.PrintSemantic psB = new Print_Semantics.PrintSemantic(blist, PrintType);
+                    //Basin
+
+                    
+                    psB.ShowDialog();
+                  //  PrintSemantics.PrintSemanticT psB2 = new PrintSemantics.PrintSemanticT(blist, PrintType);
                     //b = GetBasinByID(id);
+                    //psB2.ShowDialog();
 
                     break;
                 default:
@@ -567,7 +587,8 @@ namespace RestAPIKliens.Forms.Selectors
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Printing(2);
+            PrintType = 2;
+            PreviewHub(PrintType);
         }
     }
 }
