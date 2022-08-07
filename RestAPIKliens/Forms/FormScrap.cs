@@ -139,36 +139,87 @@ namespace RestAPIKliens.Forms
             try
             {
 
-            
-            ClearDataGridViewRows(dataGridRS, ScrapList);
 
-            var client = new RestClient(URL);
-            String ROUTE = "";
-            var request = new RestRequest(ROUTE, Method.GET);
-            request.RequestFormat = DataFormat.Json;
+                ClearDataGridViewRows(dataGridRS, ScrapList);
 
-            IRestResponse<List<Scrap>> response = client.Execute<List<Scrap>>(request);
-            foreach (Scrap a in response.Data)
-            {
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
 
-                ScrapList.Add(a);
+                IRestResponse<List<Scrap>> response = client.Execute<List<Scrap>>(request);
+                foreach (Scrap a in response.Data)
+                {
 
-            }
-            dataGridRS.DataSource = ScrapList;
+                    ScrapList.Add(a);
+
+                }
+                dataGridRS.DataSource = ScrapList;
                 DataGridDateFormating();
                 SetColumsName();
             }
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges "+e.Message);
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
             }
 
-}
+        }
 
         internal void GetDataPublicPlace(string text)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridRS, ScrapList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Scrap>> response = client.Execute<List<Scrap>>(request);
+                foreach (Scrap a in response.Data)
+                {
+
+                    ScrapList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //place Search
+
+                Scrap[] RsArray = new Scrap[ScrapList.Count];
+
+                for (int i = 0; i < ScrapList.Count; i++)
+                {
+                    RsArray[i] = ScrapList[i];
+                }
+                ScrapList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    if (RsArray[i].place == text)
+                    {
+                        ScrapList.Add(RsArray[i]);
+                    }
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridRS.DataSource = ScrapList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
         }
 
         private void GetDataID(string b)

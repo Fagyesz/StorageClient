@@ -51,7 +51,7 @@ namespace RestAPIKliens.Forms.Selectors
             dataGridView.RowHeadersVisible = false;
 
             RefreshGrid();
-            TestData();
+            //TestData();
             
 
 

@@ -146,7 +146,6 @@ namespace RestAPIKliens.Forms.Selectors
 
         private void SearchPlace()
         {
-            throw new NotImplementedException();
             switch (creator)
             {
                 case "FP":
@@ -156,7 +155,7 @@ namespace RestAPIKliens.Forms.Selectors
                     FormRS.Self.GetDataPublicPlace(comboBox4.Text);
                     break;
                 case "Scrap":
-                    FormScrap.Self.GetDataPublicSearch(comboBox4.Text,"place");
+                    FormScrap.Self.GetDataPublicPlace(comboBox4.Text);
                     break;
                 case "Dry":
                     FormDry.Self.GetDataPublicPlace(comboBox4.Text);
@@ -348,25 +347,39 @@ namespace RestAPIKliens.Forms.Selectors
             if (dialogResult == DialogResult.Yes)
             {
 
-
-
-                filePath = "ComboBoxSaves/SearchName.txt";
-                if (File.Exists(filePath))
+                switch (save_p)
                 {
-                    File.Delete(filePath);
+                    case 2:
+                        filePath = "ComboBoxSaves/SearchName.txt";
+                        if (File.Exists(filePath))
+                        {
+                            File.Delete(filePath);
+                        }
+                        break;
+                    case 3:
+                        filePath = "ComboBoxSaves/SearchWeight.txt";
+                        if (File.Exists(filePath))
+                        {
+                            File.Delete(filePath);
+                        }
+                        break;
+                    case 4:
+
+                        filePath = "ComboBoxSaves/SearchPlace.txt";
+                        if (File.Exists(filePath))
+                        {
+                            File.Delete(filePath);
+                        }
+                        break;
+
+                    default:
+                        break;
                 }
 
-                filePath = "ComboBoxSaves/SearchWeight.txt";
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
 
-                filePath = "ComboBoxSaves/SearchPlace.txt";
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
+
+
+
 
                 
                 CbxRefresh();

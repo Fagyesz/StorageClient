@@ -187,7 +187,58 @@ namespace RestAPIKliens.Forms
 
         internal void GetDataPublicPlace(string text)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridDry, DryList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Dry>> response = client.Execute<List<Dry>>(request);
+                foreach (Dry a in response.Data)
+                {
+
+                    DryList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //place Search
+
+                Dry[] RsArray = new Dry[DryList.Count];
+
+                for (int i = 0; i < DryList.Count; i++)
+                {
+                    RsArray[i] = DryList[i];
+                }
+                DryList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    if (RsArray[i].place == text)
+                    {
+                        DryList.Add(RsArray[i]);
+                    }
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridDry.DataSource = DryList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
         }
 
         public void DataList(Dry d)

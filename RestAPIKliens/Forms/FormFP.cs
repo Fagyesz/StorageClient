@@ -120,7 +120,63 @@ namespace RestAPIKliens.Forms
 
         internal void GetDataPublicTime(DateTime time)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridFP, FPList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<FP>> response = client.Execute<List<FP>>(request);
+                foreach (FP a in response.Data)
+                {
+
+                    FPList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //place Search
+
+                FP[] RsArray = new FP[FPList.Count];
+
+                for (int i = 0; i < FPList.Count; i++)
+                {
+                    RsArray[i] = FPList[i];
+                }
+                FPList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    DateTime tmp = Convert.ToDateTime(RsArray[i].arrived);
+                    
+                    if (TimeCreator(Convert.ToDateTime(RsArray[i].arrived)) == TimeCreator(time))
+                    {
+                        FPList.Add(RsArray[i]);
+                    }
+                     tmp = Convert.ToDateTime(RsArray[i].arrived);
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridFP.DataSource = FPList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Keresés idő:  " + e.Message);
+            }
+
+
         }
 
         internal void DeleteByST()
@@ -163,7 +219,58 @@ namespace RestAPIKliens.Forms
 
         internal void GetDataPublicPlace(string text)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridFP, FPList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<FP>> response = client.Execute<List<FP>>(request);
+                foreach (FP a in response.Data)
+                {
+
+                    FPList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //place Search
+
+                FP[] RsArray = new FP[FPList.Count];
+
+                for (int i = 0; i < FPList.Count; i++)
+                {
+                    RsArray[i] = FPList[i];
+                }
+                FPList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    if (RsArray[i].place == text)
+                    {
+                        FPList.Add(RsArray[i]);
+                    }
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridFP.DataSource = FPList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
         }
 
         internal void DecreaseByST(int w)
@@ -379,7 +486,15 @@ namespace RestAPIKliens.Forms
             IRestResponse response = client.Execute(request);
             MessageBox.Show(response.Content);
         }
+        private static DateTime TimeCreator(DateTime time)
+        {
+            // PlusTime();
+            int year, month, day;
+            year = time.Year; day = time.Day; month = time.Month;
+            DateTime a = new DateTime(year, month, day, 1, 1, 1);
 
+            return a;
+        }
         private void Put()
         {
             int rowIndex = dataGridFP.CurrentCell.RowIndex;
@@ -394,14 +509,14 @@ namespace RestAPIKliens.Forms
                 rsid = (int)dataGridFP.SelectedRows[0].Cells[1].Value,
                 bid = (int)dataGridFP.SelectedRows[0].Cells[2].Value,
                 did = (int)dataGridFP.SelectedRows[0].Cells[3].Value,
-                name = (string)dataGridFP.SelectedRows[0].Cells[4].Value,
-                weight = (int)dataGridFP.SelectedRows[0].Cells[5].Value,
-                place = (string)dataGridFP.SelectedRows[0].Cells[6].Value,
-                arrived = (DateTime)dataGridFP.SelectedRows[0].Cells[7].Value,
-                butchered = (DateTime)dataGridFP.SelectedRows[0].Cells[8].Value,
-                marinated = (DateTime)dataGridFP.SelectedRows[0].Cells[9].Value,
-                smoked = (DateTime)dataGridFP.SelectedRows[0].Cells[10].Value
-
+                externalid = (int)dataGridFP.SelectedRows[0].Cells[4].Value,
+                name = (string)dataGridFP.SelectedRows[0].Cells[5].Value,
+                weight = (int)dataGridFP.SelectedRows[0].Cells[6].Value,
+                place = (string)dataGridFP.SelectedRows[0].Cells[7].Value,
+                arrived = TimeCreator((DateTime)dataGridFP.SelectedRows[0].Cells[8].Value),
+                butchered = TimeCreator((DateTime)dataGridFP.SelectedRows[0].Cells[9].Value),
+                marinated = TimeCreator((DateTime)dataGridFP.SelectedRows[0].Cells[10].Value),
+                smoked = TimeCreator((DateTime)dataGridFP.SelectedRows[0].Cells[11].Value)
 
 
 
@@ -758,30 +873,34 @@ namespace RestAPIKliens.Forms
                         FPList = query.ToList();
                         break;
                     case 4:
-                        query = rsArray.OrderBy(var => var.name);
+                        query = rsArray.OrderBy(var => var.externalid);
                         FPList = query.ToList();
                         break;
                     case 5:
-                        query = rsArray.OrderBy(var => var.weight);
+                        query = rsArray.OrderBy(var => var.name);
                         FPList = query.ToList();
                         break;
                     case 6:
-                        query = rsArray.OrderBy(var => var.place);
+                        query = rsArray.OrderBy(var => var.weight);
                         FPList = query.ToList();
                         break;
                     case 7:
-                        query = rsArray.OrderBy(var => var.arrived);
+                        query = rsArray.OrderBy(var => var.place);
                         FPList = query.ToList();
                         break;
                     case 8:
-                        query = rsArray.OrderBy(var => var.butchered);
+                        query = rsArray.OrderBy(var => var.arrived);
                         FPList = query.ToList();
                         break;
                     case 9:
-                        query = rsArray.OrderBy(var => var.marinated);
+                        query = rsArray.OrderBy(var => var.butchered);
                         FPList = query.ToList();
                         break;
                     case 10:
+                        query = rsArray.OrderBy(var => var.marinated);
+                        FPList = query.ToList();
+                        break;
+                    case 11:
                         query = rsArray.OrderBy(var => var.smoked);
                         FPList = query.ToList();
                         break;
@@ -813,30 +932,34 @@ namespace RestAPIKliens.Forms
                         FPList = query.ToList();
                         break;
                     case 4:
-                        query = rsArray.OrderByDescending(var => var.name);
+                        query = rsArray.OrderByDescending(var => var.externalid);
                         FPList = query.ToList();
                         break;
                     case 5:
-                        query = rsArray.OrderByDescending(var => var.weight);
+                        query = rsArray.OrderByDescending(var => var.name);
                         FPList = query.ToList();
                         break;
                     case 6:
-                        query = rsArray.OrderByDescending(var => var.place);
+                        query = rsArray.OrderByDescending(var => var.weight);
                         FPList = query.ToList();
                         break;
                     case 7:
-                        query = rsArray.OrderByDescending(var => var.arrived);
+                        query = rsArray.OrderByDescending(var => var.place);
                         FPList = query.ToList();
                         break;
                     case 8:
-                        query = rsArray.OrderByDescending(var => var.butchered);
+                        query = rsArray.OrderByDescending(var => var.arrived);
                         FPList = query.ToList();
                         break;
                     case 9:
-                        query = rsArray.OrderByDescending(var => var.marinated);
+                        query = rsArray.OrderByDescending(var => var.butchered);
                         FPList = query.ToList();
                         break;
                     case 10:
+                        query = rsArray.OrderByDescending(var => var.marinated);
+                        FPList = query.ToList();
+                        break;
+                    case 11:
                         query = rsArray.OrderByDescending(var => var.smoked);
                         FPList = query.ToList();
                         break;
