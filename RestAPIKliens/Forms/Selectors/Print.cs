@@ -541,7 +541,7 @@ namespace RestAPIKliens.Forms.Selectors
                       
 
                     }
-                    Print_Semantics.PrintSemantic psB = new Print_Semantics.PrintSemantic(blist, PrintType);
+                    PrintSemantics.PrintSemanticT psB = new PrintSemantics.PrintSemanticT(blist, PrintType);
                     //Basin
 
                     

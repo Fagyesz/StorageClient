@@ -134,7 +134,7 @@ namespace RestAPIKliens.Forms
                 MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
             }
 
-
+            DataGridDateFormating();
         }
 
         internal void DeleteBySC()
@@ -540,7 +540,7 @@ namespace RestAPIKliens.Forms
         }
         private void SortingMain(int col)
         {
-            GetData();
+          
             GetSortingData(col);
             SetColumsName();
         }

@@ -33,7 +33,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelFill = new System.Windows.Forms.Panel();
             this.panelSelector = new System.Windows.Forms.Panel();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.paneAll.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRS)).BeginInit();
@@ -84,7 +83,6 @@
             // 
             // panelSelector
             // 
-            this.panelSelector.Controls.Add(this.radioButton4);
             this.panelSelector.Controls.Add(this.radioButton1);
             this.panelSelector.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSelector.Location = new System.Drawing.Point(0, 0);
@@ -92,22 +90,10 @@
             this.panelSelector.Size = new System.Drawing.Size(240, 83);
             this.panelSelector.TabIndex = 32;
             // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(22, 44);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(75, 17);
-            this.radioButton4.TabIndex = 5;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Nyomtatás";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged_2);
-            // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(22, 21);
+            this.radioButton1.Location = new System.Drawing.Point(18, 32);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(63, 17);
             this.radioButton1.TabIndex = 2;
@@ -142,7 +128,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panelFill;
         private System.Windows.Forms.Panel panelSelector;
-        private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton1;
     }
 }

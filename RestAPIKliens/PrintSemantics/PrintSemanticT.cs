@@ -61,7 +61,7 @@ namespace RestAPIKliens.PrintSemantics
                         txt_arrived1.Text = TimeCreator(Printarray[0].arrived).ToString("yyyy/MM/dd");
                         marinatedstart1.Text = TimeCreator(Printarray[0].marinadestart).ToString("yyyy/MM/dd");
                         marinatedend1.Text = TimeCreator(Printarray[0].marinadeend).ToString("yyyy/MM/dd");
-                        smoke1.Text = TimeCreator(Printarray[0].smoking).ToString("yyyy/MM/dd");
+                        //smoke1.Text = TimeCreator(Printarray[0].smoking).ToString("yyyy/MM/dd");
                         rsid1.Text=Printarray[0].rsid.ToString();
                         tableLayoutPanel1.Visible = true;
                     }
@@ -74,7 +74,7 @@ namespace RestAPIKliens.PrintSemantics
                         arrived2.Text = TimeCreator(Printarray[1].arrived).ToString("yyyy/MM/dd");
                         marinatedstart2.Text = TimeCreator(Printarray[1].marinadestart).ToString("yyyy/MM/dd");
                         marinatedend2.Text = TimeCreator(Printarray[1].marinadeend).ToString("yyyy/MM/dd");
-                        smoke2.Text = TimeCreator(Printarray[1].smoking).ToString("yyyy/MM/dd");
+                        //smoke2.Text = TimeCreator(Printarray[1].smoking).ToString("yyyy/MM/dd");
                         rsid2.Text = Printarray[1].rsid.ToString();
                         tableLayoutPanel2.Visible = true;
                     }
@@ -87,7 +87,7 @@ namespace RestAPIKliens.PrintSemantics
                         arrived3.Text = TimeCreator(Printarray[2].arrived).ToString("yyyy/MM/dd");
                         marinatedstart3.Text = TimeCreator(Printarray[2].marinadestart).ToString("yyyy/MM/dd");
                         marinatedend3.Text = TimeCreator(Printarray[2].marinadeend).ToString("yyyy/MM/dd");
-                        smoke3.Text = TimeCreator(Printarray[2].smoking).ToString("yyyy/MM/dd");
+                       // smoke3.Text = TimeCreator(Printarray[2].smoking).ToString("yyyy/MM/dd");
                         rsid3.Text = Printarray[2].rsid.ToString();
                         tableLayoutPanel3.Visible = true;
                     }
@@ -100,7 +100,7 @@ namespace RestAPIKliens.PrintSemantics
                         arrived4.Text = TimeCreator(Printarray[3].arrived).ToString("yyyy/MM/dd");
                         marinatedstart4.Text = TimeCreator(Printarray[3].marinadestart).ToString("yyyy/MM/dd");
                         marinatedend4.Text = TimeCreator(Printarray[3].marinadeend).ToString("yyyy/MM/dd");
-                        smoke4.Text = TimeCreator(Printarray[3].smoking).ToString("yyyy/MM/dd");
+                        //smoke4.Text = TimeCreator(Printarray[3].smoking).ToString("yyyy/MM/dd");
                         rsid4.Text = Printarray[3].rsid.ToString();
                         tableLayoutPanel4.Visible = true;
                     }

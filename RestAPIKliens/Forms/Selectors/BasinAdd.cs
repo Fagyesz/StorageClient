@@ -37,6 +37,7 @@ namespace RestAPIKliens.Forms.Selectors
             b.weight = int.Parse(btnBasinw.Text);
             b.marinadestart = theDate;
             b.marinadeend = theDate2;
+            
             FormRS.Self.DataBasinba(b);
         }
 

@@ -693,7 +693,7 @@ namespace RestAPIKliens.Forms
         }
         private void SortingMain(int col)
         {
-            GetData();
+           
             GetSortingData(col);
             SetColumsName();
         }

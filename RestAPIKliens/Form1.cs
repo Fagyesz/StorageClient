@@ -224,7 +224,7 @@ namespace RestAPIKliens
         private void FPbtn_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormFP(), sender);
-            this.Width = 1733;
+            this.Width = 1725;
         }
         private void Home_Click(object sender, EventArgs e)
         {

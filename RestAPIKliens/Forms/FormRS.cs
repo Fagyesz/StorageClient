@@ -415,13 +415,7 @@ public class RS
             IRestResponse response = client.Execute(request);
             //  MessageBox.Show(response.Content);
         }
-        private static void PlusTime()
-        {
-            //DataTimePut2.Year = DataTimePut1.Year;
-           // DataTimePut2.Day = DataTimePut2.Day + 1;
-           // DateTime a = new DateTime (DataTimePut1.Year+DataTimePut1.Day+DataTimePut1.Hour);
 
-        }
         private void Put()
         {
             int rowIndex = dataGridRS.CurrentCell.RowIndex;
@@ -475,6 +469,7 @@ public class RS
             IRestResponse response = client.Execute(request);
 
             MessageBox.Show(response.Content);
+            Look();
         }
         private static DateTime PutGET()
         {
@@ -694,6 +689,7 @@ public class RS
 
                 }
                 GetData();
+                Look();
             }
             catch (Exception ex)
             {
@@ -715,6 +711,8 @@ public class RS
             String ROUTE = "post";
 
             var request = new RestRequest(ROUTE, Method.POST);
+
+
             request.RequestFormat = DataFormat.Json;
             
 
@@ -738,25 +736,25 @@ public class RS
 
                 string name, place;
                 int weight, rsid;
-                DateTime marinadestart, marinadeend, smoking, arrived;
-                /*
-                name = "test";//dataGridRS.SelectedRows[0].Cells[1].Value.ToString();
-                weight = 2;//(int)dataGridRS.SelectedRows[0].Cells[2].Value;
-                place = "test";//dataGridRS.SelectedRows[0].Cells[5].Value.ToString();
-                arrived = DateTime.MinValue;
-                marinadestart = DateTime.MinValue;
-                marinadeend = DateTime.MinValue;
-                smoking = DateTime.MinValue;
-                rsid = 3;
-                */
 
+                DateTime marinadestart, marinadeend, smoking, arrived;
+        
                 name = dataGridRS.SelectedRows[0].Cells[1].Value.ToString();
-                //weight = (int)dataGridRS.SelectedRows[0].Cells[2].Value;
+               
                 weight = b.weight;
-                place = dataGridRS.SelectedRows[0].Cells[5].Value.ToString();
-                arrived = (DateTime)dataGridRS.SelectedRows[0].Cells[3].Value;
-                marinadestart = b.marinadestart;
-                marinadeend = b.marinadeend;
+                place = dataGridRS.SelectedRows[0].Cells[3].Value.ToString();
+                arrived = (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value;
+                try
+                {
+                    marinadestart = b.marinadestart;
+                    marinadeend = b.marinadeend;
+                }
+                catch (Exception e)
+                {
+
+                    throw ;
+                }
+                
                 smoking = DateTime.MinValue;
                 rsid = (int)dataGridRS.SelectedRows[0].Cells[0].Value;
 
@@ -873,9 +871,12 @@ public class RS
 
         private void FormRS_Load(object sender, EventArgs e)
         {
+            Look();
+        }
+
+        private void Look()
+        {
             LoadTheme();
-            dataGridRS.Columns[3].DefaultCellStyle.Format = "yyyy.MM.dd.";
-            dataGridRS.Columns[4].DefaultCellStyle.Format = "yyyy.MM.dd.";
             DataGridDateFormating();
             SetColumsName();
             Scrollbar();
@@ -1147,8 +1148,8 @@ public class RS
 
         private void SortingMain(int col)
         {
+            
 
-            GetData();
             GetSortingData(col);
             SetColumsName();
         }
