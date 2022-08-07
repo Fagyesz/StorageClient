@@ -143,9 +143,71 @@ namespace RestAPIKliens.Forms
 
         internal void GetDataPublicTime(DateTime time)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
 
+                ClearDataGridViewRows(dataGridRS, StatList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Stat>> response = client.Execute<List<Stat>>(request);
+                foreach (Stat a in response.Data)
+                {
+
+                    StatList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //place Search
+
+                Stat[] RsArray = new Stat[StatList.Count];
+
+                for (int i = 0; i < StatList.Count; i++)
+                {
+                    RsArray[i] = StatList[i];
+                }
+                StatList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    DateTime tmp = Convert.ToDateTime(RsArray[i].arrived);
+
+                    if (TimeCreator(Convert.ToDateTime(RsArray[i].arrived)) == TimeCreator(time))
+                    {
+                        StatList.Add(RsArray[i]);
+                    }
+                    tmp = Convert.ToDateTime(RsArray[i].arrived);
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridRS.DataSource = StatList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
+        }
+        private static DateTime TimeCreator(DateTime time)
+        {
+            // PlusTime();
+            int year, month, day;
+            year = time.Year; day = time.Day; month = time.Month;
+            DateTime a = new DateTime(year, month, day, 1, 1, 1);
+
+            return a;
+        }
         public static void ClearDataGridViewRows(DataGridView dataGridView, List<Stat> StatList)
         {
             dataGridView.DataSource = null;
@@ -258,11 +320,11 @@ namespace RestAPIKliens.Forms
                 name = (string)dataGridRS.SelectedRows[0].Cells[5].Value,
                 weight = (int)dataGridRS.SelectedRows[0].Cells[6].Value,
                 place = (string)dataGridRS.SelectedRows[0].Cells[7].Value,
-                butchered = (DateTime)dataGridRS.SelectedRows[0].Cells[8].Value,
-                arrived = (DateTime)dataGridRS.SelectedRows[0].Cells[9].Value,
-                marinated = (DateTime)dataGridRS.SelectedRows[0].Cells[10].Value,
-                smoked = (DateTime)dataGridRS.SelectedRows[0].Cells[11].Value,
-                stated = (DateTime)dataGridRS.SelectedRows[0].Cells[12].Value
+                butchered = TimeCreator((DateTime)dataGridRS.SelectedRows[0].Cells[8].Value),
+                arrived = TimeCreator((DateTime)dataGridRS.SelectedRows[0].Cells[9].Value),
+                marinated = TimeCreator((DateTime)dataGridRS.SelectedRows[0].Cells[10].Value),
+                smoked = TimeCreator((DateTime)dataGridRS.SelectedRows[0].Cells[11].Value),
+                stated = TimeCreator((DateTime)dataGridRS.SelectedRows[0].Cells[12].Value)
 
 
 

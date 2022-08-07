@@ -157,9 +157,72 @@ namespace RestAPIKliens.Forms
 
         internal void GetDataPublicTime(DateTime time)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
 
+                ClearDataGridViewRows(dataGridDry, DryList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Dry>> response = client.Execute<List<Dry>>(request);
+                foreach (Dry a in response.Data)
+                {
+
+                    DryList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //place Search
+
+                Dry[] RsArray = new Dry[DryList.Count];
+
+                for (int i = 0; i < DryList.Count; i++)
+                {
+                    RsArray[i] = DryList[i];
+                }
+                DryList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+
+                    DateTime tmp = Convert.ToDateTime(RsArray[i].arrived);
+
+                    if (TimeCreator(Convert.ToDateTime(RsArray[i].arrived)) == TimeCreator(time))
+                    {
+                        DryList.Add(RsArray[i]);
+                    }
+                    tmp = Convert.ToDateTime(RsArray[i].arrived);
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridDry.DataSource = DryList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Keresés Ido " + e.Message);
+            }
+        }
+        private static DateTime TimeCreator(DateTime time)
+        {
+            // PlusTime();
+            int year, month, day;
+            year = time.Year; day = time.Day; month = time.Month;
+            DateTime a = new DateTime(year, month, day, 1, 1, 1);
+
+            return a;
+        }
         internal void DecreaseBySC(int w)
         {
             try
@@ -237,7 +300,7 @@ namespace RestAPIKliens.Forms
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés Származási hely " + e.Message);
             }
         }
 
@@ -589,7 +652,7 @@ namespace RestAPIKliens.Forms
                 weight = (int)dataGridDry.SelectedRows[0].Cells[2].Value,
                 arrived = time,
                 place = (string)dataGridDry.SelectedRows[0].Cells[3].Value,
-                expiration=(DateTime)dataGridDry.SelectedRows[0].Cells[5].Value,
+                expiration=TimeCreator((DateTime)dataGridDry.SelectedRows[0].Cells[5].Value),
                 externalid=(int)dataGridDry.SelectedRows[0].Cells[6].Value,
 
 

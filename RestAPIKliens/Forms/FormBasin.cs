@@ -189,9 +189,71 @@ namespace RestAPIKliens.Forms
 
         internal void GetDataPublicTime(DateTime time)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
 
+                ClearDataGridViewRows(dataGridBasin, RSList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Basin>> response = client.Execute<List<Basin>>(request);
+                foreach (Basin a in response.Data)
+                {
+
+                    RSList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //place Search
+
+                Basin[] RsArray = new Basin[RSList.Count];
+
+                for (int i = 0; i < RSList.Count; i++)
+                {
+                    RsArray[i] = RSList[i];
+                }
+                RSList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    DateTime tmp = Convert.ToDateTime(RsArray[i].arrived);
+
+                    if (TimeCreator(Convert.ToDateTime(RsArray[i].arrived)) == TimeCreator(time))
+                    {
+                        RSList.Add(RsArray[i]);
+                    }
+                    tmp = Convert.ToDateTime(RsArray[i].arrived);
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridBasin.DataSource = RSList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+            }
+        }
+        private static DateTime TimeCreator(DateTime time)
+        {
+            // PlusTime();
+            int year, month, day;
+            year = time.Year; day = time.Day; month = time.Month;
+            DateTime a = new DateTime(year, month, day, 1, 1, 1);
+
+            return a;
+        }
         private void gtnGetById_Click(object sender, EventArgs e)
         {
            // GetDataID();
@@ -478,10 +540,10 @@ namespace RestAPIKliens.Forms
                 name = dataGridBasin.SelectedRows[0].Cells[1].Value.ToString();
                 weight = (int)dataGridBasin.SelectedRows[0].Cells[2].Value;
                 place = dataGridBasin.SelectedRows[0].Cells[3].Value.ToString();
-                arrived = (DateTime)dataGridBasin.SelectedRows[0].Cells[4].Value;
-                marinadestart = (DateTime)dataGridBasin.SelectedRows[0].Cells[5].Value;
-                marinadeend = (DateTime)dataGridBasin.SelectedRows[0].Cells[6].Value;
-                smoking = (DateTime)dataGridBasin.SelectedRows[0].Cells[7].Value;
+                arrived =TimeCreator( (DateTime)dataGridBasin.SelectedRows[0].Cells[4].Value);
+            marinadestart = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[5].Value);
+                marinadeend = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[6].Value);
+                smoking = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[7].Value);
                 rsid = (int)dataGridBasin.SelectedRows[0].Cells[8].Value;
 
 

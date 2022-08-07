@@ -130,9 +130,71 @@ namespace RestAPIKliens.Forms
 
         internal void GetDataPublicTime(DateTime time)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
 
+                ClearDataGridViewRows(dataGridRS, ScrapList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Scrap>> response = client.Execute<List<Scrap>>(request);
+                foreach (Scrap a in response.Data)
+                {
+
+                    ScrapList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //place Search
+
+                Scrap[] RsArray = new Scrap[ScrapList.Count];
+
+                for (int i = 0; i < ScrapList.Count; i++)
+                {
+                    RsArray[i] = ScrapList[i];
+                }
+                ScrapList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    DateTime tmp = Convert.ToDateTime(RsArray[i].time);
+
+                    if (TimeCreator(Convert.ToDateTime(RsArray[i].time)) == TimeCreator(time))
+                    {
+                        ScrapList.Add(RsArray[i]);
+                    }
+                    tmp = Convert.ToDateTime(RsArray[i].time);
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridRS.DataSource = ScrapList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Keresés idő " + e.Message);
+            }
+        }
+        private static DateTime TimeCreator(DateTime time)
+        {
+            // PlusTime();
+            int year, month, day;
+            year = time.Year; day = time.Day; month = time.Month;
+            DateTime a = new DateTime(year, month, day, 1, 1, 1);
+
+            return a;
+        }
         private void GetData()
         {
 
@@ -218,7 +280,7 @@ namespace RestAPIKliens.Forms
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés Származási hely:  " + e.Message);
             }
         }
 
