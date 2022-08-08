@@ -49,7 +49,7 @@ namespace RestAPIKliens.Forms.Selectors
         private void Print_Load(object sender, EventArgs e)
         {
             dataGridView.RowHeadersVisible = false;
-
+          //  panel3.BackColor = Color.Transparent;
             RefreshGrid();
             //TestData();
             

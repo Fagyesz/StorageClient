@@ -98,6 +98,7 @@
             this.btnDelFromPrepToPrint.TabIndex = 4;
             this.btnDelFromPrepToPrint.Text = "Törlés";
             this.btnDelFromPrepToPrint.UseVisualStyleBackColor = true;
+            this.btnDelFromPrepToPrint.Visible = false;
             this.btnDelFromPrepToPrint.Click += new System.EventHandler(this.btnDelFromPrepToPrint_Click);
             // 
             // btnPrepToPrint
@@ -140,6 +141,7 @@
             this.dataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView.Enabled = false;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
