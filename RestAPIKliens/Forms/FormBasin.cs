@@ -100,6 +100,7 @@ namespace RestAPIKliens.Forms
             SC.name = (string)dataGridBasin.SelectedRows[0].Cells[1].Value;
             SC.weight = (int)dataGridBasin.SelectedRows[0].Cells[2].Value;
             SC.place = (string)dataGridBasin.SelectedRows[0].Cells[3].Value;
+            SC.rsid = (int)dataGridBasin.SelectedRows[0].Cells[8].Value;
 
             return SC;
         }
@@ -140,6 +141,7 @@ namespace RestAPIKliens.Forms
         internal void DeleteBySC()
         {
             Delete();
+            GetData();
         }
 
         internal void ScrapDel(int weight)
@@ -242,7 +244,7 @@ namespace RestAPIKliens.Forms
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés:  " + e.Message);
             }
         }
         private static DateTime TimeCreator(DateTime time)
@@ -340,7 +342,7 @@ namespace RestAPIKliens.Forms
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés " + e.Message);
             }
         }
 
@@ -385,7 +387,7 @@ namespace RestAPIKliens.Forms
 
             }
             IRestResponse response2 = client2.Execute(request);
-            MessageBox.Show("Succesfully added.");
+            MessageBox.Show("Sikeres feltöltés .");
 
 
 
@@ -455,7 +457,7 @@ namespace RestAPIKliens.Forms
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés: " + e.Message);
             }
         }
 
@@ -482,7 +484,9 @@ namespace RestAPIKliens.Forms
             String ROUTE = "delete/" + tmp;
             var request = new RestRequest(ROUTE, Method.DELETE);
             IRestResponse response = client.Execute(request);
-            MessageBox.Show(response.Content);
+            //MessageBox.Show(response.Content);
+
+            MessageBox.Show("Sikeres Törlés");
         }
         public void MsExeption(string s, string s2)
 
@@ -568,8 +572,8 @@ namespace RestAPIKliens.Forms
 
 
             IRestResponse response = client.Execute(request);
-            MessageBox.Show(response.Content);
-
+            //MessageBox.Show(response.Content);
+            MessageBox.Show("Sikeres Frissítés");
 
 
 

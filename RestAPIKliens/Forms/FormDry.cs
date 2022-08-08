@@ -132,6 +132,7 @@ namespace RestAPIKliens.Forms
         internal void DeleteBySC()
         {
             Delete();
+            GetData();
         }
 
         internal void ScrapDel(int weight)
@@ -364,7 +365,7 @@ namespace RestAPIKliens.Forms
                 }
 
                 IRestResponse response = client.Execute(request);
-                MessageBox.Show("Succesfully added.");
+                MessageBox.Show("Sikeres feltöltés.");
 
             }
             GetData();
@@ -435,7 +436,7 @@ namespace RestAPIKliens.Forms
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés: " + e.Message);
             }
         }
 
@@ -620,7 +621,7 @@ namespace RestAPIKliens.Forms
             String ROUTE = "delete/" + tmp;
             var request = new RestRequest(ROUTE, Method.DELETE);
             IRestResponse response = client.Execute(request);
-            MessageBox.Show(response.Content);
+            MessageBox.Show("Sikeres Törlés");
         }
 
         private void Put()
@@ -660,7 +661,7 @@ namespace RestAPIKliens.Forms
 
             });
             IRestResponse response = client.Execute(request);
-            MessageBox.Show(response.Content);
+            MessageBox.Show("Sikeres frissítés");
 
         }
 

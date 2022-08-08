@@ -196,7 +196,7 @@ namespace RestAPIKliens.Forms
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés: " + e.Message);
             }
         }
         private static DateTime TimeCreator(DateTime time)
@@ -279,7 +279,7 @@ namespace RestAPIKliens.Forms
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés " + e.Message);
             }
         }
 
@@ -331,7 +331,7 @@ namespace RestAPIKliens.Forms
             }) ;
             IRestResponse response = client.Execute(request);
 
-            MessageBox.Show(response.Content);
+            MessageBox.Show("Sikeres frissítés");
         }
 
         internal void GetDataPublicWeight(string text)
@@ -391,7 +391,7 @@ namespace RestAPIKliens.Forms
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés:  " + e.Message);
             }
         }
 

@@ -269,7 +269,7 @@ namespace RestAPIKliens.Forms
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés:  " + e.Message);
             }
         }
 
@@ -395,13 +395,14 @@ namespace RestAPIKliens.Forms
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés:  " + e.Message);
             }
         }
 
         internal void DeleteBySC()
         {
             Delete();
+            GetData();
         }
 
         private void GetData()
@@ -484,7 +485,7 @@ namespace RestAPIKliens.Forms
             String ROUTE = "delete/" + tmp;
             var request = new RestRequest(ROUTE, Method.DELETE);
             IRestResponse response = client.Execute(request);
-            MessageBox.Show(response.Content);
+            MessageBox.Show("Sikeres Törlés");
         }
         private static DateTime TimeCreator(DateTime time)
         {
@@ -522,7 +523,7 @@ namespace RestAPIKliens.Forms
 
             });
             IRestResponse response = client.Execute(request);
-            MessageBox.Show(response.Content);
+            MessageBox.Show("Sikeres frissítés");
             GetData();
         }
         private void OpenChildForm(Form childForm, object btnSender)

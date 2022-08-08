@@ -420,7 +420,7 @@ namespace RestAPIKliens.Forms
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés:  " + e.Message);
             }
         }
 
@@ -457,7 +457,7 @@ namespace RestAPIKliens.Forms
                 name = (string)dataGridRS.SelectedRows[0].Cells[1].Value,
                 weight = (int)dataGridRS.SelectedRows[0].Cells[2].Value,
                 place = (string)dataGridRS.SelectedRows[0].Cells[3].Value,
-                time = (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value,
+                time =TimeCreator( (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value),
                 rsid=(int)dataGridRS.SelectedRows[0].Cells[5].Value,
                 did= (int)dataGridRS.SelectedRows[0].Cells[6].Value
 
@@ -467,7 +467,7 @@ namespace RestAPIKliens.Forms
             });
             IRestResponse response = client.Execute(request);
 
-            MessageBox.Show(response.Content);
+            MessageBox.Show("Sikeres frissítés");
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -575,7 +575,7 @@ namespace RestAPIKliens.Forms
                 }
 
                 IRestResponse response = client.Execute(request);
-                MessageBox.Show("Succesfully added.");
+                MessageBox.Show("Sikeres feltöltés.");
 
             }
             GetData();

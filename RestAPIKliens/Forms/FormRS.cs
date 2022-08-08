@@ -123,6 +123,7 @@ namespace RestAPIKliens.Forms
         internal void DeleteBySC()
         {
             Delete();
+            GetData();
         }
 
         private void GetData()
@@ -234,7 +235,7 @@ namespace RestAPIKliens.Forms
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés: " + e.Message);
             }
         }
 
@@ -488,7 +489,7 @@ public class RS
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Keresés " + e.Message);
             }
         }
 
@@ -582,7 +583,7 @@ public class RS
             });
             IRestResponse response = client.Execute(request);
 
-            MessageBox.Show(response.Content);
+            MessageBox.Show("Adat sikeresen frissítve");
             Look();
         }
         private static DateTime PutGET()
@@ -674,10 +675,11 @@ public class RS
                 }
 
                 IRestResponse response = client.Execute(request);
-                MessageBox.Show("Succesfully added.");
+                MessageBox.Show("Sikeres feltöltés.");
 
             }
             GetData();
+            Look();
         }
 
         public void MsExeption(string s, string s2)
