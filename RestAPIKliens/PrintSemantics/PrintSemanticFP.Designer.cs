@@ -815,6 +815,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "PrintSemanticFP";
             this.Text = "PrintSemanticFP";
+            this.Load += new System.EventHandler(this.PrintSemanticFP_Load);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();

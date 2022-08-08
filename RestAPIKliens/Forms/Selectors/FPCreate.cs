@@ -69,8 +69,7 @@ namespace RestAPIKliens.Forms.Selectors
             var request = new RestRequest(ROUTE, Method.PUT);
             request.RequestFormat = DataFormat.Json;
             GetDataID(id, type);
-            DateTime tmp, tmp2, tmp3; tmp = rs.arrived; tmp2 = rs.butchered;
-            tmp=time(tmp);
+           
             
             switch (type)
             {
@@ -100,7 +99,7 @@ namespace RestAPIKliens.Forms.Selectors
                         weight = realweight,
                         arrived = TimeCreator( dry.arrived),
                         place = dry.place,
-                        expiration = dry.expiration,
+                        expiration = TimeCreator(dry.expiration),
                         externalid = dry.externalid,
 
 
@@ -194,35 +193,55 @@ namespace RestAPIKliens.Forms.Selectors
         private Basin GetBasinByID(int id)
         {
             var client = new RestClient(URLb);
-            String ROUTE = id.ToString();
+            String ROUTE = "";
             var request = new RestRequest(ROUTE, Method.GET);
-            IRestResponse<Basin> response = client.Execute<Basin>(request);
-            var content = response.Content;
-            string srt;
-            srt = content;
-            srt = srt.Substring(1, srt.Length - 2);
-            Basin a = new Basin();
-            a = JsonConvert.DeserializeObject<Basin>(srt);
-            return a;
+            request.RequestFormat = DataFormat.Json;
+
+            IRestResponse<List<Basin>> response = client.Execute<List<Basin>>(request);
+          
+            Basin t = new Basin();
+            foreach (Basin a in response.Data)
+            {
+                if (a.id == id)
+                {
+                    t = a;
+                }
+
+
+            }
+            return t;
         }
 
         private Dry GetDryByID(int id)
-        {
+        {/*
             var client = new RestClient(URLd);
             String ROUTE = id.ToString();
             var request = new RestRequest(ROUTE, Method.GET);
-            IRestResponse<Dry> response = client.Execute<Dry>(request);
-            var content = response.Content;
-            string srt;
-            srt = content;
-            srt = srt.Substring(1, srt.Length - 2);
-            Dry a = new Dry();
-            a = JsonConvert.DeserializeObject<Dry>(srt);
-            return a;
+            request.RequestFormat = DataFormat.Json;
+            IRestResponse < List < Dry >> response = client.Execute<List<Dry>>(request);
+            */
+            var client = new RestClient(URLd);
+            String ROUTE = "";
+            var request = new RestRequest(ROUTE, Method.GET);
+            request.RequestFormat = DataFormat.Json;
+
+            IRestResponse<List<Dry>> response = client.Execute<List<Dry>>(request);
+
+            Dry t = new Dry();
+            foreach (Dry a in response.Data)
+            {
+                if (a.id == id)
+                {
+                    t = a;
+                }
+
+
+            }
+            return t;
         }
 
         private RS GetRsByID(int id)
-        {
+        {/*
             var client = new RestClient(URLr);
             String ROUTE = id.ToString();
             var request = new RestRequest(ROUTE, Method.GET);
@@ -231,9 +250,31 @@ namespace RestAPIKliens.Forms.Selectors
             string srt;
             srt = content;
             srt = srt.Substring(1, srt.Length - 2);
-            RS a = new RS();
-            a = JsonConvert.DeserializeObject<RS>(srt);
-            return a;
+            */
+            
+
+            var client = new RestClient(URLr);
+            String ROUTE = "";
+            var request = new RestRequest(ROUTE, Method.GET);
+            request.RequestFormat = DataFormat.Json;
+            
+            IRestResponse<List<RS>> response = client.Execute<List<RS>>(request);
+            
+            RS t = new RS();
+            foreach (RS a in response.Data)
+            {
+                if (a.id == id)
+                {
+                    t = a;
+                }
+              
+
+            }
+
+
+          
+
+            return t;
         }
 
 
@@ -279,7 +320,7 @@ namespace RestAPIKliens.Forms.Selectors
                             case "Dry":
 
                                 fp = FormDry.Self.GetDataCreateFP();
-                                if (fp.weight > sh.weight)
+                                if (fp.weight >= sh.weight)
                                 {
                                     sh.name = fp.name;
                                     sh.id = fp.id;
@@ -298,7 +339,7 @@ namespace RestAPIKliens.Forms.Selectors
                                 break;
                             case "Basin":
                                 fp = FormBasin.Self.GetDataCreateFP();
-                                if (fp.weight > sh.weight)
+                                if (fp.weight >= sh.weight)
                                 {
                                     fp = FormBasin.Self.GetDataCreateFP();
 
@@ -598,17 +639,20 @@ namespace RestAPIKliens.Forms.Selectors
                             switch (url[i])
                             {
                                 case "Nyersanyag":
-                                    Delete(URLr, id[i]);
+                                  
                                     PostFPCreator(URLr, id[i], shWeight[i], "RS", fpWeight.Length,i);
+                                    Delete(URLr, id[i]);
                                     break;
                                 case "Száraz":
-                                    Delete(URLd, id[i]);
+                                    
                                     PostFPCreator(URLd, id[i], shWeight[i], "Dry", fpWeight.Length,i);
+                                    Delete(URLd, id[i]);
 
                                     break;
                                 case "Basin":
-                                    Delete(URLb, id[i]);
+                                    
                                     PostFPCreator(URLb,id[i], shWeight[i], "Basin", fpWeight.Length,i);
+                                    Delete(URLb, id[i]);
 
                                     break;
                                 default:
@@ -677,7 +721,7 @@ namespace RestAPIKliens.Forms.Selectors
                         fpcreator.externalid = dry.externalid;
                         //fp.name=dry.name;
                         fpcreator.weight = fpWeight;
-                        fpcreator.place = dry.place;
+                       // fpcreator.place = dry.place;
                       //  fpcreator.arrived = TimeCreator(dry.arrived);
                         /*
                         fp.rsid = 0;
@@ -874,6 +918,10 @@ namespace RestAPIKliens.Forms.Selectors
 
         private void DeleteFromPrep()
         {
+            try
+            {
+
+            
             string filePath = "FpCreate/Short.txt";
 
 
@@ -911,6 +959,12 @@ namespace RestAPIKliens.Forms.Selectors
             }
             File.WriteAllLines(filePath, tmp2);
             RefreshGrid();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Semmit nem lehet törölni");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

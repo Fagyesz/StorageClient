@@ -65,6 +65,7 @@
             this.btnPost.TabIndex = 32;
             this.btnPost.Text = "Feltölt";
             this.btnPost.UseVisualStyleBackColor = true;
+            this.btnPost.Click += new System.EventHandler(this.btnPost_Click);
             // 
             // label4
             // 

@@ -39,7 +39,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbExternal = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnCollection3 = new System.Windows.Forms.Button();
@@ -158,13 +158,13 @@
             this.label5.TabIndex = 42;
             this.label5.Text = "Lejárati idő";
             // 
-            // comboBox1
+            // cmbExternal
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(26, 281);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 43;
+            this.cmbExternal.FormattingEnabled = true;
+            this.cmbExternal.Location = new System.Drawing.Point(26, 281);
+            this.cmbExternal.Name = "cmbExternal";
+            this.cmbExternal.Size = new System.Drawing.Size(121, 21);
+            this.cmbExternal.TabIndex = 43;
             // 
             // label6
             // 
@@ -248,7 +248,7 @@
             this.Controls.Add(this.btnCollection2);
             this.Controls.Add(this.btnCollection);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbExternal);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.dateTimePicker2);
@@ -282,7 +282,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbExternal;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnCollection3;

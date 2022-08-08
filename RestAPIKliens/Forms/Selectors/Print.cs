@@ -239,46 +239,66 @@ namespace RestAPIKliens.Forms.Selectors
         private Basin GetBasinByID(int id)
         {
             var client = new RestClient(URLb);
-            String ROUTE = id.ToString();
+            String ROUTE = "";
             var request = new RestRequest(ROUTE, Method.GET);
-            IRestResponse<Basin> response = client.Execute<Basin>(request);
-            var content = response.Content;
-            string srt;
-            srt = content;
-            srt = srt.Substring(1, srt.Length - 2);
-            Basin a = new Basin();
-            a = JsonConvert.DeserializeObject<Basin>(srt);
-            return a;
+            request.RequestFormat = DataFormat.Json;
+
+            IRestResponse<List<Basin>> response = client.Execute<List<Basin>>(request);
+
+            Basin t = new Basin();
+            foreach (Basin a in response.Data)
+            {
+                if (a.id == id)
+                {
+                    t = a;
+                }
+
+
+            }
+            return t;
         }
 
         private Dry GetDryByID(int id)
         {
             var client = new RestClient(URLd);
-            String ROUTE = id.ToString();
+            String ROUTE = "";
             var request = new RestRequest(ROUTE, Method.GET);
-            IRestResponse<Dry> response = client.Execute<Dry>(request);
-            var content = response.Content;
-            string srt;
-            srt = content;
-            srt = srt.Substring(1, srt.Length - 2);
-            Dry a = new Dry();
-            a = JsonConvert.DeserializeObject<Dry>(srt);
-            return a;
+            request.RequestFormat = DataFormat.Json;
+
+            IRestResponse<List<Dry>> response = client.Execute<List<Dry>>(request);
+
+            Dry t = new Dry();
+            foreach (Dry a in response.Data)
+            {
+                if (a.id == id)
+                {
+                    t = a;
+                }
+
+
+            }
+            return t;
         }
 
         private RS GetRsByID(int id)
         {
             var client = new RestClient(URLr);
-            String ROUTE = id.ToString();
+            String ROUTE = "";
             var request = new RestRequest(ROUTE, Method.GET);
-            IRestResponse<RS> response = client.Execute<RS>(request);
-            var content = response.Content;
-            string srt;
-            srt = content;
-            srt = srt.Substring(1, srt.Length - 2);
-            RS a = new RS();
-            a = JsonConvert.DeserializeObject<RS>(srt);
-            return a;
+            request.RequestFormat = DataFormat.Json;
+
+            IRestResponse<List<RS>> response = client.Execute<List<RS>>(request);
+            RS t = new RS();
+            foreach (RS a in response.Data)
+            {
+                if (a.id == id)
+                {
+                    t = a;
+                }
+
+
+            }
+            return t;
         }
 
 
@@ -451,7 +471,16 @@ namespace RestAPIKliens.Forms.Selectors
         }
         private void btnDelFromPrepToPrint_Click(object sender, EventArgs e)
         {
-            DeletAt();
+            try
+            {
+                DeletAt();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Semmit nem lehet törölni");
+            }
+            
         }
 
         private void DeletAt()
@@ -526,7 +555,22 @@ namespace RestAPIKliens.Forms.Selectors
 
                     break;
                 case "Dry":
-                   // dry = GetDryByID(id);
+                    // dry = GetDryByID(id);
+                    List<Dry> drylist = new List<Dry>();
+                    for (int i = 0; i < ShortList.Count; i++)
+                    {
+                        id = ShortList[i].id;
+
+                        GetDataID(id);
+                        drylist.Add(dry);
+
+
+                    }
+                    PrintSemantics.PrintSemanticDry psD = new PrintSemantics.PrintSemanticDry(drylist, PrintType);
+                    //Basin
+
+
+                    psD.ShowDialog();
 
                     break;
                 case "Basin":

@@ -26,7 +26,7 @@ namespace RestAPIKliens.Forms.Selectors
 
         private void StatAdd_Load(object sender, EventArgs e)
         {
-
+            this.AcceptButton = btnPost;
         }
 
         private void btnPost_Click(object sender, EventArgs e)
@@ -156,6 +156,7 @@ namespace RestAPIKliens.Forms.Selectors
                         weight = ST.weight,
                         place = ST.place,
                         arrived = ST.arrived,
+                        butchered= ST.butchered,
                         marinated = ST.marinated,
                         smoked = ST.smoked,
                         stated = ST.stated

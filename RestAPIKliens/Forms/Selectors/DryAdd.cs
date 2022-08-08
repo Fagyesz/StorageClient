@@ -45,6 +45,8 @@ namespace RestAPIKliens.Forms.Selectors
                 Dry.weight = int.Parse(txtPostWeight.Text);
                 Dry.arrived = theDate;
                 Dry.place = txtPostPlace.Text;
+                Dry.externalid =int.Parse( cmbExternal.Text);
+                Dry.expiration = dateTimePicker2.Value;
                 /*
                             RS.Add(new RS() { 
                                         name = txtPostName.Text,
@@ -265,6 +267,7 @@ namespace RestAPIKliens.Forms.Selectors
         private void DryAdd_Load(object sender, EventArgs e)
         {
             CbxRefresh();
+            this.AcceptButton = btnPost;
         }
     }
 }

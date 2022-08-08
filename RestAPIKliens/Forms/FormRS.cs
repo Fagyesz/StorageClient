@@ -359,7 +359,58 @@ namespace RestAPIKliens.Forms
 
         internal void GetDataPublicWeight(string text)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridRS, RSList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<RS>> response = client.Execute<List<RS>>(request);
+                foreach (RS a in response.Data)
+                {
+
+                    RSList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //Name Search
+
+                RS[] RsArray = new RS[RSList.Count];
+
+                for (int i = 0; i < RSList.Count; i++)
+                {
+                    RsArray[i] = RSList[i];
+                }
+                RSList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    if (RsArray[i].weight.ToString() == text)
+                    {
+                        RSList.Add(RsArray[i]);
+                    }
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridRS.DataSource = RSList;
+
+
+                GridFormating(); SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Keresés " + e.Message);
+            }
         }
 
 
@@ -881,10 +932,10 @@ public class RS
                     name = name,
                     weight = weight,
                     place = place,
-                    arrived = arrived,
-                    marinadestart = marinadestart,
-                    marinadeend = marinadeend,
-                    smoking = smoking,
+                    arrived = TimeCreator(arrived),
+                    marinadestart =TimeCreator( marinadestart),
+                    marinadeend = TimeCreator(marinadeend),
+                    smoking = TimeCreator(smoking),
                     rsid = rsid,
 
                 });
@@ -898,7 +949,7 @@ public class RS
 
             }
             IRestResponse response2 = client2.Execute(request);
-            MessageBox.Show("Succesfully added.");
+            MessageBox.Show("Sikeres Feltöltés.");
 
 
 

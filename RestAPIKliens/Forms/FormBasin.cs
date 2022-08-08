@@ -395,7 +395,58 @@ namespace RestAPIKliens.Forms
 
         internal void GetDataPublicWeight(string text)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridBasin, RSList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Basin>> response = client.Execute<List<Basin>>(request);
+                foreach (Basin a in response.Data)
+                {
+
+                    RSList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //w Search
+
+                Basin[] RsArray = new Basin[RSList.Count];
+
+                for (int i = 0; i < RSList.Count; i++)
+                {
+                    RsArray[i] = RSList[i];
+                }
+                RSList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    if (RsArray[i].weight.ToString() == text)
+                    {
+                        RSList.Add(RsArray[i]);
+                    }
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridBasin.DataSource = RSList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Keresés: " + e.Message);
+            }
         }
 
         public static void ClearDataGridViewRows(DataGridView dataGridView, List<Basin> DryList)

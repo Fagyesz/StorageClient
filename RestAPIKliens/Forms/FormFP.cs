@@ -50,17 +50,18 @@ namespace RestAPIKliens.Forms
         internal Stat DataToStatFP()
         {
             Stat ST = new Stat();
-
-            ST.name=(string)dataGridFP.SelectedRows[0].Cells[4].Value;
-            ST.weight = (int)dataGridFP.SelectedRows[0].Cells[5].Value;
+            
+            ST.name=(string)dataGridFP.SelectedRows[0].Cells[5].Value;
+            ST.weight = (int)dataGridFP.SelectedRows[0].Cells[6].Value;
             ST.fpid = (int)dataGridFP.SelectedRows[0].Cells[0].Value;
             ST.rsid = (int)dataGridFP.SelectedRows[0].Cells[1].Value;
             ST.bid = (int)dataGridFP.SelectedRows[0].Cells[2].Value;
             ST.did = (int)dataGridFP.SelectedRows[0].Cells[3].Value;
-            ST.place = (string)dataGridFP.SelectedRows[0].Cells[6].Value;
-            ST.arrived=(DateTime)dataGridFP.SelectedRows[0].Cells[7].Value;
-            ST.marinated = (DateTime)dataGridFP.SelectedRows[0].Cells[9].Value; 
-            ST.smoked = (DateTime)dataGridFP.SelectedRows[0].Cells[10].Value; 
+            ST.place = (string)dataGridFP.SelectedRows[0].Cells[7].Value;
+            ST.arrived=TimeCreator( (DateTime)dataGridFP.SelectedRows[0].Cells[8].Value);
+            ST.marinated = TimeCreator((DateTime)dataGridFP.SelectedRows[0].Cells[10].Value); 
+            ST.butchered=TimeCreator((DateTime)dataGridFP.SelectedRows[0].Cells[9].Value);
+            ST.smoked = TimeCreator((DateTime)dataGridFP.SelectedRows[0].Cells[11].Value); 
 
             
 
@@ -282,7 +283,7 @@ namespace RestAPIKliens.Forms
                 string tmp = dataGridFP.SelectedRows[0].Cells[0].Value.ToString();
 
 
-                dataGridFP.SelectedRows[0].Cells[5].Value = w;
+                dataGridFP.SelectedRows[0].Cells[6].Value = w;
 
             }
             catch
@@ -294,7 +295,58 @@ namespace RestAPIKliens.Forms
 
         internal void GetDataPublicWeight(string text)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridFP, FPList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<FP>> response = client.Execute<List<FP>>(request);
+                foreach (FP a in response.Data)
+                {
+
+                    FPList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //w Search
+
+                FP[] RsArray = new FP[FPList.Count];
+
+                for (int i = 0; i < FPList.Count; i++)
+                {
+                    RsArray[i] = FPList[i];
+                }
+                FPList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    if (RsArray[i].weight.ToString() == text)
+                    {
+                        FPList.Add(RsArray[i]);
+                    }
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridFP.DataSource = FPList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Keresés:  " + e.Message);
+            }
         }
 
         private void LoadTheme()
@@ -446,7 +498,7 @@ namespace RestAPIKliens.Forms
                 string tmp = dataGridFP.SelectedRows[0].Cells[0].Value.ToString();
 
 
-                dataGridFP.SelectedRows[0].Cells[5].Value = w;
+                dataGridFP.SelectedRows[0].Cells[6].Value = w;
 
             }
             catch
@@ -486,6 +538,7 @@ namespace RestAPIKliens.Forms
             var request = new RestRequest(ROUTE, Method.DELETE);
             IRestResponse response = client.Execute(request);
             MessageBox.Show("Sikeres Törlés");
+            GetData();
         }
         private static DateTime TimeCreator(DateTime time)
         {

@@ -16,5 +16,10 @@ namespace RestAPIKliens.PrintSemantics
         {
             InitializeComponent();
         }
+
+        private void PrintSemanticFP_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -336,7 +336,58 @@ namespace RestAPIKliens.Forms
 
         internal void GetDataPublicWeight(string text)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridRS, StatList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Stat>> response = client.Execute<List<Stat>>(request);
+                foreach (Stat a in response.Data)
+                {
+
+                    StatList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //w Search
+
+                Stat[] RsArray = new Stat[StatList.Count];
+
+                for (int i = 0; i < StatList.Count; i++)
+                {
+                    RsArray[i] = StatList[i];
+                }
+                StatList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    if (RsArray[i].weight.ToString() == text)
+                    {
+                        StatList.Add(RsArray[i]);
+                    }
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridRS.DataSource = StatList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Keresés:  " + e.Message);
+            }
         }
 
         internal void GetDataPublicName(string text)

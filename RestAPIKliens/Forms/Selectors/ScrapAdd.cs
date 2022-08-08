@@ -30,6 +30,7 @@ namespace RestAPIKliens.Forms.Selectors
         private void ScrapAdd_Load(object sender, EventArgs e)
         {
             CbxRefresh();
+            this.AcceptButton = btnPost;
         }
 
         private void btnPost_Click(object sender, EventArgs e)

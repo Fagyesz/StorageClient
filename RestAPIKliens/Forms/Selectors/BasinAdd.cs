@@ -28,6 +28,7 @@ namespace RestAPIKliens.Forms.Selectors
         private void BasinAdd_Load(object sender, EventArgs e)
         {
             CbxRefresh();
+            this.AcceptButton = btnSend;
         }
 
         private void btnSend_Click(object sender, EventArgs e)

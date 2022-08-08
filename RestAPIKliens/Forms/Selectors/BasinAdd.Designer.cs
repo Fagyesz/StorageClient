@@ -85,7 +85,7 @@
             // btnSend
             // 
             this.btnSend.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnSend.Location = new System.Drawing.Point(58, 192);
+            this.btnSend.Location = new System.Drawing.Point(58, 198);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(104, 27);
             this.btnSend.TabIndex = 37;

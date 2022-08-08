@@ -316,7 +316,58 @@ namespace RestAPIKliens.Forms
 
         internal void GetDataPublicWeight(string text)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridRS, ScrapList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Scrap>> response = client.Execute<List<Scrap>>(request);
+                foreach (Scrap a in response.Data)
+                {
+
+                    ScrapList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //we Search
+
+                Scrap[] RsArray = new Scrap[ScrapList.Count];
+
+                for (int i = 0; i < ScrapList.Count; i++)
+                {
+                    RsArray[i] = ScrapList[i];
+                }
+                ScrapList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    if (RsArray[i].weight.ToString() == text)
+                    {
+                        ScrapList.Add(RsArray[i]);
+                    }
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridRS.DataSource = ScrapList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Keresés Származási hely:  " + e.Message);
+            }
         }
 
         public static void ClearDataGridViewRows(DataGridView dataGridView, List<Scrap> ScrapList)

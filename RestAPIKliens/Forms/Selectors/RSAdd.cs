@@ -28,6 +28,7 @@ namespace RestAPIKliens.Forms.Selectors
         private void RSAdd_Load(object sender, EventArgs e)
         {
             CbxRefresh();
+            this.AcceptButton = btnPost;
         }
         private void RSPost()
         {

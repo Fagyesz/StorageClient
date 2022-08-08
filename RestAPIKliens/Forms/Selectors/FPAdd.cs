@@ -230,5 +230,9 @@ namespace RestAPIKliens.Forms.Selectors
 
         }
 
+        private void btnPost_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

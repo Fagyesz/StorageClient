@@ -54,6 +54,7 @@ namespace RestAPIKliens.Forms.Selectors
         {
             //   LoadTheme();
             CbxRefresh();
+            this.AcceptButton = gtnGetById;
         }
 
         private void btnGetAll_Click(object sender, EventArgs e)
@@ -183,7 +184,7 @@ namespace RestAPIKliens.Forms.Selectors
                     FormRS.Self.GetDataPublicWeight(comboBox3.Text);
                     break;
                 case "Scrap":
-                    FormScrap.Self.GetDataPublicSearch(comboBox3.Text,"weight");
+                    FormScrap.Self.GetDataPublicWeight(comboBox3.Text);
                     break;
                 case "Dry":
                     FormDry.Self.GetDataPublicWeight(comboBox3.Text);
