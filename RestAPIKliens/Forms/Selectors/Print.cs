@@ -634,5 +634,10 @@ namespace RestAPIKliens.Forms.Selectors
             PrintType = 2;
             PreviewHub(PrintType);
         }
+
+        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

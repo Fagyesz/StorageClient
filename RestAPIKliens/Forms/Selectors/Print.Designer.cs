@@ -146,6 +146,7 @@
             this.dataGridView.ShowCellErrors = false;
             this.dataGridView.Size = new System.Drawing.Size(222, 332);
             this.dataGridView.TabIndex = 7;
+            this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
             // printDialog1
