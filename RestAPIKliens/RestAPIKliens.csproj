@@ -177,6 +177,12 @@
     <Compile Include="Forms\Selectors\Search.Designer.cs">
       <DependentUpon>Search.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Selectors\Smoker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Selectors\Smoker.Designer.cs">
+      <DependentUpon>Smoker.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Selectors\StatAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Selectors\Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Selectors\Smoker.resx">
+      <DependentUpon>Smoker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Selectors\StatAdd.resx">
       <DependentUpon>StatAdd.cs</DependentUpon>

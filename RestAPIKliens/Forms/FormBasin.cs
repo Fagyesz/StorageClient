@@ -29,6 +29,9 @@ namespace RestAPIKliens.Forms
             LoadTheme();
             Self = this;
         }
+
+        
+
         private void LoadTheme()
         {
             panelSelector.BackColor = ThemeColor.SecondaryColor;
@@ -59,9 +62,10 @@ namespace RestAPIKliens.Forms
             data.weight = (int)dataGridBasin.SelectedRows[0].Cells[2].Value;
             data.place = (string)dataGridBasin.SelectedRows[0].Cells[3].Value;
             data.arrived = (DateTime)dataGridBasin.SelectedRows[0].Cells[4].Value;
-            data.marinated = (DateTime)dataGridBasin.SelectedRows[0].Cells[6].Value;
-            data.smoked = (DateTime)dataGridBasin.SelectedRows[0].Cells[7].Value;
-            data.rsid = (int)dataGridBasin.SelectedRows[0].Cells[8].Value;
+            data.butchered = (DateTime)dataGridBasin.SelectedRows[0].Cells[5].Value;
+            data.marinated = (DateTime)dataGridBasin.SelectedRows[0].Cells[7].Value;
+            data.smoked = (DateTime)dataGridBasin.SelectedRows[0].Cells[8].Value;
+            data.rsid = (int)dataGridBasin.SelectedRows[0].Cells[9].Value;
             return data;
         }
         internal Basin GetDataCreateBasin()
@@ -74,10 +78,11 @@ namespace RestAPIKliens.Forms
             data.weight = (int)dataGridBasin.SelectedRows[0].Cells[2].Value;
             data.place = (string)dataGridBasin.SelectedRows[0].Cells[3].Value;
             data.arrived = (DateTime)dataGridBasin.SelectedRows[0].Cells[4].Value;
-            data.marinadestart = (DateTime)dataGridBasin.SelectedRows[0].Cells[5].Value;
-            data.marinadeend = (DateTime)dataGridBasin.SelectedRows[0].Cells[6].Value;
-            data.smoking = (DateTime)dataGridBasin.SelectedRows[0].Cells[7].Value;
-            data.rsid = (int)dataGridBasin.SelectedRows[0].Cells[8].Value;
+            data.butchered = (DateTime)dataGridBasin.SelectedRows[0].Cells[5].Value;
+            data.marinadestart = (DateTime)dataGridBasin.SelectedRows[0].Cells[6].Value;
+            data.marinadeend = (DateTime)dataGridBasin.SelectedRows[0].Cells[7].Value;
+            data.smoking = (DateTime)dataGridBasin.SelectedRows[0].Cells[8].Value;
+            data.rsid = (int)dataGridBasin.SelectedRows[0].Cells[9].Value;
             return data;
         }
 
@@ -380,6 +385,7 @@ namespace RestAPIKliens.Forms
                     weight = 2,
                     place = "nem",
                     arrived = DateTime.MinValue,
+                    butchered = DateTime.MinValue,
                     marinadestart = DateTime.MinValue,
                     marinadeend = DateTime.MinValue,
                     smoking = DateTime.MinValue,
@@ -581,7 +587,7 @@ namespace RestAPIKliens.Forms
             int rowIndex = dataGridBasin.CurrentCell.RowIndex;
             string tmp = dataGridBasin.SelectedRows[0].Cells[0].Value.ToString();
 
-          //  DateTime theDate = dateTimePicker1.Value.Date;
+            //  DateTime theDate = dateTimePicker1.Value.Date;
 
             var client = new RestClient(URL);
             String ROUTE = "put/" + (int)dataGridBasin.SelectedRows[0].Cells[0].Value;
@@ -589,42 +595,44 @@ namespace RestAPIKliens.Forms
             request.RequestFormat = DataFormat.Json;
 
 
-            
-
-
-                string name, place;
-                int weight, rsid;
-                DateTime marinadestart, marinadeend, smoking, arrived;
-           // DateTime time = DateTime.MinValue;
-
-           // DataTimePut1 = (DateTime)dataGridBasin.SelectedRows[0].Cells[3].Value;
-
-                name = dataGridBasin.SelectedRows[0].Cells[1].Value.ToString();
-                weight = (int)dataGridBasin.SelectedRows[0].Cells[2].Value;
-                place = dataGridBasin.SelectedRows[0].Cells[3].Value.ToString();
-                arrived =TimeCreator( (DateTime)dataGridBasin.SelectedRows[0].Cells[4].Value);
-            marinadestart = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[5].Value);
-                marinadeend = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[6].Value);
-                smoking = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[7].Value);
-                rsid = (int)dataGridBasin.SelectedRows[0].Cells[8].Value;
 
 
 
-                request.AddBody(new Basin
-                {
-                    name = name,
-                    weight = weight,
-                    place = place,
-                    arrived = arrived,
-                    marinadestart = marinadestart,
-                    marinadeend = marinadeend,
-                    smoking = smoking,
-                    rsid = rsid,
+            string name, place;
+            int weight, rsid;
+            DateTime marinadestart, marinadeend, smoking, arrived, butchered;
+            // DateTime time = DateTime.MinValue;
 
-                });
+            // DataTimePut1 = (DateTime)dataGridBasin.SelectedRows[0].Cells[3].Value;
+
+            name = dataGridBasin.SelectedRows[0].Cells[1].Value.ToString();
+            weight = (int)dataGridBasin.SelectedRows[0].Cells[2].Value;
+            place = dataGridBasin.SelectedRows[0].Cells[3].Value.ToString();
+            arrived = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[4].Value);
+            butchered = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[5].Value);
+            marinadestart = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[6].Value);
+            marinadeend = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[7].Value);
+            smoking = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[8].Value);
+            rsid = (int)dataGridBasin.SelectedRows[0].Cells[9].Value;
 
 
-           
+
+            request.AddBody(new Basin
+            {
+                name = name,
+                weight = weight,
+                place = place,
+                arrived = arrived,
+                butchered = butchered,
+                marinadestart = marinadestart,
+                marinadeend = marinadeend,
+                smoking = smoking,
+                rsid = rsid,
+
+            });
+
+
+
 
 
 
@@ -637,7 +645,48 @@ namespace RestAPIKliens.Forms
 
 
         }
+        internal void SmokingSomeData(DateTime value)
+        {
+            var client = new RestClient(URL);
+            String ROUTE = "put/" + (int)dataGridBasin.SelectedRows[0].Cells[0].Value;
+            var request = new RestRequest(ROUTE, Method.PUT);
+            request.RequestFormat = DataFormat.Json;
 
+            string name, place;
+            int weight, rsid;
+            DateTime marinadestart, marinadeend, smoking, arrived, butchered;
+
+
+            name = dataGridBasin.SelectedRows[0].Cells[1].Value.ToString();
+            weight = (int)dataGridBasin.SelectedRows[0].Cells[2].Value;
+            place = dataGridBasin.SelectedRows[0].Cells[3].Value.ToString();
+            arrived = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[4].Value);
+            butchered = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[5].Value);
+            marinadestart = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[6].Value);
+            marinadeend = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[7].Value);
+            smoking = TimeCreator((DateTime)dataGridBasin.SelectedRows[0].Cells[8].Value);
+            rsid = (int)dataGridBasin.SelectedRows[0].Cells[9].Value;
+
+
+
+            request.AddBody(new Basin
+            {
+                name = name,
+                weight = weight,
+                place = place,
+                arrived = arrived,
+                butchered = butchered,
+                marinadestart = marinadestart,
+                marinadeend = marinadeend,
+                smoking = value,
+                rsid = rsid,
+
+            });
+            IRestResponse response = client.Execute(request);
+            MessageBox.Show("Sikeres Frissítés ");
+            GetData();
+
+        }
         public void GetDataPublic()
         {
 
@@ -675,6 +724,7 @@ namespace RestAPIKliens.Forms
             dataGridBasin.Columns[5].DefaultCellStyle.Format = "yyyy.MM.dd.";
             dataGridBasin.Columns[6].DefaultCellStyle.Format = "yyyy.MM.dd.";
             dataGridBasin.Columns[7].DefaultCellStyle.Format = "yyyy.MM.dd.";
+            dataGridBasin.Columns[8].DefaultCellStyle.Format = "yyyy.MM.dd.";
         }
 
 
@@ -727,10 +777,11 @@ namespace RestAPIKliens.Forms
             dataGridBasin.Columns[2].HeaderText = "Súly";
             dataGridBasin.Columns[3].HeaderText = "Származási hely";
             dataGridBasin.Columns[4].HeaderText = "Érkezési idő";
-            dataGridBasin.Columns[5].HeaderText = "Érlelés kezdete";
-            dataGridBasin.Columns[6].HeaderText = "Érlelés vége"; 
-            dataGridBasin.Columns[7].HeaderText = "Füstölés ideje";
-            dataGridBasin.Columns[8].HeaderText = "Nyersanyag ID";
+            dataGridBasin.Columns[5].HeaderText = "Vágás ideje";
+            dataGridBasin.Columns[6].HeaderText = "Érlelés kezdete";
+            dataGridBasin.Columns[7].HeaderText = "Érlelés vége"; 
+            dataGridBasin.Columns[8].HeaderText = "Füstölés ideje";
+            dataGridBasin.Columns[9].HeaderText = "Nyersanyag ID";
             ColumnChange = false;
         }
 
@@ -797,18 +848,22 @@ namespace RestAPIKliens.Forms
                         RSList = query.ToList();
                         break;
                     case 5:
-                        query = rsArray.OrderBy(var => var.marinadestart);
+                        query = rsArray.OrderBy(var => var.butchered);
                         RSList = query.ToList();
                         break;
                     case 6:
-                        query = rsArray.OrderBy(var => var.marinadeend);
+                        query = rsArray.OrderBy(var => var.marinadestart);
                         RSList = query.ToList();
                         break;
                     case 7:
-                        query = rsArray.OrderBy(var => var.smoking);
+                        query = rsArray.OrderBy(var => var.marinadeend);
                         RSList = query.ToList();
                         break;
                     case 8:
+                        query = rsArray.OrderBy(var => var.smoking);
+                        RSList = query.ToList();
+                        break;
+                    case 9:
                         query = rsArray.OrderBy(var => var.rsid);
                         RSList = query.ToList();
                         break;
@@ -843,18 +898,22 @@ namespace RestAPIKliens.Forms
                         RSList = query.ToList();
                         break;
                     case 5:
-                        query = rsArray.OrderByDescending(var => var.marinadestart);
+                        query = rsArray.OrderByDescending(var => var.butchered);
                         RSList = query.ToList();
                         break;
                     case 6:
-                        query = rsArray.OrderByDescending(var => var.marinadeend);
+                        query = rsArray.OrderByDescending(var => var.marinadestart);
                         RSList = query.ToList();
                         break;
                     case 7:
-                        query = rsArray.OrderByDescending(var => var.smoking);
+                        query = rsArray.OrderByDescending(var => var.marinadeend);
                         RSList = query.ToList();
                         break;
                     case 8:
+                        query = rsArray.OrderByDescending(var => var.smoking);
+                        RSList = query.ToList();
+                        break;
+                    case 9:
                         query = rsArray.OrderByDescending(var => var.rsid);
                         RSList = query.ToList();
                         break;
@@ -879,6 +938,11 @@ namespace RestAPIKliens.Forms
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.Selectors.FPCreate("Basin"), sender);
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.Smoker("Basin"), sender);
         }
     }
 }

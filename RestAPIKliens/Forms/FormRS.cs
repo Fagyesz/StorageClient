@@ -914,22 +914,26 @@ public class RS
                 string name, place;
                 int weight, rsid;
 
-                DateTime marinadestart, marinadeend, smoking, arrived;
+                DateTime marinadestart, marinadeend, smoking, arrived, butchered;
         
                 name = dataGridRS.SelectedRows[0].Cells[1].Value.ToString();
                
                 weight = b.weight;
                 place = dataGridRS.SelectedRows[0].Cells[3].Value.ToString();
                 arrived = (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value;
+                butchered = (DateTime)dataGridRS.SelectedRows[0].Cells[5].Value;
+                
                 try
                 {
                     marinadestart = b.marinadestart;
                     marinadeend = b.marinadeend;
+                    
                 }
                 catch (Exception e)
                 {
-
-                    throw ;
+                    marinadestart = DateTime.MinValue;
+                    marinadeend = DateTime.MinValue;
+                    MessageBox.Show("hiba :"+e); ;
                 }
                 
                 smoking = DateTime.MinValue;
@@ -943,7 +947,8 @@ public class RS
                     weight = weight,
                     place = place,
                     arrived = TimeCreator(arrived),
-                    marinadestart =TimeCreator( marinadestart),
+                    butchered=TimeCreator(butchered),
+                    marinadestart =TimeCreator(marinadestart),
                     marinadeend = TimeCreator(marinadeend),
                     smoking = TimeCreator(smoking),
                     rsid = rsid,

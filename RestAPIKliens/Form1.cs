@@ -346,6 +346,7 @@ namespace RestAPIKliens
         public int weight { get; set; }
         public string place { get; set; }
         public DateTime arrived { get; set; }
+        public DateTime butchered { get; set; }
         public DateTime marinadestart { get; set; }
         public DateTime marinadeend { get; set; }
         public DateTime smoking { get; set; }
