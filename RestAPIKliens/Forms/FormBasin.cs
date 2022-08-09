@@ -260,34 +260,41 @@ namespace RestAPIKliens.Forms
         {
            // GetDataID();
         }
-        
-        private void GetDataID(string b)
+
+        private void GetDataID(int id)
         {
-            try { 
-            ClearDataGridViewRows(dataGridBasin, RSList);
+            try
+            {
+                ClearDataGridViewRows(dataGridBasin, RSList);
+                RSList.Clear();
 
-            RSList.Clear();
-            var client = new RestClient(URL);
-            String ROUTE = b;
-            var request = new RestRequest(ROUTE, Method.GET);
-            IRestResponse<Basin> response = client.Execute<Basin>(request);
-            var content = response.Content;
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+                IRestResponse<List<Basin>> response = client.Execute<List<Basin>>(request);
 
-            string srt;
-            srt = content;
-            srt = srt.Substring(1, srt.Length - 2);
-            Basin a = new Basin();
-            a = JsonConvert.DeserializeObject<Basin>(srt);
+                Basin t = new Basin();
+                foreach (Basin a in response.Data)
+                {
+                    if (a.id == id)
+                    {
+                        RSList.Add(a);
+                    }
 
-            RSList.Add(a);
-            dataGridBasin.DataSource = RSList;
-                DataGridDateFormating(); SetColumsName();
+
+                }
+
+                dataGridBasin.DataSource = RSList; SetColumsName();
+
             }
             catch (Exception e)
             {
 
-                MessageBox.Show( e.Message);
+                MessageBox.Show("Hiba : " + e);
             }
+
+
         }
 
         internal void GetDataPublicPlace(string text)
@@ -651,7 +658,7 @@ namespace RestAPIKliens.Forms
                 }
                 else
                 {
-                    GetDataID(b);
+                    GetDataID(int.Parse(b));
                     this.Refresh();
                 }
             }

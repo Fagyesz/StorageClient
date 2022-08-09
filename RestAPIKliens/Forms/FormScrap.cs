@@ -49,7 +49,7 @@ namespace RestAPIKliens.Forms
                 }
                 else
                 {
-                    GetDataID(s);
+                    GetDataID(int.Parse(s));
                     this.Refresh();
                     SetColumsName();
                 }
@@ -72,7 +72,7 @@ namespace RestAPIKliens.Forms
             dataGridRS.Columns[1].HeaderText = "Megnevezés";
             dataGridRS.Columns[2].HeaderText = "Súly";
             dataGridRS.Columns[3].HeaderText = "Származási hely";
-            dataGridRS.Columns[4].HeaderText = "Érkezési ideje";
+            dataGridRS.Columns[4].HeaderText = "Selejtezés ideje";
             dataGridRS.Columns[5].HeaderText = "Nyersanyag ID";
             dataGridRS.Columns[6].HeaderText = "SzárazRaktár ID";
             dataGridRS.Columns[7].HeaderText = "Basin ID";
@@ -284,35 +284,41 @@ namespace RestAPIKliens.Forms
             }
         }
 
-        private void GetDataID(string b)
+        private void GetDataID(int id)
         {
-            try { 
-            ClearDataGridViewRows(dataGridRS, ScrapList);
+            try
+            {
+                ClearDataGridViewRows(dataGridRS, ScrapList);
+                ScrapList.Clear();
 
-            ScrapList.Clear();
-            var client = new RestClient(URL);
-            String ROUTE = b;
-            var request = new RestRequest(ROUTE, Method.GET);
-            IRestResponse<Scrap> response = client.Execute<Scrap>(request);
-            var content = response.Content;
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+                IRestResponse<List<Scrap>> response = client.Execute<List<Scrap>>(request);
 
-            string srt;
-            srt = content;
-            srt = srt.Substring(1, srt.Length - 2);
-            Scrap a = new Scrap();
-            a = JsonConvert.DeserializeObject<Scrap>(srt);
+                Scrap t = new Scrap();
+                foreach (Scrap a in response.Data)
+                {
+                    if (a.id == id)
+                    {
+                        ScrapList.Add(a);
+                    }
 
-            ScrapList.Add(a);
-            dataGridRS.DataSource = ScrapList;
-                DataGridDateFormating();
-                SetColumsName();
+
+                }
+
+                dataGridRS.DataSource = ScrapList; SetColumsName();
+
             }
             catch (Exception e)
             {
 
-                MessageBox.Show(e.Message);
+                MessageBox.Show("Hiba : " + e);
             }
-}
+
+
+        }
 
         internal void GetDataPublicWeight(string text)
         {

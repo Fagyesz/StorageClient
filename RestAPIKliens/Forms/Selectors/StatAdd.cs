@@ -170,7 +170,7 @@ namespace RestAPIKliens.Forms.Selectors
                 }
 
                 IRestResponse response = client.Execute(request);
-                MessageBox.Show("Succesfully added.");
+                //MessageBox.Show("Succesfully added.");
 
             }
 

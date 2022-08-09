@@ -239,7 +239,7 @@ namespace RestAPIKliens.Forms.Selectors
                     FormRS.Self.GetDataPublicId(comboBox1.Text);
                     break;
                 case "Scrap":
-                    FormScrap.Self.GetDataPublicSearch(comboBox1.Text,"id");
+                    FormScrap.Self.GetDataPublicId(comboBox1.Text);
                     break;
                 case "Dry":
                     FormDry.Self.GetDataPublicId(comboBox1.Text);

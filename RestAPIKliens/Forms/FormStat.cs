@@ -48,7 +48,7 @@ namespace RestAPIKliens.Forms
                 }
                 else
                 {
-                    GetDataID(s);
+                    GetDataID(int.Parse(s));
                     this.Refresh();
                 }
             }
@@ -107,38 +107,40 @@ namespace RestAPIKliens.Forms
             DataGridDateFormating();
             SetColumsName();
         }
-        private void GetDataID(string b)
+        private void GetDataID(int id)
         {
             try
             {
-
-
-
                 ClearDataGridViewRows(dataGridRS, StatList);
-
                 StatList.Clear();
+
                 var client = new RestClient(URL);
-                String ROUTE = b;
+                String ROUTE = "";
                 var request = new RestRequest(ROUTE, Method.GET);
-                IRestResponse<Stat> response = client.Execute<Stat>(request);
-                var content = response.Content;
+                request.RequestFormat = DataFormat.Json;
+                IRestResponse<List<Stat>> response = client.Execute<List<Stat>>(request);
 
-                string srt;
-                srt = content;
-                srt = srt.Substring(1, srt.Length - 2);
-                Stat a = new Stat();
-                a = JsonConvert.DeserializeObject<Stat>(srt);
+                Stat t = new Stat();
+                foreach (Stat a in response.Data)
+                {
+                    if (a.id == id)
+                    {
+                        StatList.Add(a);
+                    }
 
-                StatList.Add(a);
-                dataGridRS.DataSource = StatList;
-                SetColumsName();
+
+                }
+
+                dataGridRS.DataSource = StatList; SetColumsName();
+
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
-                
+
+                MessageBox.Show("Hiba : " + e);
             }
-            DataGridDateFormating();
+
+
         }
 
         internal void GetDataPublicTime(DateTime time)

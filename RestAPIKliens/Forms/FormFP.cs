@@ -702,19 +702,54 @@ namespace RestAPIKliens.Forms
                 }
                 else
                 {
-                    GetDataID(b);
+                    //GetDataID(b);
+                    GetDataID(int.Parse(b));
                     this.Refresh();
                     CallColumns();
                 }
             }
         }
 
-        private void GetDataID(string b)
+        private void GetDataID(int id)
         {
-            try { 
-            ClearDataGridViewRows(dataGridFP, FPList);
+            try
+            {
+                ClearDataGridViewRows(dataGridFP, FPList);
+                FPList.Clear();
 
-            FPList.Clear();
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+                IRestResponse<List<FP>> response = client.Execute<List<FP>>(request);
+
+                FP t = new FP();
+                foreach (FP a in response.Data)
+                {
+                    if (a.id == id)
+                    {
+                        FPList.Add(a);
+                    }
+
+
+                }
+
+                dataGridFP.DataSource = FPList; CallColumns();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Hiba : " + e);
+            }
+            
+            
+        }
+ /*     //SQL and C# compatibility bad at datetime //
+       
+        private void GetDataID(string b)
+        {  
+            
             var client = new RestClient(URL);
             String ROUTE = b;
             var request = new RestRequest(ROUTE, Method.GET);
@@ -729,7 +764,7 @@ namespace RestAPIKliens.Forms
             a = JsonConvert.DeserializeObject<FP>(srt);
 
             FPList.Add(a);
-            dataGridFP.DataSource = FPList;
+           
             b = "";
 
             this.Refresh();
@@ -742,7 +777,7 @@ namespace RestAPIKliens.Forms
             CallColumns();
         }
 
-
+        */
         private void dataGridDry_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (!ColumnChange)

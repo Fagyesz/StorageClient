@@ -329,32 +329,42 @@ namespace RestAPIKliens.Forms
             
         }
 
-        private void GetDataID(string b)
+        private void GetDataID(int id)
         {
-            try { 
-            ClearDataGridViewRows(dataGridRS, RSList);
 
-            RSList.Clear();
-            var client = new RestClient(URL);
-            String ROUTE = b;
-            var request = new RestRequest(ROUTE, Method.GET);
-            IRestResponse<RS> response = client.Execute<RS>(request);
-            var content = response.Content;
+            try
+            {
+                ClearDataGridViewRows(dataGridRS, RSList);
+                RSList.Clear();
 
-            string srt;
-            srt = content;
-            srt = srt.Substring(1, srt.Length - 2);
-            RS a = new RS();
-            a = JsonConvert.DeserializeObject<RS>(srt);
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+                IRestResponse<List<RS>> response = client.Execute<List<RS>>(request);
 
-            RSList.Add(a);
-            dataGridRS.DataSource = RSList;
-        }
+                RS t = new RS();
+                foreach (RS a in response.Data)
+                {
+                    if (a.id == id)
+                    {
+                        RSList.Add(a);
+                    }
+
+
+                }
+
+                dataGridRS.DataSource = RSList; Look();
+
+            }
             catch (Exception e)
             {
 
-                MessageBox.Show(e.Message);
+                MessageBox.Show("Hiba : " + e);
             }
+
+
+
         }
 
         internal void GetDataPublicWeight(string text)
@@ -1006,7 +1016,7 @@ public class RS
                 }
                 else
                 {
-                    GetDataID(b);
+                    GetDataID(int.Parse(b));
                     dataGridRS.Columns[3].DefaultCellStyle.Format = "yyyy.MM.dd.";
                     dataGridRS.Columns[4].DefaultCellStyle.Format = "yyyy.MM.dd.";
                     this.Refresh();

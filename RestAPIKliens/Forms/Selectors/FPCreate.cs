@@ -742,11 +742,12 @@ namespace RestAPIKliens.Forms.Selectors
                         fpcreator.arrived = TimeCreator(b.arrived);
                         fpcreator.marinated = TimeCreator(b.marinadeend);
                         fpcreator.smoked = TimeCreator(b.smoking);
-                        /*
-                        fp.butchered = DateTime.MinValue;
-                        fp.did = 0;
-                        */
-                        CreatorBasin=true;
+                        //fpcreator.butchered= TimeCreator(b.bu);
+                    /*
+                    fp.butchered = DateTime.MinValue;
+                    fp.did = 0;
+                    */
+                    CreatorBasin =true;
                         break;
                     default:
                         break;

@@ -496,58 +496,41 @@ namespace RestAPIKliens.Forms
             //GetDataID();
 
         }
-        
-        private void GetDataID(string b)
+
+        private void GetDataID(int id)
         {
-            try { 
-            ClearDataGridViewRows(dataGridDry, DryList);
+            try
+            {
+                ClearDataGridViewRows(dataGridDry, DryList);
+                DryList.Clear();
 
-            //dataGridDry.Rows.Clear();
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+                IRestResponse<List<Dry>> response = client.Execute<List<Dry>>(request);
+
+                Dry t = new Dry();
+                foreach (Dry a in response.Data)
+                {
+                    if (a.id == id)
+                    {
+                        DryList.Add(a);
+                    }
 
 
-            // dataGridDry.Refresh();
-            DryList.Clear();
-            var client = new RestClient(URL);
-            String ROUTE = b;
-            var request = new RestRequest(ROUTE, Method.GET);
-            IRestResponse<Dry> response = client.Execute<Dry>(request);
-            var content = response.Content;
+                }
 
+                dataGridDry.DataSource = DryList; SetColumsName();
 
-            //Animal a = new Animal();
-            //a = JsonSerializer.Deserialize<Animal>(content);
-            //listcomp.Items.Add(content);
-
-            string srt;
-            srt = content;
-            srt = srt.Substring(1, srt.Length - 2);
-            Dry a = new Dry();
-            a = JsonConvert.DeserializeObject<Dry>(srt);
-
-            DryList.Add(a);
-            dataGridDry.DataSource = DryList;
-            GridForming();
-            DataGridDateFormating();
-                SetColumsName();
             }
             catch (Exception e)
             {
 
-                MessageBox.Show("Node server nem fut Kijelentkezés szükséges " + e.Message);
+                MessageBox.Show("Hiba : " + e);
             }
 
-            /*
-            List<string> ContentList = new List<string>();
-            ContentList = content.Split(':').ToList();
-            //listcomp.Items.Add(content);
-            Dry dry = new Dry();
-           // dry.name = ContentList[0];
-            
-            listcomp.Items.Add(content);
-            dataGridDry.DataSource = content;
-            dataGridDry.Refresh();
-            //DryList.Add(content);
-            */
+
         }
 
         private void btnDeleteById_Click(object sender, EventArgs e)
@@ -845,7 +828,7 @@ namespace RestAPIKliens.Forms
                 }
                 else
                 {
-                    GetDataID(b);
+                    GetDataID(int.Parse(b));
                     this.Refresh();
                     id = true;
                 }
