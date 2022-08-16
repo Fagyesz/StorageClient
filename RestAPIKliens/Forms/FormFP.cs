@@ -118,8 +118,27 @@ namespace RestAPIKliens.Forms
             // szükség szerint bővíthető
             
         }
+        
+        internal void GetDataPublicTime(DateTime[,]timeArray,string type)
+        {
+            
+            switch (type)
+            {
+                case "B":
+                    GetDataPublicTime(timeArray[0, 0], timeArray[0, 1],type);
+                    break;
+                case "M":
+                    GetDataPublicTime(timeArray[1, 0], timeArray[1, 1], type);
+                    break;
+                case "S":
+                    GetDataPublicTime(timeArray[2, 0], timeArray[2, 1], type);
+                    break;
+                default:
+                    break;
+            }
 
-        internal void GetDataPublicTime(DateTime time)
+        }
+        internal void GetDataPublicTime(DateTime time, DateTime time2)
         {
             try
             {
@@ -153,12 +172,12 @@ namespace RestAPIKliens.Forms
                 for (int i = 0; i < RsArray.Length; i++)
                 {
                     DateTime tmp = Convert.ToDateTime(RsArray[i].arrived);
-                    
-                    if (TimeCreator(Convert.ToDateTime(RsArray[i].arrived)) == TimeCreator(time))
+
+                    if (TimeCreator(tmp) >= TimeCreator(time) && TimeCreator(tmp) <= TimeCreator(time2))
                     {
                         FPList.Add(RsArray[i]);
                     }
-                     tmp = Convert.ToDateTime(RsArray[i].arrived);
+                    tmp = Convert.ToDateTime(RsArray[i].arrived);
                 }
 
 
@@ -179,7 +198,81 @@ namespace RestAPIKliens.Forms
 
 
         }
+        internal void GetDataPublicTime(DateTime time, DateTime time2,string type)
+        {
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
 
+                ClearDataGridViewRows(dataGridFP, FPList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<FP>> response = client.Execute<List<FP>>(request);
+                foreach (FP a in response.Data)
+                {
+
+                    FPList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //place Search
+
+                FP[] RsArray = new FP[FPList.Count];
+
+                for (int i = 0; i < FPList.Count; i++)
+                {
+                    RsArray[i] = FPList[i];
+                }
+                FPList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    DateTime tmp = Convert.ToDateTime(RsArray[i].arrived);
+                    switch (type)
+                    {
+                        case "M":
+                            tmp = Convert.ToDateTime(RsArray[i].marinated);
+                            break;
+                        case "B":
+                            tmp = Convert.ToDateTime(RsArray[i].butchered);
+                            break;
+                        case "S":
+                            tmp = Convert.ToDateTime(RsArray[i].smoked);
+                            break;
+                        default:
+                            break;
+                    }
+                   
+
+                    if (TimeCreator(tmp) >= TimeCreator(time) && TimeCreator(tmp) <= TimeCreator(time2))
+                    {
+                        FPList.Add(RsArray[i]);
+                    }
+                    tmp = Convert.ToDateTime(RsArray[i].arrived);
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridFP.DataSource = FPList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Keresés idő:  " + e.Message);
+            }
+
+
+        }
         internal void DeleteByST()
         {
             Delete();
@@ -449,6 +542,12 @@ namespace RestAPIKliens.Forms
 
                 MessageBox.Show("Keresés:  " + e.Message);
             }
+        }
+
+        internal void Delete_this()
+        {
+            Delete();
+
         }
 
         internal void DeleteBySC()
@@ -1060,5 +1159,9 @@ namespace RestAPIKliens.Forms
             }
         }
 
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.SearchPlus("FP"), sender);
+        }
     }
 }

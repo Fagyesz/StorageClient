@@ -28,40 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.paneAll = new System.Windows.Forms.Panel();
-            this.dataGridRS = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelFill = new System.Windows.Forms.Panel();
             this.panelSelector = new System.Windows.Forms.Panel();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.paneAll.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridRS)).BeginInit();
+            this.paneAll = new System.Windows.Forms.Panel();
+            this.dataGridRS = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panelSelector.SuspendLayout();
+            this.paneAll.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridRS)).BeginInit();
             this.SuspendLayout();
-            // 
-            // paneAll
-            // 
-            this.paneAll.Controls.Add(this.dataGridRS);
-            this.paneAll.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.paneAll.Location = new System.Drawing.Point(0, 0);
-            this.paneAll.Name = "paneAll";
-            this.paneAll.Size = new System.Drawing.Size(683, 477);
-            this.paneAll.TabIndex = 32;
-            // 
-            // dataGridRS
-            // 
-            this.dataGridRS.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.dataGridRS.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridRS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridRS.Location = new System.Drawing.Point(0, 0);
-            this.dataGridRS.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
-            this.dataGridRS.Name = "dataGridRS";
-            this.dataGridRS.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridRS.Size = new System.Drawing.Size(683, 477);
-            this.dataGridRS.TabIndex = 22;
-            this.dataGridRS.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRS_CellClick);
-            this.dataGridRS.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRS_CellValueChanged);
             // 
             // panel1
             // 
@@ -102,32 +79,52 @@
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged_2);
             // 
+            // paneAll
+            // 
+            this.paneAll.Controls.Add(this.dataGridRS);
+            this.paneAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.paneAll.Location = new System.Drawing.Point(0, 0);
+            this.paneAll.Name = "paneAll";
+            this.paneAll.Size = new System.Drawing.Size(443, 477);
+            this.paneAll.TabIndex = 34;
+            // 
+            // dataGridRS
+            // 
+            this.dataGridRS.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.dataGridRS.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridRS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridRS.Location = new System.Drawing.Point(0, 0);
+            this.dataGridRS.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
+            this.dataGridRS.Name = "dataGridRS";
+            this.dataGridRS.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridRS.Size = new System.Drawing.Size(443, 477);
+            this.dataGridRS.TabIndex = 22;
+            // 
             // FormScrap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(683, 477);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.paneAll);
+            this.Controls.Add(this.panel1);
             this.Name = "FormScrap";
             this.Text = "FormScrap";
             this.Load += new System.EventHandler(this.FormScrap_Load);
-            this.paneAll.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridRS)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panelSelector.ResumeLayout(false);
             this.panelSelector.PerformLayout();
+            this.paneAll.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridRS)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel paneAll;
-        private System.Windows.Forms.DataGridView dataGridRS;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panelFill;
         private System.Windows.Forms.Panel panelSelector;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Panel paneAll;
+        private System.Windows.Forms.DataGridView dataGridRS;
     }
 }

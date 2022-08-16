@@ -120,25 +120,26 @@ namespace RestAPIKliens.Forms.Selectors
         {
             
             DateTime time = dateTimePicker1.Value;
+            DateTime time2 = dateTimePicker2.Value;
             switch (creator)
             {
                 case "FP":
-                    FormFP.Self.GetDataPublicTime(time);
+                    FormFP.Self.GetDataPublicTime(time,time2);
                     break;
                 case "RS":
-                    FormRS.Self.GetDataPublicTime(time);
+                    FormRS.Self.GetDataPublicTime(time,time2);
                     break;
                 case "Scrap":
                     FormScrap.Self.GetDataPublicTime(time);
                     break;
                 case "Dry":
-                    FormDry.Self.GetDataPublicTime(time);
+                    FormDry.Self.GetDataPublicTime(time, time2,"a");
                     break;
                 case "Basin":
-                    FormBasin.Self.GetDataPublicTime(time);
+                    FormBasin.Self.GetDataPublicTime(time, time2,"a");
                     break;
                 case "Stat":
-                    FormStat.Self.GetDataPublicTime(time);
+                    FormStat.Self.GetDataPublicTime(time,time2, "a");
                     break;
                 default:
                     break;
@@ -330,7 +331,7 @@ namespace RestAPIKliens.Forms.Selectors
             if (settings)
             {
                 btnCollection.Visible = true;
-
+                btndel.Visible = true;
                 btnClear.Visible = true;
             }
             else
@@ -338,7 +339,10 @@ namespace RestAPIKliens.Forms.Selectors
                 btnCollection.Visible = false;
 
                 btnClear.Visible = false;
+                btndel.Visible = false;
             }
+
+            
         }
         private void CbxClear()
         {
@@ -520,6 +524,43 @@ namespace RestAPIKliens.Forms.Selectors
         private void btnClear_Click(object sender, EventArgs e)
         {
             CbxClear();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Biztos törölni akarod ?\nNem vonhatod utánna vissza", "Törlés", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Delete();
+            }
+        }
+
+        private void Delete()
+        {
+            
+            switch (creator)
+            {
+                case "FP":
+                    FormFP.Self.Delete_this();
+                    break;
+                case "RS":
+                    FormRS.Self.Delete_this();
+                    break;
+                case "Scrap":
+                    FormScrap.Self.Delete_this();
+                    break;
+                case "Dry":
+                    FormDry.Self.Delete_this();
+                    break;
+                case "Basin":
+                    FormBasin.Self.Delete_this();
+                    break;
+                case "Stat":
+                    FormStat.Self.Delete_this();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

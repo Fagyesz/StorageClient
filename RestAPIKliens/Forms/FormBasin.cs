@@ -194,6 +194,104 @@ namespace RestAPIKliens.Forms
             }
         }
 
+        internal void GetDataPublicTime(DateTime[,] timeArray, string type)
+        {
+
+            switch (type)
+            {
+                case "B":
+                    GetDataPublicTime(timeArray[0, 0], timeArray[0, 1], type);
+                    break;
+                case "M":
+                    GetDataPublicTime(timeArray[1, 0], timeArray[1, 1], type);
+                    break;
+                case "MV":
+                    GetDataPublicTime(timeArray[2, 0], timeArray[2, 1], type);
+                    break;
+                case "S":
+                    GetDataPublicTime(timeArray[3, 0], timeArray[3, 1], type);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+            internal void GetDataPublicTime(DateTime time, DateTime time2, string type)
+        {
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridBasin, RSList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Basin>> response = client.Execute<List<Basin>>(request);
+                foreach (Basin a in response.Data)
+                {
+
+                    RSList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //place Search
+
+                Basin[] RsArray = new Basin[RSList.Count];
+
+                for (int i = 0; i < RSList.Count; i++)
+                {
+                    RsArray[i] = RSList[i];
+                }
+                RSList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    DateTime tmp = Convert.ToDateTime(RsArray[i].arrived);
+                    switch (type)
+                    {
+                        case "B":
+                            tmp = Convert.ToDateTime(RsArray[i].butchered);
+                            break;
+                        case "M":
+                            tmp = Convert.ToDateTime(RsArray[i].marinadestart);
+                            break;
+                        case "MV":
+                            tmp = Convert.ToDateTime(RsArray[i].marinadeend);
+                            break;
+                        case "S":
+                            tmp = Convert.ToDateTime(RsArray[i].smoking);
+                            break;
+                        default:
+                            break;
+                    }
+
+
+                    if (TimeCreator(tmp) >= TimeCreator(time) && TimeCreator(tmp) <= TimeCreator(time2))
+                    {
+                        RSList.Add(RsArray[i]);
+                    }
+                    tmp = Convert.ToDateTime(RsArray[i].arrived);
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridBasin.DataSource = RSList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Keresés Ido " + e.Message);
+            }
+        }
         internal void GetDataPublicTime(DateTime time)
         {
             try
@@ -404,6 +502,11 @@ namespace RestAPIKliens.Forms
 
 
 
+        }
+
+        internal void Delete_this()
+        {
+            Delete();
         }
 
         internal void GetDataPublicWeight(string text)
@@ -943,6 +1046,11 @@ namespace RestAPIKliens.Forms
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.Selectors.Smoker("Basin"), sender);
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.SearchPlus("Basin"), sender);
         }
     }
 }

@@ -180,7 +180,7 @@ namespace RestAPIKliens.Forms
 
             return a;
         }
-        internal void GetDataPublicTime(DateTime time)
+        internal void GetDataPublicTime(DateTime time,DateTime time2)
         {
             try
             {
@@ -202,7 +202,7 @@ namespace RestAPIKliens.Forms
 
                 }
                 //--------------------------------------------------------//
-                //place Search
+                //time Search
 
                 RS[] RsArray = new RS[RSList.Count];
 
@@ -215,7 +215,7 @@ namespace RestAPIKliens.Forms
                 {
                     DateTime tmp = Convert.ToDateTime(RsArray[i].arrived);
 
-                    if (TimeCreator(Convert.ToDateTime(RsArray[i].arrived)) == TimeCreator(time))
+                    if (TimeCreator(tmp) >= TimeCreator(time)&& TimeCreator(tmp) <= TimeCreator(time2))
                     {
                         RSList.Add(RsArray[i]);
                     }
@@ -552,6 +552,12 @@ public class RS
 
                 MessageBox.Show("Keresés " + e.Message);
             }
+        }
+
+        internal void Delete_this()
+        {
+            
+            Delete();
         }
 
         public static void ClearDataGridViewRows(DataGridView dataGridView, List<RS> DryList)

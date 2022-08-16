@@ -156,6 +156,88 @@ namespace RestAPIKliens.Forms
 
         }
 
+     
+        internal void GetDataPublicTime(DateTime[,] timeArray, string type)
+        {
+
+            switch (type)
+            {
+                case "EX":
+                    GetDataPublicTime(timeArray[0, 0], timeArray[0, 1], type);
+                    break;
+               
+                default:
+                    break;
+            }
+
+        }
+        internal void GetDataPublicTime(DateTime time, DateTime time2,string type)
+        {
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridDry, DryList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Dry>> response = client.Execute<List<Dry>>(request);
+                foreach (Dry a in response.Data)
+                {
+
+                    DryList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //place Search
+
+                Dry[] RsArray = new Dry[DryList.Count];
+
+                for (int i = 0; i < DryList.Count; i++)
+                {
+                    RsArray[i] = DryList[i];
+                }
+                DryList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    DateTime tmp = Convert.ToDateTime(RsArray[i].arrived);
+                    switch (type)
+                    {
+                        case "EX":
+                            tmp = Convert.ToDateTime(RsArray[i].expiration);
+                            break;
+                        default:
+                            break;
+                    }
+                   
+
+                    if (TimeCreator(tmp) >= TimeCreator(time) && TimeCreator(tmp) <= TimeCreator(time2))
+                    {
+                        DryList.Add(RsArray[i]);
+                    }
+                    tmp = Convert.ToDateTime(RsArray[i].arrived);
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridDry.DataSource = DryList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Keresés Ido " + e.Message);
+            }
+        }
         internal void GetDataPublicTime(DateTime time)
         {
             try
@@ -489,6 +571,11 @@ namespace RestAPIKliens.Forms
 
                 MessageBox.Show("Keresés: " + e.Message);
             }
+        }
+
+        internal void Delete_this()
+        {
+            Delete();
         }
 
         private void gtnGetById_Click(object sender, EventArgs e)
@@ -1060,6 +1147,11 @@ namespace RestAPIKliens.Forms
             {
                 SortingMain(col);
             }
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.SearchPlus("Dry"), sender);
         }
     }
 }

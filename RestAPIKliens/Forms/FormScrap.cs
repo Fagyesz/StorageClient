@@ -527,6 +527,11 @@ namespace RestAPIKliens.Forms
             MessageBox.Show("Sikeres frissítés");
         }
 
+        internal void Delete_this()
+        {
+            Delete();
+        }
+
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.Selectors.Search("Scrap"), sender);

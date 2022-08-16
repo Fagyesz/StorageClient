@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.dataGridDry = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelFill = new System.Windows.Forms.Panel();
             this.panelSelector = new System.Windows.Forms.Panel();
@@ -38,35 +36,14 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridDry)).BeginInit();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.dataGridDry = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panelSelector.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridDry)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.dataGridDry);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(683, 477);
-            this.panel3.TabIndex = 30;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
-            // 
-            // dataGridDry
-            // 
-            this.dataGridDry.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.dataGridDry.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridDry.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridDry.Location = new System.Drawing.Point(0, 0);
-            this.dataGridDry.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
-            this.dataGridDry.Name = "dataGridDry";
-            this.dataGridDry.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridDry.Size = new System.Drawing.Size(683, 477);
-            this.dataGridDry.TabIndex = 22;
-            this.dataGridDry.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDry_CellClick);
-            this.dataGridDry.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDry_CellValueChanged_1);
             // 
             // panel1
             // 
@@ -88,6 +65,7 @@
             // 
             // panelSelector
             // 
+            this.panelSelector.Controls.Add(this.radioButton6);
             this.panelSelector.Controls.Add(this.radioButton5);
             this.panelSelector.Controls.Add(this.radioButton4);
             this.panelSelector.Controls.Add(this.radioButton3);
@@ -150,7 +128,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(125, 9);
+            this.radioButton2.Location = new System.Drawing.Point(125, 32);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(78, 17);
             this.radioButton2.TabIndex = 3;
@@ -159,28 +137,59 @@
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged_1);
             // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(125, 9);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(75, 17);
+            this.radioButton6.TabIndex = 7;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "Keresés++";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.dataGridDry);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(437, 477);
+            this.panel3.TabIndex = 32;
+            // 
+            // dataGridDry
+            // 
+            this.dataGridDry.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.dataGridDry.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridDry.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridDry.Location = new System.Drawing.Point(0, 0);
+            this.dataGridDry.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
+            this.dataGridDry.Name = "dataGridDry";
+            this.dataGridDry.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridDry.Size = new System.Drawing.Size(437, 477);
+            this.dataGridDry.TabIndex = 22;
+            // 
             // FormDry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(683, 477);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel1);
             this.Name = "FormDry";
             this.Text = "FormDry";
             this.Load += new System.EventHandler(this.FormDry_Load);
-            this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridDry)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panelSelector.ResumeLayout(false);
             this.panelSelector.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridDry)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DataGridView dataGridDry;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panelFill;
         private System.Windows.Forms.Panel panelSelector;
@@ -189,5 +198,8 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.DataGridView dataGridDry;
     }
 }

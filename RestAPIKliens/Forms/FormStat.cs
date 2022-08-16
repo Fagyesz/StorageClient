@@ -142,7 +142,103 @@ namespace RestAPIKliens.Forms
 
 
         }
+        internal void GetDataPublicTime(DateTime[,] timeArray, string type)
+        {
 
+            switch (type)
+            {
+                case "B":
+                    GetDataPublicTime(timeArray[0, 0], timeArray[0, 1], type);
+                    break;
+                case "M":
+                    GetDataPublicTime(timeArray[1, 0], timeArray[1, 1], type);
+                    break;
+                case "E":
+                    GetDataPublicTime(timeArray[3, 0], timeArray[3, 1], type);
+                    break;
+                case "S":
+                    GetDataPublicTime(timeArray[2, 0], timeArray[2, 1], type);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        internal void GetDataPublicTime(DateTime time, DateTime time2,string type)
+        {
+            try
+            {
+                //--------------------------------------------------------//
+                //Basic Get
+
+                ClearDataGridViewRows(dataGridRS, StatList);
+
+                var client = new RestClient(URL);
+                String ROUTE = "";
+                var request = new RestRequest(ROUTE, Method.GET);
+                request.RequestFormat = DataFormat.Json;
+
+                IRestResponse<List<Stat>> response = client.Execute<List<Stat>>(request);
+                foreach (Stat a in response.Data)
+                {
+
+                    StatList.Add(a);
+
+                }
+                //--------------------------------------------------------//
+                //place Search
+
+                Stat[] RsArray = new Stat[StatList.Count];
+
+                for (int i = 0; i < StatList.Count; i++)
+                {
+                    RsArray[i] = StatList[i];
+                }
+                StatList.Clear();
+                for (int i = 0; i < RsArray.Length; i++)
+                {
+                    DateTime tmp = Convert.ToDateTime(RsArray[i].arrived);
+                    switch (type)
+                    {
+                        case "B":
+                            tmp = Convert.ToDateTime(RsArray[i].butchered);
+                            break;
+                        case "M":
+                            tmp = Convert.ToDateTime(RsArray[i].marinated);
+                            break;
+                        case "E":
+                            tmp = Convert.ToDateTime(RsArray[i].stated);
+                            break;
+                        case "S":
+                            tmp = Convert.ToDateTime(RsArray[i].smoked);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (TimeCreator(tmp) >= TimeCreator(time) && TimeCreator(tmp) <= TimeCreator(time2))
+                    {
+                        StatList.Add(RsArray[i]);
+                    }
+                    tmp = Convert.ToDateTime(RsArray[i].arrived);
+                }
+
+
+
+
+                //--------------------------------------------------------//
+                dataGridRS.DataSource = StatList;
+
+
+                SetColumsName();
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Keresés: " + e.Message);
+            }
+        }
         internal void GetDataPublicTime(DateTime time)
         {
             try
@@ -448,6 +544,12 @@ namespace RestAPIKliens.Forms
             }
         }
 
+        internal void Delete_this()
+        {
+            Delete();
+
+        }
+
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.Selectors.Search("Stat"), sender);
@@ -722,6 +824,11 @@ namespace RestAPIKliens.Forms
         private void dataGridRS_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void radioButton2_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.SearchPlus("Stat"), sender);
         }
     }
 }
