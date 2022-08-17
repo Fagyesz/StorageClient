@@ -201,6 +201,12 @@
     <Compile Include="PrintSemantics\PrintSemanticBasin.Designer.cs">
       <DependentUpon>PrintSemanticBasin.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintSemantics\PrintSemanticExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintSemantics\PrintSemanticExport.Designer.cs">
+      <DependentUpon>PrintSemanticExport.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintSemantics\PrintSemanticT.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -284,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PrintSemantics\PrintSemanticBasin.resx">
       <DependentUpon>PrintSemanticBasin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintSemantics\PrintSemanticExport.resx">
+      <DependentUpon>PrintSemanticExport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintSemantics\PrintSemanticT.resx">
       <DependentUpon>PrintSemanticT.cs</DependentUpon>

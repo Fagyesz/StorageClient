@@ -239,6 +239,12 @@ namespace RestAPIKliens.Forms
                 MessageBox.Show("Keresés: " + e.Message);
             }
         }
+
+        internal int GetStatID()
+        {
+            return (int)dataGridRS.SelectedRows[0].Cells[0].Value;
+        }
+
         internal void GetDataPublicTime(DateTime time)
         {
             try

@@ -198,6 +198,12 @@ namespace RestAPIKliens.Forms
 
 
         }
+
+        internal int GetFPID()
+        {
+            return (int)dataGridFP.SelectedRows[0].Cells[0].Value;
+        }
+
         internal void GetDataPublicTime(DateTime time, DateTime time2,string type)
         {
             try

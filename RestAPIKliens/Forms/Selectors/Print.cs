@@ -25,6 +25,7 @@ namespace RestAPIKliens.Forms.Selectors
         Dry dry = new Dry();
         Basin b = new Basin();
         FP fp = new FP();
+        Stat stat = new Stat();
 
         private List<RS> PrintListRS = new List<RS>();
         private List<Basin> PrintListBasin = new List<Basin>();
@@ -33,6 +34,8 @@ namespace RestAPIKliens.Forms.Selectors
         String URLr = "http://127.0.0.1:3000/resourcestorage/";
         String URLd = "http://127.0.0.1:3000/drystorage/";
         String URLb = "http://127.0.0.1:3000/basin/";
+        String URLfp = "http://127.0.0.1:3000/finalproduct/";
+        String URLs = "http://127.0.0.1:3000/statistics/";
         int PrintMaxInt=0;
         int print = 0;
         private bool ColumnChange;
@@ -156,6 +159,22 @@ namespace RestAPIKliens.Forms.Selectors
                     sh.Class = "Basin";
 
                     break;
+                case "FP":
+
+                    sh.id = fp.id;
+                    sh.name = fp.name;
+                    sh.weight = fp.weight;
+                    sh.Class = "FP";
+
+                    break;
+                case "Stat":
+
+                    sh.id = stat.id;
+                    sh.name = stat.name;
+                    sh.weight = stat.weight;
+                    sh.Class = "Stat";
+
+                    break;
                 default:
                     sh.id = 0;
                     sh.name = "Hiba";
@@ -186,6 +205,16 @@ namespace RestAPIKliens.Forms.Selectors
                     id = FormBasin.Self.GetBasinID();
 
                     break;
+                case "FP":
+
+                    id = FormFP.Self.GetFPID();
+
+                    break;
+                case "Stat":
+
+                    id = FormStat.Self.GetStatID();
+
+                    break;
                 default:
                     break;
             }
@@ -200,6 +229,8 @@ namespace RestAPIKliens.Forms.Selectors
             GetDataID(id, "RS");
             GetDataID(id, "Dry");
             GetDataID(id, "Basin");
+            GetDataID(id, "FP");
+            GetDataID(id, "Stat");
         }
         private void GetDataID(int id, string type)
         {
@@ -222,6 +253,16 @@ namespace RestAPIKliens.Forms.Selectors
                         b = GetBasinByID(id);
 
                         break;
+                    case "FP":
+
+                        fp = GetFPByID(id);
+
+                        break;
+                    case "Stat":
+
+                        stat = GetStatByID(id);
+
+                        break;
                     default:
                         break;
                 }
@@ -234,6 +275,50 @@ namespace RestAPIKliens.Forms.Selectors
 
                 MessageBox.Show(e.Message);
             }
+        }
+
+        private Stat GetStatByID(int id)
+        {
+            var client = new RestClient(URLs);
+            String ROUTE = "";
+            var request = new RestRequest(ROUTE, Method.GET);
+            request.RequestFormat = DataFormat.Json;
+
+            IRestResponse<List<Stat>> response = client.Execute<List<Stat>>(request);
+
+            Stat t = new Stat();
+            foreach (Stat a in response.Data)
+            {
+                if (a.id == id)
+                {
+                    t = a;
+                }
+
+
+            }
+            return t; 
+        }
+
+        private FP GetFPByID(int id)
+        {
+            var client = new RestClient(URLfp);
+            String ROUTE = "";
+            var request = new RestRequest(ROUTE, Method.GET);
+            request.RequestFormat = DataFormat.Json;
+
+            IRestResponse<List<FP>> response = client.Execute<List<FP>>(request);
+
+            FP t = new FP();
+            foreach (FP a in response.Data)
+            {
+                if (a.id == id)
+                {
+                    t = a;
+                }
+
+
+            }
+            return t;
         }
 
         private Basin GetBasinByID(int id)
@@ -593,6 +678,45 @@ namespace RestAPIKliens.Forms.Selectors
                   //  PrintSemantics.PrintSemanticT psB2 = new PrintSemantics.PrintSemanticT(blist, PrintType);
                     //b = GetBasinByID(id);
                     //psB2.ShowDialog();
+
+                    break;
+                case "FP":
+                    // dry = GetDryByID(id);
+                    List<FP> FPlist = new List<FP>();
+                    for (int i = 0; i < ShortList.Count; i++)
+                    {
+                        id = ShortList[i].id;
+
+                        GetDataID(id);
+                        FPlist.Add(fp);
+
+
+                    }
+                    
+                    PrintSemantics.PrintSemanticFP psF = new PrintSemantics.PrintSemanticFP(FPlist, PrintType);
+
+
+                    psF.ShowDialog();
+
+                    break;
+                case "Stat":
+                    // dry = GetDryByID(id);
+                    List<Stat> Statlist = new List<Stat>();
+                    for (int i = 0; i < ShortList.Count; i++)
+                    {
+                        id = ShortList[i].id;
+
+                        GetDataID(id);
+                        Statlist.Add(stat);
+
+
+                    }
+                    
+                   // PrintSemantics.PrintSemanticExport psE = new PrintSemantics.ExportSemantics(Statlist, PrintType);
+                    
+
+
+                    //psE.ShowDialog();
 
                     break;
                 default:

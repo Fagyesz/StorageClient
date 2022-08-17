@@ -1060,6 +1060,36 @@ namespace RestAPIKliens.Forms
                 Put();
             }
         }
+
+        private void radioButton6_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.SearchPlus("Basin"), sender);
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.Search("Basin"), sender);
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.ScrapAdd("Basin"), sender);
+        }
+
+        private void radioButton2_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.Smoker("Basin"), sender);
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.Print("Basin"), sender);
+        }
+
+        private void radioButton5_CheckedChanged_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.FPCreate("Basin"), sender);
+        }
     }
 }
 
