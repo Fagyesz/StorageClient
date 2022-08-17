@@ -557,7 +557,7 @@ public class RS
         internal void Delete_this()
         {
             
-            Delete();
+            Delete(); GetData();
         }
 
         public static void ClearDataGridViewRows(DataGridView dataGridView, List<RS> DryList)
@@ -1460,6 +1460,19 @@ public class RS
                 SortingMain(col);
             }
             
+        }
+
+        private void dataGridRS_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridRS_CellValueChanged_2(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!ColumnChange)
+            {
+                Put();
+            }
         }
     }
 }

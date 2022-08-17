@@ -547,7 +547,7 @@ namespace RestAPIKliens.Forms
         internal void Delete_this()
         {
             Delete();
-
+            GetData();
         }
 
         internal void DeleteBySC()
@@ -1162,6 +1162,14 @@ namespace RestAPIKliens.Forms
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.Selectors.SearchPlus("FP"), sender);
+        }
+
+        private void dataGridFP_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!ColumnChange)
+            {
+                Put();
+            }
         }
     }
 }

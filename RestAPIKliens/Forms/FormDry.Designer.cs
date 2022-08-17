@@ -169,6 +169,7 @@
             this.dataGridDry.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridDry.Size = new System.Drawing.Size(437, 477);
             this.dataGridDry.TabIndex = 22;
+            this.dataGridDry.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDry_CellValueChanged_2);
             // 
             // FormDry
             // 

@@ -191,6 +191,7 @@
             this.dataGridFP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridFP.Size = new System.Drawing.Size(443, 477);
             this.dataGridFP.TabIndex = 22;
+            this.dataGridFP.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridFP_CellValueChanged);
             // 
             // FormFP
             // 

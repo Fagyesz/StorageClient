@@ -506,7 +506,7 @@ namespace RestAPIKliens.Forms
 
         internal void Delete_this()
         {
-            Delete();
+            Delete(); GetData();
         }
 
         internal void GetDataPublicWeight(string text)
@@ -1051,6 +1051,14 @@ namespace RestAPIKliens.Forms
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.Selectors.SearchPlus("Basin"), sender);
+        }
+
+        private void dataGridBasin_CellValueChanged_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!ColumnChange)
+            {
+                Put();
+            }
         }
     }
 }

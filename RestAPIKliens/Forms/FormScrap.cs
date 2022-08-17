@@ -529,7 +529,7 @@ namespace RestAPIKliens.Forms
 
         internal void Delete_this()
         {
-            Delete();
+            Delete(); GetData();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -774,6 +774,14 @@ namespace RestAPIKliens.Forms
                 SortingMain(col);
             }
 
+        }
+
+        private void dataGridRS_CellValueChanged_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!ColumnChange)
+            {
+                Put();
+            }
         }
     }
 }
