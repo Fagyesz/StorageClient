@@ -38,9 +38,7 @@ namespace RestAPIKliens.Forms.Selectors
             switch (creator)
             {
                 case "FP":
-                    //SC = FormFP.Self.DataToScrapFP();
-                    //Selejt adatbázis nem tartalmaz kész terméket 
-                    //DB bővítés szükséges
+                    SC = FormFP.Self.DataToScrapFP();
                     break;
                 case "RS":
                     SC = FormRS.Self.DataToScrapRS();
@@ -159,7 +157,8 @@ namespace RestAPIKliens.Forms.Selectors
                         time = SC.time,
                         rsid = SC.rsid,
                         did = SC.did,
-                        bid = SC.bid
+                        bid = SC.bid,
+                        fpid=SC.fpid,
                     });
                 }
                 catch (Exception)

@@ -38,6 +38,8 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.btnCollection = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.text_basinszám = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label8
@@ -67,7 +69,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(68, 139);
+            this.label7.Location = new System.Drawing.Point(68, 194);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(66, 13);
             this.label7.TabIndex = 43;
@@ -76,7 +78,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(68, 87);
+            this.label6.Location = new System.Drawing.Point(68, 142);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 13);
             this.label6.TabIndex = 40;
@@ -85,7 +87,7 @@
             // btnSend
             // 
             this.btnSend.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnSend.Location = new System.Drawing.Point(58, 198);
+            this.btnSend.Location = new System.Drawing.Point(58, 253);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(104, 27);
             this.btnSend.TabIndex = 37;
@@ -95,7 +97,7 @@
             // 
             // dateTimePicker3
             // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(21, 155);
+            this.dateTimePicker3.Location = new System.Drawing.Point(21, 210);
             this.dateTimePicker3.Name = "dateTimePicker3";
             this.dateTimePicker3.Size = new System.Drawing.Size(188, 20);
             this.dateTimePicker3.TabIndex = 41;
@@ -103,7 +105,7 @@
             // dateTimePicker4
             // 
             this.dateTimePicker4.CustomFormat = "";
-            this.dateTimePicker4.Location = new System.Drawing.Point(21, 103);
+            this.dateTimePicker4.Location = new System.Drawing.Point(21, 158);
             this.dateTimePicker4.Name = "dateTimePicker4";
             this.dateTimePicker4.Size = new System.Drawing.Size(188, 20);
             this.dateTimePicker4.TabIndex = 38;
@@ -147,11 +149,29 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(40, 87);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 65;
+            this.label1.Text = "Basin szám";
+            // 
+            // text_basinszám
+            // 
+            this.text_basinszám.Location = new System.Drawing.Point(21, 103);
+            this.text_basinszám.Name = "text_basinszám";
+            this.text_basinszám.Size = new System.Drawing.Size(100, 20);
+            this.text_basinszám.TabIndex = 66;
+            // 
             // BasinAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(248, 255);
+            this.ClientSize = new System.Drawing.Size(248, 292);
+            this.Controls.Add(this.text_basinszám);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnCollection);
             this.Controls.Add(this.button2);
@@ -182,5 +202,7 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnCollection;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox text_basinszám;
     }
 }

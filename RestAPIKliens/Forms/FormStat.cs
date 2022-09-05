@@ -364,7 +364,7 @@ namespace RestAPIKliens.Forms
                 StatList.Clear();
                 for (int i = 0; i < RsArray.Length; i++)
                 {
-                    if (RsArray[i].place == text)
+                    if (RsArray[i].place.ToUpper() == text.ToUpper())
                     {
                         StatList.Add(RsArray[i]);
                     }
@@ -527,7 +527,7 @@ namespace RestAPIKliens.Forms
                 StatList.Clear();
                 for (int i = 0; i < RsArray.Length; i++)
                 {
-                    if (RsArray[i].name == text)
+                    if (RsArray[i].name.ToUpper() == text.ToUpper())
                     {
                         StatList.Add(RsArray[i]);
                     }

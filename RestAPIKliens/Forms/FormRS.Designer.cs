@@ -31,7 +31,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelFill = new System.Windows.Forms.Panel();
             this.panelSelector = new System.Windows.Forms.Panel();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -39,6 +38,8 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.paneAll = new System.Windows.Forms.Panel();
             this.dataGridRS = new System.Windows.Forms.DataGridView();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panelSelector.SuspendLayout();
             this.paneAll.SuspendLayout();
@@ -58,13 +59,14 @@
             // panelFill
             // 
             this.panelFill.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelFill.Location = new System.Drawing.Point(0, 83);
+            this.panelFill.Location = new System.Drawing.Point(0, 99);
             this.panelFill.Name = "panelFill";
-            this.panelFill.Size = new System.Drawing.Size(240, 394);
+            this.panelFill.Size = new System.Drawing.Size(240, 378);
             this.panelFill.TabIndex = 34;
             // 
             // panelSelector
             // 
+            this.panelSelector.Controls.Add(this.radioButton7);
             this.panelSelector.Controls.Add(this.radioButton6);
             this.panelSelector.Controls.Add(this.radioButton5);
             this.panelSelector.Controls.Add(this.radioButton4);
@@ -74,20 +76,9 @@
             this.panelSelector.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSelector.Location = new System.Drawing.Point(0, 0);
             this.panelSelector.Name = "panelSelector";
-            this.panelSelector.Size = new System.Drawing.Size(240, 83);
+            this.panelSelector.Size = new System.Drawing.Size(240, 99);
             this.panelSelector.TabIndex = 32;
-            // 
-            // radioButton6
-            // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(125, 55);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(80, 17);
-            this.radioButton6.TabIndex = 7;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Késztermék";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+            this.panelSelector.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSelector_Paint);
             // 
             // radioButton5
             // 
@@ -172,6 +163,30 @@
             this.dataGridRS.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRS_CellContentClick_1);
             this.dataGridRS.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRS_CellValueChanged_2);
             // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(125, 55);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(80, 17);
+            this.radioButton6.TabIndex = 7;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "Késztermék";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Location = new System.Drawing.Point(26, 79);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(64, 17);
+            this.radioButton7.TabIndex = 8;
+            this.radioButton7.TabStop = true;
+            this.radioButton7.Text = "Füstölés";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
+            // 
             // FormRS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -195,7 +210,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panelFill;
         private System.Windows.Forms.Panel panelSelector;
-        private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;
@@ -203,5 +217,7 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.Panel paneAll;
         private System.Windows.Forms.DataGridView dataGridRS;
+        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.RadioButton radioButton6;
     }
 }

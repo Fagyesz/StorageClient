@@ -44,6 +44,53 @@ namespace RestAPIKliens.Forms
             data.butchered=(DateTime)dataGridRS.SelectedRows[0].Cells[5].Value;
             return data;
         }
+
+        internal void SmokingSomeData(DateTime value)
+        {
+
+            var client = new RestClient(URL);
+            String ROUTE = "put/" + (int)dataGridRS.SelectedRows[0].Cells[0].Value;
+            var request = new RestRequest(ROUTE, Method.PUT);
+            request.RequestFormat = DataFormat.Json;
+
+
+
+            DataTimePut1 = (DateTime)dataGridRS.SelectedRows[0].Cells[4].Value;
+            DataTimePut2 = (DateTime)dataGridRS.SelectedRows[0].Cells[5].Value;
+
+
+            DateTime a = DateTime.MinValue, b = DateTime.MinValue;
+            PutTime(out a, out b);
+
+            DateTime time = DateTime.MinValue;
+
+
+            a = PutGET();
+
+            b = PutGETid();
+
+
+            request.AddJsonBody(new RS
+            {
+                id = (int)dataGridRS.SelectedRows[0].Cells[0].Value,
+                name = (string)dataGridRS.SelectedRows[0].Cells[1].Value,
+                weight = (int)dataGridRS.SelectedRows[0].Cells[2].Value,
+                arrived = a,
+                butchered = b,
+                place = (string)dataGridRS.SelectedRows[0].Cells[3].Value,
+                smoked = TimeCreator(value)
+
+
+
+            });
+            IRestResponse response = client.Execute(request);
+
+            MessageBox.Show("Adat sikeresen frissítve");
+            GetData();
+            Look();
+            
+        }
+
         internal RS GetDataCreateRS()
         {
             RS data = new RS();
@@ -291,7 +338,7 @@ namespace RestAPIKliens.Forms
                 RSList.Clear();
                 for (int i = 0; i < RsArray.Length; i++)
                 {
-                    if (RsArray[i].place == text)
+                    if (RsArray[i].place.ToUpper() == text.ToUpper())
                     {
                         RSList.Add(RsArray[i]);
                     }
@@ -531,7 +578,7 @@ public class RS
                 RSList.Clear();
                 for (int i = 0; i < RsArray.Length; i++)
                 {
-                    if (RsArray[i].name==SearchedName)
+                    if (RsArray[i].name.ToUpper() == SearchedName.ToUpper())
                     {
                         RSList.Add(RsArray[i]);
                     }
@@ -626,15 +673,15 @@ public class RS
                 a = PutGET();
             
                 b = PutGETid();
-           /*
-            if (id)
-            {
-                b = PutGET(DataTimePut2);
-            }
-            else
-            {
-                b = PutGETid(DataTimePut2);
-            }*/
+            /*
+             if (id)
+             {
+                 b = PutGET(DataTimePut2);
+             }
+             else
+             {
+                 b = PutGETid(DataTimePut2);
+             }*/
 
             request.AddJsonBody(new RS
             {
@@ -643,14 +690,17 @@ public class RS
                 weight = (int)dataGridRS.SelectedRows[0].Cells[2].Value,
                 arrived = a,
                 butchered = b,
-                place = (string)dataGridRS.SelectedRows[0].Cells[3].Value
+                place = (string)dataGridRS.SelectedRows[0].Cells[3].Value,
+                smoked = TimeCreator((DateTime)dataGridRS.SelectedRows[0].Cells[6].Value)
 
 
 
-            });
+
+            }); ;
             IRestResponse response = client.Execute(request);
 
             MessageBox.Show("Adat sikeresen frissítve");
+            GetData();
             Look();
         }
         private static DateTime PutGET()
@@ -953,13 +1003,14 @@ public class RS
                     weight = weight,
                     place = place,
                     arrived = TimeCreator(arrived),
-                    butchered=TimeCreator(butchered),
-                    marinadestart =TimeCreator(marinadestart),
+                    butchered = TimeCreator(butchered),
+                    marinadestart = TimeCreator(marinadestart),
                     marinadeend = TimeCreator(marinadeend),
                     smoking = TimeCreator(smoking),
                     rsid = rsid,
+                    number = b.number
 
-                });
+                }); 
 
 
             }
@@ -1064,6 +1115,7 @@ public class RS
 
         private void Look()
         {
+            
             LoadTheme();
             DataGridDateFormating();
             SetColumsName();
@@ -1086,7 +1138,8 @@ public class RS
             dataGridRS.Columns[3].HeaderText = "Származási hely";
             dataGridRS.Columns[4].HeaderText = "Érkezési idő";
             dataGridRS.Columns[5].HeaderText = "Vágási idő";
-            
+            dataGridRS.Columns[6].HeaderText = "Füstölési idő";
+
             ColumnChange = false;
         }
 
@@ -1473,6 +1526,16 @@ public class RS
             {
                 Put();
             }
+        }
+
+        private void panelSelector_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void radioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Selectors.Smoker("RS"), sender);
         }
     }
 }

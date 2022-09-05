@@ -38,8 +38,16 @@ namespace RestAPIKliens.Forms.Selectors
             b.weight = int.Parse(btnBasinw.Text);
             b.marinadestart = theDate;
             b.marinadeend = theDate2;
-            
-            FormRS.Self.DataBasinba(b);
+            if (text_basinszám.Text.All(char.IsNumber)&& text_basinszám.Text !="")
+            {
+                b.number = int.Parse(text_basinszám.Text);
+                FormRS.Self.DataBasinba(b);
+            }
+            else
+            {
+                MessageBox.Show("Hiányzó basinszám");
+            }
+           
         }
 
         private void button2_Click(object sender, EventArgs e)

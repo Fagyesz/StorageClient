@@ -108,14 +108,14 @@ namespace RestAPIKliens.Forms
         {
             Scrap SC = new Scrap();
 
-           // SC.fid = (int)dataGridFP.SelectedRows[0].Cells[0].Value;
-            SC.name = (string)dataGridFP.SelectedRows[0].Cells[1].Value;
-            SC.weight = (int)dataGridFP.SelectedRows[0].Cells[2].Value;
+            SC.fpid = (int)dataGridFP.SelectedRows[0].Cells[0].Value;
+            SC.name = (string)dataGridFP.SelectedRows[0].Cells[5].Value;
+            SC.place= (string)dataGridFP.SelectedRows[0].Cells[7].Value;
+            SC.weight = (int)dataGridFP.SelectedRows[0].Cells[6].Value;
 
             return SC;
 
-            //Scrap nem tartalmaz Kész terméket Az adatbázisban 
-            // szükség szerint bővíthető
+            
             
         }
         
@@ -350,7 +350,7 @@ namespace RestAPIKliens.Forms
                 FPList.Clear();
                 for (int i = 0; i < RsArray.Length; i++)
                 {
-                    if (RsArray[i].place == text)
+                    if (RsArray[i].place.ToUpper() == text.ToUpper())
                     {
                         FPList.Add(RsArray[i]);
                     }
@@ -522,12 +522,13 @@ namespace RestAPIKliens.Forms
 
                 for (int i = 0; i < FPList.Count; i++)
                 {
-                    RsArray[i] = FPList[i];
+                    
+                    RsArray[i]= FPList[i];
                 }
                 FPList.Clear();
                 for (int i = 0; i < RsArray.Length; i++)
                 {
-                    if (RsArray[i].name == text)
+                    if (RsArray[i].name.ToUpper() == text.ToUpper())
                     {
                         FPList.Add(RsArray[i]);
                     }

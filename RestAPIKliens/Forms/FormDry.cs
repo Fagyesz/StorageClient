@@ -364,7 +364,7 @@ namespace RestAPIKliens.Forms
                 DryList.Clear();
                 for (int i = 0; i < RsArray.Length; i++)
                 {
-                    if (RsArray[i].place == text)
+                    if (RsArray[i].place.ToUpper() == text.ToUpper())
                     {
                         DryList.Add(RsArray[i]);
                     }
@@ -550,7 +550,7 @@ namespace RestAPIKliens.Forms
                 DryList.Clear();
                 for (int i = 0; i < RsArray.Length; i++)
                 {
-                    if (RsArray[i].name == text)
+                    if (RsArray[i].name.ToUpper() == text.ToUpper())
                     {
                         DryList.Add(RsArray[i]);
                     }

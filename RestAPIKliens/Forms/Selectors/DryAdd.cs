@@ -35,12 +35,13 @@ namespace RestAPIKliens.Forms.Selectors
             
             
 
-            if (!txtPostWeight.Text.All(char.IsDigit))
+            if (!txtPostWeight.Text.All(char.IsDigit)|| !cmbExternal.Text.All(char.IsDigit)||cmbExternal.Text=="")
             {
                 MessageBox.Show("Hibás érték");
             }
             else
             {
+
                 Dry.name= txtPostName.Text;
                 Dry.weight = int.Parse(txtPostWeight.Text);
                 Dry.arrived = theDate;
@@ -56,6 +57,7 @@ namespace RestAPIKliens.Forms.Selectors
                                         place = txtPostPlace.Text
                             });
                 */
+                
                 FormDry.Self.DataList(Dry);
             }
 

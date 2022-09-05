@@ -433,7 +433,7 @@ namespace RestAPIKliens.Forms
                 RSList.Clear();
                 for (int i = 0; i < RsArray.Length; i++)
                 {
-                    if (RsArray[i].place == text)
+                    if (RsArray[i].place.ToUpper() == text.ToUpper())
                     {
                         RSList.Add(RsArray[i]);
                     }
@@ -605,7 +605,7 @@ namespace RestAPIKliens.Forms
                 RSList.Clear();
                 for (int i = 0; i < RsArray.Length; i++)
                 {
-                    if (RsArray[i].name == text)
+                    if (RsArray[i].name.ToUpper() == text.ToUpper())
                     {
                         RSList.Add(RsArray[i]);
                     }
@@ -731,6 +731,7 @@ namespace RestAPIKliens.Forms
                 marinadeend = marinadeend,
                 smoking = smoking,
                 rsid = rsid,
+                number= (int)dataGridBasin.SelectedRows[0].Cells[10].Value
 
             });
 
@@ -885,6 +886,7 @@ namespace RestAPIKliens.Forms
             dataGridBasin.Columns[7].HeaderText = "Érlelés vége"; 
             dataGridBasin.Columns[8].HeaderText = "Füstölés ideje";
             dataGridBasin.Columns[9].HeaderText = "Nyersanyag ID";
+            dataGridBasin.Columns[10].HeaderText = "BasinSzám";
             ColumnChange = false;
         }
 

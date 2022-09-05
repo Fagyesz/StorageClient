@@ -29,7 +29,24 @@ namespace RestAPIKliens.Forms.Selectors
 
         private void btnPost_Click(object sender, EventArgs e)
         {
-            SmokingDataToBasin();
+            switch (creator)
+            {
+                case "Basin":
+                    SmokingDataToBasin();
+                    break;
+                case "RS":
+                    SmokingDataToRS();
+                    break;
+
+                default:
+                    break;
+            }
+            
+        }
+
+        private void SmokingDataToRS()
+        {
+            FormRS.Self.SmokingSomeData(dateTimePicker1.Value);
         }
 
         private void SmokingDataToBasin()

@@ -321,7 +321,7 @@ namespace RestAPIKliens
         public DateTime arrived { get; set; }
         public DateTime butchered { get; set; }
 
-
+        public DateTime smoked { get; set; }
     }
     public class Dry
     {
@@ -351,6 +351,7 @@ namespace RestAPIKliens
         public DateTime marinadeend { get; set; }
         public DateTime smoking { get; set; }
         public int rsid { get; set; }
+        public int number { get; set; }
 
     }
     public class BasinMini
@@ -358,6 +359,9 @@ namespace RestAPIKliens
         public int weight { get; set; }
         public DateTime marinadestart { get; set; }
         public DateTime marinadeend { get; set; }
+
+        public int number { get; set; }
+
     }
         public class FP
     {
@@ -388,6 +392,7 @@ namespace RestAPIKliens
         public int rsid { get; set; }
         public int did { get; set; }
         public int bid { get; set; }
+        public int fpid { get; set; }
 
 
     }

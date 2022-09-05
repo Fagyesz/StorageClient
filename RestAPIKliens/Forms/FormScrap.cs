@@ -261,7 +261,7 @@ namespace RestAPIKliens.Forms
                 ScrapList.Clear();
                 for (int i = 0; i < RsArray.Length; i++)
                 {
-                    if (RsArray[i].place == text)
+                    if (RsArray[i].place.ToUpper() == text.ToUpper())
                     {
                         ScrapList.Add(RsArray[i]);
                     }
@@ -438,7 +438,7 @@ namespace RestAPIKliens.Forms
                             }
                             break;
                         case "name":
-                            if (RsArray[i].name == text)
+                            if (RsArray[i].name.ToUpper() == text.ToUpper())
                             {
                                 ScrapList.Add(RsArray[i]);
                             }
